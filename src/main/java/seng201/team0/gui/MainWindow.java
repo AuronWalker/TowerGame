@@ -21,14 +21,14 @@ public class MainWindow extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/new_main.fxml"));
         Parent root = baseLoader.load();
 
-        MainController baseController = baseLoader.getController();
-        baseController.init(primaryStage);
+//        MainController baseController = baseLoader.getController();
+//        baseController.init(primaryStage);
 
         primaryStage.setTitle("SENG201 Example App");
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 1280, 720);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
