@@ -6,6 +6,9 @@ import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 
 public class MainGameController {
     @FXML
@@ -112,6 +115,14 @@ public class MainGameController {
     private Image treeTileRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/treeTile.png"));
 
     private Image emptyDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/empty.png"));
+    private Image treeLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeLeft.png"));
+    private Image treeRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeRight.png"));
+
+    private Image towerRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSprite.png"));
+    private Image towerLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png"));
+
+    private List<ImageView> displayTiles;
+    private int placement = 0;
 
     public void initialize() {
         generateLevel();
@@ -121,7 +132,7 @@ public class MainGameController {
         List<ImageView> roadTiles = List.of(roadTile, roadTile1, roadTile2, roadTile3, roadTile4, roadTile5, roadTile6, roadTile7);
         List<ImageView> leftTiles = List.of(placeTile, placeTile1, placeTile2, placeTile3, placeTile4, placeTile5, placeTile6, placeTile7);
         List<ImageView> rightTiles = List.of(placeTile8, placeTile9, placeTile10, placeTile11, placeTile12, placeTile13, placeTile14, placeTile15);
-        List<ImageView> displayTiles = List.of(displayTile, displayTile1, displayTile2, displayTile3, displayTile4, displayTile5, displayTile6, displayTile7, displayTile8, displayTile9, displayTile10, displayTile11, displayTile12, displayTile13, displayTile14, displayTile15);
+        displayTiles = List.of(displayTile, displayTile1, displayTile2, displayTile3, displayTile4, displayTile5, displayTile6, displayTile7, displayTile8, displayTile9, displayTile10, displayTile11, displayTile12, displayTile13, displayTile14, displayTile15);
 
         List<Image> roadTileSprites = List.of(roadTileSprite, roadTileSprite1, roadTileSprite2, roadTileSprite3, roadTileSprite4);
         List<Image> leftGrassTileSprites = List.of(grassTileLeftSprite, grassTileLeftSprite1, grassTileLeftSprite2, grassTileLeftSprite3);
@@ -140,15 +151,16 @@ public class MainGameController {
             displayTile.setImage(emptyDisply);
         }
 
-        //Right side Generation
-        generateTile(rightTiles, rightGrassTileSprites, false, rng);
         //Left side Generation
         generateTile(leftTiles, leftGrassTileSprites, true, rng);
+        //Right side Generation
+        generateTile(rightTiles, rightGrassTileSprites, false, rng);
     }
+
+    
 
     private void generateTile(List<ImageView> tiles, List<Image> tileImages, boolean directionLeft, Random rng){
         boolean notGrass = false;
-
         for (ImageView tile : tiles) {
             int tileType = rng.nextInt(3);
             int randomInt = rng.nextInt(tileImages.size());
@@ -156,11 +168,16 @@ public class MainGameController {
             //Makes sure to trees/rocks wont spawn beside each other
             if(notGrass == true){
                 tile.setImage(tileImages.get(randomInt));
+                tile = placeTowerEvent(tile, directionLeft, placement);
                 notGrass = false;
+                placement += 1;
                 continue;
             }
 
-            if(tileType == 0) tile.setImage(tileImages.get(randomInt));
+            if(tileType == 0){
+                tile.setImage(tileImages.get(randomInt));
+                tile = placeTowerEvent(tile, directionLeft, placement);
+            }
             else if(tileType == 1){
                 if(directionLeft) tile.setImage(rockTileLeftSprite);
                 else tile.setImage(rockTileRightSprite);
@@ -171,6 +188,24 @@ public class MainGameController {
                 else tile.setImage(treeTileRightSprite);
                 notGrass = true;
             }
+            placement += 1;
         }
+    }
+
+    private ImageView placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement){
+        emptyTile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            System.out.println("You clicked");
+            if(directionLeft){
+                emptyTile.setImage(towerLeftSprite);
+                displayTiles.get(placement).setImage(treeLeftDisply);
+            }
+            else {
+                emptyTile.setImage(towerRightSprite);
+                displayTiles.get(placement).setImage(treeRightDisply);
+            }
+            
+            event.consume();
+        });
+        return emptyTile;
     }
 }

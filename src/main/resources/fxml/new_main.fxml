@@ -215,7 +215,7 @@
             <Image url="@../../../../../../../Art/GameArt/SengProject/white.png" />
          </image>
       </ImageView>
-      <GridPane prefHeight="728.0" prefWidth="1294.0">
+      <GridPane prefHeight="734.0" prefWidth="359.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
