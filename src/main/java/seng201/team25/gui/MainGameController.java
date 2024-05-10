@@ -88,6 +88,7 @@ public class MainGameController {
 
     private List<ImageView> displayTiles;
     private List<Tower> activeTowers;
+    private List<Integer> tileResources;
     private int placement = 0;
     //0 = wood, 1 = stone, 2 = fruit
     private int currentSelectedButton = -1;
@@ -102,6 +103,7 @@ public class MainGameController {
         List<ImageView> rightTiles = List.of(placeTile8, placeTile9, placeTile10, placeTile11, placeTile12, placeTile13, placeTile14, placeTile15);
         displayTiles = List.of(displayTile, displayTile1, displayTile2, displayTile3, displayTile4, displayTile5, displayTile6, displayTile7, displayTile8, displayTile9, displayTile10, displayTile11, displayTile12, displayTile13, displayTile14, displayTile15);
         activeTowers = new ArrayList<Tower>();
+        tileResources = new ArrayList<Integer>();
 
         List<Image> roadTileSprites = List.of(roadTileSprite, roadTileSprite1, roadTileSprite2, roadTileSprite3, roadTileSprite4);
         List<Image> leftGrassTileSprites = List.of(grassTileLeftSprite, grassTileLeftSprite1, grassTileLeftSprite2, grassTileLeftSprite3);
@@ -147,6 +149,7 @@ public class MainGameController {
 
     private void generateTile(List<ImageView> tiles, List<Image> tileImages, boolean directionLeft, Random rng){
         boolean notGrass = false;
+        int cuurentTile = 0;
         for (ImageView tile : tiles) {
             int tileType = rng.nextInt(4);
             int randomInt = rng.nextInt(tileImages.size());
@@ -155,6 +158,7 @@ public class MainGameController {
             if(notGrass == true){
                 tile.setImage(tileImages.get(randomInt));
                 tile = placeTowerEvent(tile, directionLeft, placement);
+                tileResources.add(-1);
                 notGrass = false;
                 placement += 1;
                 continue;
@@ -163,21 +167,26 @@ public class MainGameController {
             if(tileType == 0 ){
                 tile.setImage(tileImages.get(randomInt));
                 tile = placeTowerEvent(tile, directionLeft, placement);
+                tileResources.add(-1);
             }else if(tileType == 1){
-                if(directionLeft) tile.setImage(rockTileLeftSprite);
-                else tile.setImage(rockTileRightSprite);
+                setTile(directionLeft, tile, rockTileLeftSprite, rockTileRightSprite, 1);
                 notGrass = true;
             }else if(tileType == 2) {
-                if(directionLeft) tile.setImage(treeTileLeftSprite);
-                else tile.setImage(treeTileRightSprite);
+                setTile(directionLeft, tile, treeTileLeftSprite, treeTileRightSprite, 0);
                 notGrass = true;
             }else if(tileType == 3) {
-                if(directionLeft) tile.setImage(fruitTileLeftSprite);
-                else tile.setImage(fruitTileRightSprite);
+                setTile(directionLeft, tile, fruitTileLeftSprite, fruitTileRightSprite, 3);
                 notGrass = true;
             }
             placement += 1;
+            cuurentTile += 1;
         }
+    }
+
+    private void setTile(boolean directionLeft, ImageView tile, Image tileLeftSprite, Image tileRightSprite, int resourceType){
+        if(directionLeft) tile.setImage(tileLeftSprite);
+        else tile.setImage(tileRightSprite);
+        tileResources.add(resourceType);
     }
 
     private ImageView placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement){
@@ -185,14 +194,16 @@ public class MainGameController {
             System.out.println("You clicked");
 
             if(currentSelectedButton == -1) return;
-            displayTile = displayTiles.get(placement);
+            if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton) return;
             
+            displayTile = displayTiles.get(placement);
             Tower newTower = new Tower(1, currentSelectedButton, 0, 0, 0, "Tower", emptyTile, displayTile, directionLeft);
             activeTowers.add(newTower);
 
             List<Image> towerSprites = newTower.getTileImage();
             emptyTile.setImage(towerSprites.get(0));
             displayTile.setImage(towerSprites.get(1));
+            System.out.println(emptyTile.getImage());
 
             event.consume();
         });
