@@ -3,9 +3,15 @@ import seng201.team25.models.Tower;
 import seng201.team25.models.Cart;
 
 import java.util.List;
+import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -94,10 +100,18 @@ public class MainGameController {
     private int placement = 0;
     //0 = wood, 1 = stone, 2 = fruit
     private int currentSelectedButton = -1;
+    private int numberOfCarts = 0;
 
     public void initialize() {
         generateLevel();
-        Cart newCart = new Cart(anchorPane);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> spawnCart()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.playFromStart();
+    }
+
+    private void spawnCart(){
+        new Cart(anchorPane, 1, 0);
     }
 
     private void generateLevel(){
