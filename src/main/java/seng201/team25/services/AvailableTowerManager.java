@@ -2,6 +2,7 @@ package seng201.team25.services;
 
 import seng201.team25.models.Tower;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // Static method to hold all available towers for placement, either from the start screen
@@ -9,7 +10,7 @@ import java.util.List;
 // type available.
 
 public class AvailableTowerManager {
-    private static List<Tower> towers;
+    private static List<Tower> towers = new ArrayList<>();
     private final String[] resourceTypeMap = {"Wood", "Stone", "Fruit", "Vertical Upgrade", "Horizontal Upgrade"};
 
     public void addAvailableTower(Tower tower) {
