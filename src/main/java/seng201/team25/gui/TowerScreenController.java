@@ -16,6 +16,7 @@ public class TowerScreenController {
 
     public void initialize() {
         selectedTower = imgTower1;
+
     }
 
 

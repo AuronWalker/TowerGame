@@ -4,35 +4,34 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Tower {
-    private int level;
+    private int level = 1;
     //0 = wood, 1 = stone, 2 = fruit
     private int resourceType;
-    private int resourceAmount;
-    private int reloadSpeed;
-    private int cost;
-    private String name;
+    private int resourceAmount = 5;
+    private int reloadSpeed = 1;
 
     public ImageView currentTile;
     public ImageView currentDisplay;
     private boolean directionLeft;
 
-    private Image treeLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeLeft.png"));
-    private Image treeRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeRight.png"));
-    private Image towerRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSprite.png"));
+    private final Image treeLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeLeft.png"));
+    private final Image treeRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeRight.png"));
+    private final Image towerRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSprite.png"));
     private Image towerLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png"));
 
-    public Tower(int newLevel, int newResourceType, int newResourceAmount, int newReloadSpeed, int newCost, String newName, ImageView emptyTile, ImageView displayTile, boolean direction) {
-        this.level = newLevel;
-        this.resourceAmount = newResourceAmount;
+
+    public Tower(int newResourceType) {
+
+
+    }
+
+    public Tower(int newResourceType, ImageView emptyTile, ImageView displayTile, boolean direction) {
         this.resourceType = newResourceType;
-        this.reloadSpeed = newReloadSpeed;
-        this.cost = newCost;
-        this.name = newName;
         this.currentDisplay = displayTile;
         this.currentTile = emptyTile;
         this.directionLeft = direction;
     }
-    
+
     //didn't work as intended
     // private void setTile(){
     //     if(resourceType == 1){
@@ -71,14 +70,15 @@ public class Tower {
         return reloadSpeed;
     }
 
+    /*
     public String getName() {
-        return name;
+        //return name;
     }
 
-    public int getCost() {
+   // public int getCost() {
         return cost;
     }
-
+*/
     public int getResourceAmount() {
         return resourceAmount;
     }
