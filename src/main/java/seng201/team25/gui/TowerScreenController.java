@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TowerScreenController {
@@ -24,25 +23,26 @@ public class TowerScreenController {
     Label lblTowerName;
 
     @FXML
-    ImageView imgSelectedTower0;
+    ImageView imgLoadedTower0;
     @FXML
-    ImageView imgSelectedTower1;
+    ImageView imgLoadedTower1;
     @FXML
-    ImageView imgSelectedTower2;
+    ImageView imgLoadedTower2;
 
     @FXML
-    Label lblSelectedTower0;
+    Label lblLoadedTower0;
     @FXML
-    Label lblSelectedTower1;
+    Label lblLoadedTower1;
     @FXML
-    Label lblSelectedTower2;
+    Label lblLoadedTower2;
 
 
     private ImageView selectedTowerElement;
     private int selectedTowerResourceID;
 
-    private List<ImageView> selectedTowerImages = new ArrayList<>();
-    private List<Label> selectedTowerLabels = new ArrayList<>();
+    private List<ImageView> loadedTowerImages = new ArrayList<>();
+    private List<Label> loadedTowerLabels = new ArrayList<>();
+    Image referenceTowerImage;
 
 
 
@@ -51,8 +51,10 @@ public class TowerScreenController {
     public void initialize() {
         selectedTowerElement = imgTower0;
         selectedTowerResourceID = Integer.parseInt(imgTower0.getId().substring(imgTower0.getId().length() - 1));
-        selectedTowerImages.addAll(List.of(imgSelectedTower0, imgSelectedTower1, imgSelectedTower2));
-        selectedTowerLabels.addAll(List.of(lblSelectedTower0, lblSelectedTower1, lblSelectedTower2));
+        loadedTowerImages.addAll(List.of(imgLoadedTower0, imgLoadedTower1, imgLoadedTower2));
+        loadedTowerLabels.addAll(List.of(lblLoadedTower0, lblLoadedTower1, lblLoadedTower2));
+
+        referenceTowerImage = imgLoadedTower0.getImage();
     }
 
     public TowerScreenController(MenuManager menuManager) {
@@ -87,15 +89,22 @@ public class TowerScreenController {
         int nextIndex = towerManager.getNextAvailableIndex();
         if (nextIndex != -1) {
             towerManager.addAvailableTower(new Tower(selectedTowerResourceID));
-            selectedTowerImages.get(nextIndex).setImage(imgTowerSelected.getImage());
-            selectedTowerImages.get(nextIndex).setOpacity(1);
+            loadedTowerImages.get(nextIndex).setImage(imgTowerSelected.getImage());
+            loadedTowerImages.get(nextIndex).setOpacity(1);
             String resourceString = towerManager.getResourceTypeString(selectedTowerResourceID);
-            selectedTowerLabels.get(nextIndex).setText(String.format("%s Tower", resourceString));
+            loadedTowerLabels.get(nextIndex).setText(String.format("%s Tower", resourceString));
 
         }
     }
-    public void removeSelectedFromLoadout() {
-
+    public void resetLoadout() {
+        towerManager.clearAvailableTowers();
+        for (ImageView towerImage : loadedTowerImages) {
+            towerImage.setImage(referenceTowerImage);
+            towerImage.setOpacity(0.4);
+        };
+        for (Label towerLabel : loadedTowerLabels) {
+            towerLabel.setText("Not Selected");
+        }
 
     }
 

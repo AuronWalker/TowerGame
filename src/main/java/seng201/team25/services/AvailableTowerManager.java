@@ -16,6 +16,7 @@ public class AvailableTowerManager {
     public void addAvailableTower(Tower tower) {
         towers.add(tower);
     }
+    public void clearAvailableTowers() {towers.clear();}
 
     public int getNextAvailableIndex() {
         if (towers.size() == 3) { return -1;}
