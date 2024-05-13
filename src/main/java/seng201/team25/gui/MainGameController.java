@@ -175,7 +175,7 @@ public class MainGameController {
                 setTile(directionLeft, tile, treeTileLeftSprite, treeTileRightSprite, 0);
                 notGrass = true;
             }else if(tileType == 3) {
-                setTile(directionLeft, tile, fruitTileLeftSprite, fruitTileRightSprite, 3);
+                setTile(directionLeft, tile, fruitTileLeftSprite, fruitTileRightSprite, 2);
                 notGrass = true;
             }
             placement += 1;

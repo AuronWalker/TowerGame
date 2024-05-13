@@ -17,6 +17,8 @@ public class Tower {
 
     private final Image treeLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeLeft.png"));
     private final Image treeRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeRight.png"));
+    private Image stoneLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/stoneLeft.png"));
+    private Image stoneRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/stoneRight.png"));
     private final Image towerRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSprite.png"));
     private Image towerLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png"));
 
@@ -50,6 +52,9 @@ public class Tower {
         if(resourceType == 0){
             if(directionLeft) return List.of(towerLeftSprite, treeLeftDisply);
             else return List.of(towerRightSprite, treeRightDisply);
+        }else if(resourceType == 1){
+            if(directionLeft) return List.of(towerLeftSprite, stoneLeftDisply);
+            else return List.of(towerRightSprite, stoneRightDisply);
         }else{
             return List.of(towerLeftSprite, treeLeftDisply);
         }
