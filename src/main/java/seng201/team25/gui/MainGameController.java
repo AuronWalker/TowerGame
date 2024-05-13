@@ -82,9 +82,9 @@ public class MainGameController {
     private Image fruitTileRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/fruitTile.png"));
 
     private Image emptyDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/empty.png"));
-    
 
-    
+
+
 
     private List<ImageView> displayTiles;
     private List<Tower> activeTowers;
@@ -195,9 +195,9 @@ public class MainGameController {
 
             if(currentSelectedButton == -1) return;
             if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton) return;
-            
+
             displayTile = displayTiles.get(placement);
-            Tower newTower = new Tower(1, currentSelectedButton, 0, 0, 0, "Tower", emptyTile, displayTile, directionLeft);
+            Tower newTower = new Tower(currentSelectedButton, emptyTile, displayTile, directionLeft);
             activeTowers.add(newTower);
 
             List<Image> towerSprites = newTower.getTileImage();
