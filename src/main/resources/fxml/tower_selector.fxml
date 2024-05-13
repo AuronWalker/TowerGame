@@ -47,9 +47,9 @@
       </Label>
       <GridPane GridPane.rowIndex="1">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="501.8297119140625" minWidth="10.0" prefWidth="501.8297119140625" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="422.95513916015625" minWidth="10.0" prefWidth="352.1702880859375" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="531.5921936035156" minWidth="10.0" prefWidth="495.2990417480469" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="422.95513916015625" minWidth="10.0" prefWidth="291.2009582519531" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="493.09698486328125" minWidth="10.0" prefWidth="493.09698486328125" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="142.8380584716797" minHeight="0.0" prefHeight="42.29754638671875" vgrow="SOMETIMES" />
@@ -172,8 +172,8 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="208.35626220703125" minHeight="10.0" prefHeight="205.97369384765625" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="194.3680419921875" minHeight="10.0" prefHeight="99.5726318359375" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="98.79916381835938" minHeight="10.0" prefHeight="76.9273681640625" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="194.3680419921875" minHeight="10.0" prefHeight="141.47625732421875" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="98.79916381835938" minHeight="10.0" prefHeight="55.52374267578125" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <GridPane GridPane.rowIndex="1">
@@ -255,7 +255,7 @@
                         <Insets bottom="25.0" />
                      </padding>
                   </Label>
-                  <Label onMouseReleased="#addSelectedToLoadout" text="Add to loadout &gt;" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Label onMouseReleased="#addSelectedToLoadout" text="Add to Loadout" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Comic Sans MS Bold" size="19.0" />
                      </font>
@@ -267,27 +267,28 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="124.30172729492188" minHeight="10.0" prefHeight="113.25143432617188" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="154.87713623046875" minHeight="10.0" prefHeight="106.15975952148438" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="185.0" minHeight="10.0" prefHeight="109.29437255859375" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="87.57989501953125" minHeight="0.0" prefHeight="29.20562744140625" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="imgSelectedTower0" fitHeight="95.0" fitWidth="95.0" onMouseReleased="#removeSelectedFromLoadout" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                  <ImageView fx:id="imgLoadedTower0" fitHeight="95.0" fitWidth="95.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <image>
                         <Image url="@../assets/menuTiles/tower.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imgSelectedTower1" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#removeSelectedFromLoadout" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <ImageView fx:id="imgLoadedTower1" fitHeight="95.0" fitWidth="100.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <image>
                         <Image url="@../assets/menuTiles/tower.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imgSelectedTower2" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#removeSelectedFromLoadout" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <ImageView fx:id="imgLoadedTower2" fitHeight="95.0" fitWidth="100.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <image>
                         <Image url="@../assets/menuTiles/tower.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lblSelectedTower0" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                  <Label fx:id="lblLoadedTower0" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Comic Sans MS" size="13.0" />
                      </font>
@@ -295,7 +296,7 @@
                         <Insets bottom="15.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblSelectedTower1" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                  <Label fx:id="lblLoadedTower1" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Comic Sans MS" size="13.0" />
                      </font>
@@ -303,13 +304,18 @@
                         <Insets bottom="15.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblSelectedTower2" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Label fx:id="lblLoadedTower2" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Comic Sans MS" size="13.0" />
                      </font>
                      <padding>
                         <Insets bottom="15.0" />
                      </padding>
+                  </Label>
+                  <Label onMouseReleased="#resetLoadout" text="Reset Loadout" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="19.0" />
+                     </font>
                   </Label>
                </children>
                <GridPane.margin>
