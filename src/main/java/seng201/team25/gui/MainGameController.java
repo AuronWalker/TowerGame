@@ -1,5 +1,6 @@
 package seng201.team25.gui;
 import seng201.team25.models.Tower;
+import seng201.team25.models.Cart;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class MainGameController {
     @FXML private ImageView roadTile;
@@ -83,7 +85,7 @@ public class MainGameController {
 
     private Image emptyDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/empty.png"));
 
-
+    @FXML private AnchorPane anchorPane;
 
 
     private List<ImageView> displayTiles;
@@ -95,6 +97,7 @@ public class MainGameController {
 
     public void initialize() {
         generateLevel();
+        Cart newCart = new Cart(anchorPane);
     }
 
     private void generateLevel(){
