@@ -24,8 +24,7 @@ public class Tower {
 
 
     public Tower(int newResourceType) {
-
-
+        this.resourceType = newResourceType;
     }
 
     public Tower(int newResourceType, ImageView emptyTile, ImageView displayTile, boolean direction) {
