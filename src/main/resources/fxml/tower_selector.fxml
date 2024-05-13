@@ -272,22 +272,22 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fitHeight="95.0" fitWidth="95.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                  <ImageView fx:id="imgSelectedTower0" fitHeight="95.0" fitWidth="95.0" onMouseReleased="#removeSelectedFromLoadout" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <image>
                         <Image url="@../assets/menuTiles/tower.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="95.0" fitWidth="100.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <ImageView fx:id="imgSelectedTower1" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#removeSelectedFromLoadout" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <image>
                         <Image url="@../assets/menuTiles/tower.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="95.0" fitWidth="100.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <ImageView fx:id="imgSelectedTower2" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#removeSelectedFromLoadout" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <image>
                         <Image url="@../assets/menuTiles/tower.png" />
                      </image>
                   </ImageView>
-                  <Label text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                  <Label fx:id="lblSelectedTower0" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Comic Sans MS" size="13.0" />
                      </font>
@@ -295,7 +295,7 @@
                         <Insets bottom="15.0" />
                      </padding>
                   </Label>
-                  <Label text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                  <Label fx:id="lblSelectedTower1" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Comic Sans MS" size="13.0" />
                      </font>
@@ -303,7 +303,7 @@
                         <Insets bottom="15.0" />
                      </padding>
                   </Label>
-                  <Label text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Label fx:id="lblSelectedTower2" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Comic Sans MS" size="13.0" />
                      </font>

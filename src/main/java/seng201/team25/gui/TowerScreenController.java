@@ -1,11 +1,16 @@
 package seng201.team25.gui;
 
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import seng201.team25.models.Tower;
 import seng201.team25.services.AvailableTowerManager;
 import seng201.team25.services.MenuManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class TowerScreenController {
     MenuManager menuManager;
@@ -16,14 +21,36 @@ public class TowerScreenController {
     ImageView imgTowerSelected;
     @FXML
     Label lblTowerName;
-    ImageView selectedTower;
+
+    @FXML
+    ImageView imgSelectedTower0;
+    @FXML
+    ImageView imgSelectedTower1;
+    @FXML
+    ImageView imgSelectedTower2;
+
+    @FXML
+    Label lblSelectedTower0;
+    @FXML
+    Label lblSelectedTower1;
+    @FXML
+    Label lblSelectedTower2;
+
+
+    private ImageView selectedTowerElement;
+    private int selectedTowerResourceID;
+
+    private List<ImageView> selectedTowerImages;
+    private List<Label> selectedTowerLabels;
+
 
 
     AvailableTowerManager towerManager = new AvailableTowerManager();
 
     public void initialize() {
-        selectedTower = imgTower0;
-
+        selectedTowerElement = imgTower0;
+        selectedTowerImages.addAll(Arrays.asList(imgSelectedTower0, imgSelectedTower1, imgSelectedTower2));
+        selectedTowerLabels.addAll(Arrays.asList(lblSelectedTower0, lblSelectedTower1, lblSelectedTower2));
     }
 
     public TowerScreenController(MenuManager menuManager) {
@@ -39,22 +66,30 @@ public class TowerScreenController {
 
     public void towerSelected(Event event) {
         ImageView pressedTower = (ImageView) event.getSource();
-        if ( pressedTower == selectedTower ) { return; }
+        if ( pressedTower == selectedTowerElement ) { return; }
 
         // Get Resource ID then Resource String from selected tower
-        int selectedResourceId = Integer.parseInt(pressedTower.getId().substring(pressedTower.getId().length() - 1));
-        String resourceString = towerManager.getResourceTypeString(selectedResourceId);
+        this.selectedTowerResourceID = Integer.parseInt(pressedTower.getId().substring(pressedTower.getId().length() - 1));
+        String resourceString = towerManager.getResourceTypeString(selectedTowerResourceID);
         lblTowerName.setText(String.format("%s Tower", resourceString));
 
         pressedTower.setOpacity(1);
 
-        selectedTower.setOpacity(0.4);
-        selectedTower = pressedTower;
+        selectedTowerElement.setOpacity(0.4);
+        selectedTowerElement = pressedTower;
 
-        imgTowerSelected.setImage(selectedTower.getImage());
+        imgTowerSelected.setImage(selectedTowerElement.getImage());
     }
 
     public void addSelectedToLoadout() {
+        int nextIndex = towerManager.getNextAvailableIndex();
+        if (nextIndex != -1) {
+            towerManager.addAvailableTower(new Tower(selectedTowerResourceID));
+            selectedTowerImages.get(nextIndex);
+
+        }
+    }
+    public void removeSelectedFromLoadout() {
 
     }
 

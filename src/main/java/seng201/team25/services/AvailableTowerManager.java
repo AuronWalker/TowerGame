@@ -16,6 +16,11 @@ public class AvailableTowerManager {
         towers.add(tower);
     }
 
+    public int getNextAvailableIndex() {
+        if (towers.size() == 3) { return -1;}
+        return towers.size();
+    }
+
 
     public boolean removeTowerOfType(int towerType) {
         for (Tower tower : towers) {
