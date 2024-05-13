@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 
 public class Tower {
     private int level = 1;
+
     //0 = wood, 1 = stone, 2 = fruit
     private int resourceType;
     private int resourceAmount = 5;
