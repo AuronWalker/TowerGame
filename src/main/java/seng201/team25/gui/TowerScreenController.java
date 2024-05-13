@@ -9,6 +9,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class TowerScreenController {
     private ImageView selectedTowerElement;
     private int selectedTowerResourceID;
 
-    private List<ImageView> selectedTowerImages;
-    private List<Label> selectedTowerLabels;
+    private List<ImageView> selectedTowerImages = new ArrayList<>();
+    private List<Label> selectedTowerLabels = new ArrayList<>();
 
 
 
@@ -49,8 +50,9 @@ public class TowerScreenController {
 
     public void initialize() {
         selectedTowerElement = imgTower0;
-        selectedTowerImages.addAll(Arrays.asList(imgSelectedTower0, imgSelectedTower1, imgSelectedTower2));
-        selectedTowerLabels.addAll(Arrays.asList(lblSelectedTower0, lblSelectedTower1, lblSelectedTower2));
+        selectedTowerResourceID = Integer.parseInt(imgTower0.getId().substring(imgTower0.getId().length() - 1));
+        selectedTowerImages.addAll(List.of(imgSelectedTower0, imgSelectedTower1, imgSelectedTower2));
+        selectedTowerLabels.addAll(List.of(lblSelectedTower0, lblSelectedTower1, lblSelectedTower2));
     }
 
     public TowerScreenController(MenuManager menuManager) {
@@ -85,11 +87,15 @@ public class TowerScreenController {
         int nextIndex = towerManager.getNextAvailableIndex();
         if (nextIndex != -1) {
             towerManager.addAvailableTower(new Tower(selectedTowerResourceID));
-            selectedTowerImages.get(nextIndex);
+            selectedTowerImages.get(nextIndex).setImage(imgTowerSelected.getImage());
+            selectedTowerImages.get(nextIndex).setOpacity(1);
+            String resourceString = towerManager.getResourceTypeString(selectedTowerResourceID);
+            selectedTowerLabels.get(nextIndex).setText(String.format("%s Tower", resourceString));
 
         }
     }
     public void removeSelectedFromLoadout() {
+
 
     }
 
