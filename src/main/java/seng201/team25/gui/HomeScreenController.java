@@ -1,15 +1,15 @@
 package seng201.team25.gui;
 
-import seng201.team25.services.MenuManager;
+import seng201.team25.services.WindowManager;
 
 public class HomeScreenController {
-    MenuManager menuManager;
+    WindowManager windowManager;
 
-    public HomeScreenController(MenuManager menuManager) {
-        this.menuManager = menuManager;
+    public HomeScreenController(WindowManager windowManager) {
+        this.windowManager = windowManager;
     }
     public void startGamePressed() {
-        menuManager.toSetupScreen();
+        windowManager.toSetupScreen();
     }
     public void btnQuitPressed() {
         System.out.println("Start pressed");

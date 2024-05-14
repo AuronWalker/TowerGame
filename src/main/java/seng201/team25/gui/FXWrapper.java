@@ -1,6 +1,6 @@
 package seng201.team25.gui;
 
-import seng201.team25.services.MenuManager;
+import seng201.team25.services.WindowManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,14 +16,14 @@ public class FXWrapper {
 
     public void init(Stage stage) {
         this.stage = stage;
-        new MenuManager(this::launchHomeScreen, this::launchSetupScreen, this::launchTowerScreen, this::clearPane);
+        new WindowManager(this::launchHomeScreen, this::launchSetupScreen, this::launchTowerScreen, this::launchGameScreen, this::clearPane);
     }
 
-    public void launchHomeScreen(MenuManager menuManager) {
+    public void launchHomeScreen(WindowManager windowManager) {
         try {
             FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/home_screen.fxml"));
             // provide a custom Controller with parameters
-            setupLoader.setControllerFactory(param -> new HomeScreenController(menuManager));
+            setupLoader.setControllerFactory(param -> new HomeScreenController(windowManager));
             Parent setupParent  = setupLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Tower Game");
@@ -31,11 +31,11 @@ public class FXWrapper {
             e.printStackTrace();
         }
     }
-    public void launchSetupScreen(MenuManager menuManager) {
+    public void launchSetupScreen(WindowManager windowManager) {
         try {
             FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/setup_screen.fxml"));
             // provide a custom Controller with parameters
-            setupLoader.setControllerFactory(param -> new SetupScreenController(menuManager));
+            setupLoader.setControllerFactory(param -> new SetupScreenController(windowManager));
             Parent setupParent  = setupLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Tower Game");
@@ -43,11 +43,24 @@ public class FXWrapper {
             e.printStackTrace();
         }
     }
-    public void launchTowerScreen(MenuManager menuManager) {
+    public void launchTowerScreen(WindowManager windowManager) {
         try {
             FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/tower_selector.fxml"));
             // provide a custom Controller with parameters
-            setupLoader.setControllerFactory(param -> new TowerScreenController(menuManager));
+            setupLoader.setControllerFactory(param -> new TowerScreenController(windowManager));
+            Parent setupParent  = setupLoader.load();
+            pane.getChildren().add(setupParent);
+            stage.setTitle("Tower Game");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void launchGameScreen(WindowManager windowManager) {
+        try {
+            FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/new_main.fxml"));
+            // provide a custom Controller with parameters
+            setupLoader.setControllerFactory(param -> new MainGameController());//windowManager));
             Parent setupParent  = setupLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Tower Game");

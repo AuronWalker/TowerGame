@@ -1,19 +1,19 @@
 package seng201.team25.gui;
 
-import seng201.team25.services.MenuManager;
+import seng201.team25.services.WindowManager;
 
 public class SetupScreenController {
-    MenuManager menuManager;
+    WindowManager windowManager;
 
-    public SetupScreenController(MenuManager menuManager) {
-        this.menuManager = menuManager;
+    public SetupScreenController(WindowManager windowManager) {
+        this.windowManager = windowManager;
     }
 
     public void continuePressed() {
-        menuManager.toTowerScreen();
+        windowManager.toTowerScreen();
     }
     public void backPressed() {
-        menuManager.toHomeScreen();
+        windowManager.toHomeScreen();
     }
 
     public void difficultyPressed() {

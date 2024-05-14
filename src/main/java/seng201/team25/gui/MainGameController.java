@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import seng201.team25.services.WindowManager;
 
 public class MainGameController {
     @FXML private ImageView roadTile;
@@ -101,6 +102,17 @@ public class MainGameController {
     private int placement = 0;
     //0 = wood, 1 = stone, 2 = fruit
     private int currentSelectedButton = -1;
+
+
+    // Added to allow calling of new windows (i.e shop) from the main game
+    // would use windowManager.toShopWindow(), although not yet implemented
+    WindowManager windowManager;
+    public MainGameController(WindowManager newWindowManager) {
+        this.windowManager = newWindowManager;
+    }
+
+    public MainGameController() {
+    }
 
     public void initialize() {
         activeTowers = new ArrayList<Tower>();

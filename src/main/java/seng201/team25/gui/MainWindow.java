@@ -1,4 +1,3 @@
-// This needs to be merged to the FXWindow class
 
 package seng201.team25.gui;
 
@@ -10,8 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Class starts the javaFX application window
- * @author seng201 teaching team
+ * This class is now redundant, but kept for easy testing of MainGameController.
  */
 public class MainWindow extends Application {
 
