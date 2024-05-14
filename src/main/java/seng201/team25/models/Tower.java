@@ -11,7 +11,6 @@ public class Tower {
     private int resourceType;
     private int resourceAmount = 5;
     private int reloadSpeed = 1;
-    private int startingResources = 1;
     private int cost = 5;
 
     public ImageView currentTile;
@@ -45,7 +44,7 @@ public class Tower {
     // Constructor used for towers listed in the shop
     public Tower(int newResourceType, int newStartingResources, int newReloadSpeed, int newLevel, int newCost) {
         this.resourceType = newResourceType;
-        this.startingResources = newStartingResources;
+        this.resourceAmount = newStartingResources;
         this.reloadSpeed = newReloadSpeed;
         this.level = newLevel;
         this.cost = newCost;
