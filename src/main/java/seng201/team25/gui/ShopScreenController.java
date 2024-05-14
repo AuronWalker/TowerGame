@@ -28,6 +28,14 @@ public class ShopScreenController {
     Label txtStatus;
     @FXML
     Label lblBalance;
+    @FXML
+    Label lblResources;
+    @FXML
+    Label lblReloadSpeed;
+    @FXML
+    Label lblLevel;
+    @FXML
+    Label lblCost;
 
     private int recurrentPurchaseCounter = 1;
 
@@ -77,8 +85,11 @@ public class ShopScreenController {
         selectedTowerElement = pressedTower;
 
         imgTowerSelected.setImage(selectedTowerElement.getImage());
+        lblResources.setText(String.valueOf(selectedTower.getResourceAmount()));
+        lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));
+        lblLevel.setText(String.valueOf(selectedTower.getLevel()));
+        lblCost.setText(String.valueOf(selectedTower.getCost()));
 
-        // need to update stats here
     }
 
     public void buySelectedTower() {
