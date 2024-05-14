@@ -209,22 +209,22 @@
                               <Insets right="10.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label text="10" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label fx:id="lblCost" text="10" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font name="Comic Sans MS" size="16.0" />
                            </font>
                         </Label>
-                        <Label text="1" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="lblLevel" text="1" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font name="Comic Sans MS" size="16.0" />
                            </font>
                         </Label>
-                        <Label text="1" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="lblReloadSpeed" text="1" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font name="Comic Sans MS" size="16.0" />
                            </font>
                         </Label>
-                        <Label text="5" textFill="WHITE" GridPane.columnIndex="1">
+                        <Label fx:id="lblResources" text="5" textFill="WHITE" GridPane.columnIndex="1">
                            <font>
                               <Font name="Comic Sans MS" size="16.0" />
                            </font>
