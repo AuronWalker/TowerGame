@@ -15,11 +15,16 @@ public class GoldManager {
         return gold;
     }
 
-    public static void increaseGoldBalance(int goldToAdd) {
+    public static int increaseGoldBalance(int goldToAdd) {
         gold += goldToAdd;
+        return gold;
     }
 
-    public static void decreaseGoldBalance(int goldToTake) {
+    public static int decreaseGoldBalance(int goldToTake) {
+        if (goldToTake > gold) {
+            return -1;
+        }
         gold -= goldToTake;
+        return gold;
     }
 }

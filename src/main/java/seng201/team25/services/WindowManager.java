@@ -7,17 +7,18 @@ public class WindowManager {
     private final Consumer<WindowManager> setupScreenLauncher;
     private final Consumer<WindowManager> towerScreenLauncher;
     private final Consumer<WindowManager> gameScreenLauncher;
+    private final Consumer<WindowManager> shopScreenLauncher;
 
     private final Runnable clearScreen;
 
 
 
-    public WindowManager(Consumer<WindowManager> homeScreenLauncher, Consumer<WindowManager> setupScreenLauncher, Consumer<WindowManager> towerScreenLauncher, Consumer<WindowManager> gameScreenLauncher, Runnable clearScreen) {
-        System.out.println("attempting launchhomescreen");
+    public WindowManager(Consumer<WindowManager> homeScreenLauncher, Consumer<WindowManager> setupScreenLauncher, Consumer<WindowManager> towerScreenLauncher, Consumer<WindowManager> gameScreenLauncher, Consumer<WindowManager> shopScreenLauncher, Runnable clearScreen) {
         this.homeScreenLauncher = homeScreenLauncher;
         this.setupScreenLauncher = setupScreenLauncher;
         this.towerScreenLauncher = towerScreenLauncher;
         this.gameScreenLauncher = gameScreenLauncher;
+        this.shopScreenLauncher = shopScreenLauncher;
         this.clearScreen = clearScreen;
         launchHomeScreen();
     }
@@ -33,6 +34,9 @@ public class WindowManager {
     }
     public void launchGameScreen() {
         gameScreenLauncher.accept(this);
+    }
+    public void launchShopScreen() {
+        shopScreenLauncher.accept(this);
     }
 
     public void toHomeScreen() {
@@ -51,6 +55,11 @@ public class WindowManager {
     public void toGameScreen() {
         clearScreen.run();
         launchGameScreen();
+    }
+
+    public void toShopScreen() {
+        clearScreen.run();
+        launchShopScreen();
     }
 
 

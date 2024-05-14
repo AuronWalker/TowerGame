@@ -14,7 +14,6 @@ import java.util.List;
 
 public class TowerScreenController {
     WindowManager windowManager;
-
     @FXML
     ImageView imgTower0;
     @FXML
@@ -37,6 +36,7 @@ public class TowerScreenController {
     Label lblLoadedTower2;
 
 
+
     private ImageView selectedTowerElement;
     private int selectedTowerResourceID;
 
@@ -46,7 +46,6 @@ public class TowerScreenController {
 
 
 
-    AvailableTowerManager towerManager = new AvailableTowerManager();
 
     public void initialize() {
         selectedTowerElement = imgTower0;
@@ -63,7 +62,6 @@ public class TowerScreenController {
 
     public void continuePressed() {
         windowManager.toGameScreen();
-        System.out.println("ContunuePressed called");
     }
     public void backPressed() {
         windowManager.toSetupScreen();
@@ -75,7 +73,7 @@ public class TowerScreenController {
 
         // Get Resource ID then Resource String from selected tower
         this.selectedTowerResourceID = Integer.parseInt(pressedTower.getId().substring(pressedTower.getId().length() - 1));
-        String resourceString = towerManager.getResourceTypeString(selectedTowerResourceID);
+        String resourceString = AvailableTowerManager.getResourceTypeString(selectedTowerResourceID);
         lblTowerName.setText(String.format("%s Tower", resourceString));
 
         pressedTower.setOpacity(1);
@@ -87,18 +85,18 @@ public class TowerScreenController {
     }
 
     public void addSelectedToLoadout() {
-        int nextIndex = towerManager.getNextAvailableIndex();
+        int nextIndex = AvailableTowerManager.getNextAvailableIndex();
         if (nextIndex != -1) {
-            towerManager.addAvailableTower(new Tower(selectedTowerResourceID));
+            AvailableTowerManager.addAvailableTower(new Tower(selectedTowerResourceID));
             loadedTowerImages.get(nextIndex).setImage(imgTowerSelected.getImage());
             loadedTowerImages.get(nextIndex).setOpacity(1);
-            String resourceString = towerManager.getResourceTypeString(selectedTowerResourceID);
+            String resourceString = AvailableTowerManager.getResourceTypeString(selectedTowerResourceID);
             loadedTowerLabels.get(nextIndex).setText(String.format("%s Tower", resourceString));
 
         }
     }
     public void resetLoadout() {
-        towerManager.clearAvailableTowers();
+        AvailableTowerManager.clearAvailableTowers();
         for (ImageView towerImage : loadedTowerImages) {
             towerImage.setImage(referenceTowerImage);
             towerImage.setOpacity(0.4);

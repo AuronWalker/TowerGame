@@ -11,6 +11,8 @@ public class Tower {
     private int resourceType;
     private int resourceAmount = 5;
     private int reloadSpeed = 1;
+    private int startingResources = 1;
+    private int cost = 5;
 
     public ImageView currentTile;
     public ImageView currentDisplay;
@@ -25,10 +27,12 @@ public class Tower {
     private Image towerLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png"));
 
 
+    // Constructor used for starter towers with no stats
     public Tower(int newResourceType) {
         this.resourceType = newResourceType;
     }
 
+    // Constructor used for towers placed on the map
     public Tower(int newResourceType, ImageView emptyTile, ImageView displayTile, boolean direction) {
         this.resourceType = newResourceType;
         this.currentDisplay = displayTile;
@@ -36,6 +40,15 @@ public class Tower {
         this.directionLeft = direction;
         position = new Point2D(0, emptyTile.getLayoutY());
         System.out.println(position);
+    }
+
+    // Constructor used for towers listed in the shop
+    public Tower(int newResourceType, int newStartingResources, int newReloadSpeed, int newLevel, int newCost) {
+        this.resourceType = newResourceType;
+        this.startingResources = newStartingResources;
+        this.reloadSpeed = newReloadSpeed;
+        this.level = newLevel;
+        this.cost = newCost;
     }
 
     public Point2D getPosition(){
@@ -83,15 +96,9 @@ public class Tower {
         return reloadSpeed;
     }
 
-    /*
-    public String getName() {
-        //return name;
-    }
-
-   // public int getCost() {
+   public int getCost() {
         return cost;
     }
-*/
     public int getResourceAmount() {
         return resourceAmount;
     }

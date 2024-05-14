@@ -11,14 +11,28 @@ import java.util.List;
 
 public class AvailableTowerManager {
     private static List<Tower> towers = new ArrayList<>();
-    private final String[] resourceTypeMap = {"Wood", "Stone", "Fruit", "Vertical Upgrade", "Horizontal Upgrade"};
+    private static final String[] resourceTypeMap = {"Wood", "Stone", "Fruit", "Vertical Upgrade", "Horizontal Upgrade"};
 
-    public void addAvailableTower(Tower tower) {
+    // Towers available in the shop
+    private static final Tower[] towersToBuy = {
+            new Tower(0, 1, 2,1,1),
+            new Tower(1, 1, 1, 1, 2),
+            new Tower(2, 1, 1, 1, 3),
+            new Tower(3, 1, 1, 1, 4),
+            new Tower(4, 0, -1, -1, 5),
+            new Tower(5, 0, -1, -1, 6)};
+
+
+    public static Tower[] getTowersToBuy() {
+            return towersToBuy;
+    }
+
+    public static void addAvailableTower(Tower tower) {
         towers.add(tower);
     }
-    public void clearAvailableTowers() {towers.clear();}
+    public static void clearAvailableTowers() {towers.clear();}
 
-    public int getNextAvailableIndex() {
+    public static int getNextAvailableIndex() {
         if (towers.size() == 3) { return -1;}
         return towers.size();
     }
@@ -44,7 +58,7 @@ public class AvailableTowerManager {
         return towersOfType;
     }
 
-    public String getResourceTypeString(int intId) {
+    public static String getResourceTypeString(int intId) {
         return resourceTypeMap[intId];
     }
 
