@@ -66,7 +66,7 @@
             <Slider fx:id="sldRounds" majorTickUnit="1.0" max="15.0" maxWidth="-Infinity" min="5.0" minorTickCount="15" prefHeight="38.0" prefWidth="219.0" snapToTicks="true" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="lblSliderPosition" text="5" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets left="-25.0" />
+                  <Insets left="-220.0" />
                </GridPane.margin>
                <font>
                   <Font name="Comic Sans MS Bold" size="17.0" />
@@ -92,17 +92,17 @@
                <children>
                   <Label fx:id="lblEasy" onMouseReleased="#difficultyPressed" text="Easy" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font name="Comic Sans MS Bold" size="19.0" />
+                        <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblNormal" onMouseReleased="#difficultyPressed" text="Normal" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label fx:id="lblNormal" onMouseReleased="#difficultyPressed" opacity="0.4" text="Normal" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font name="Comic Sans MS" size="13.0" />
+                        <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblHard" onMouseReleased="#difficultyPressed" text="Hard" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Label fx:id="lblHard" onMouseReleased="#difficultyPressed" opacity="0.4" text="Hard" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font name="Comic Sans MS" size="13.0" />
+                        <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Label>
                </children>
