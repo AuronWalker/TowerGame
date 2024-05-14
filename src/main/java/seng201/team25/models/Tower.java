@@ -2,6 +2,7 @@ package seng201.team25.models;
 import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.geometry.Point2D;
 
 public class Tower {
     private int level = 1;
@@ -14,6 +15,7 @@ public class Tower {
     public ImageView currentTile;
     public ImageView currentDisplay;
     private boolean directionLeft;
+    private Point2D position;
 
     private final Image treeLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeLeft.png"));
     private final Image treeRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeRight.png"));
@@ -32,6 +34,12 @@ public class Tower {
         this.currentDisplay = displayTile;
         this.currentTile = emptyTile;
         this.directionLeft = direction;
+        position = new Point2D(0, emptyTile.getLayoutY());
+        System.out.println(position);
+    }
+
+    public Point2D getPosition(){
+        return position;
     }
 
     //didn't work as intended

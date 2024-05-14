@@ -7,12 +7,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.geometry.Point2D;
 
 public class Cart {
     private Image cartSprite = new Image(getClass().getResourceAsStream("/assets/cart/cart.png"));
     private Image treeDisplay = new Image(getClass().getResourceAsStream("/assets/cart/cartTree.png"));
     private int xLayout = 531;
     private Label amount;
+    private Point2D position;
 
     public Cart(AnchorPane anchorPane, int speed, int resourceType){
         ImageView cart = new ImageView();
@@ -39,16 +41,20 @@ public class Cart {
         amount.setFont(Font.font(30));
         amount.setStyle("-fx-font-weight: bold");
 
+        position = new Point2D(0, cart.getLayoutY());
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long timestamp) {
                 cart.setLayoutY(cart.getLayoutY() - speed);
                 cartDisplay.setLayoutY(cartDisplay.getLayoutY() - speed);
                 amount.setLayoutY(amount.getLayoutY() - speed);
+                position = new Point2D(0, cart.getLayoutY());
             }
         };
         timer.start();
 
+
+        
         anchorPane.getChildren().add(cart);
         anchorPane.getChildren().add(cartDisplay);
         anchorPane.getChildren().add(amount);
@@ -58,5 +64,9 @@ public class Cart {
         if(resourceType == 0){
             cartDisplay.setImage(treeDisplay);
         }
+    }
+
+    public Point2D getPosition(){
+        return position;
     }
 }

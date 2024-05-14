@@ -96,22 +96,41 @@ public class MainGameController {
 
     private List<ImageView> displayTiles;
     private List<Tower> activeTowers;
+    private List<Cart> activeCarts;
     private List<Integer> tileResources;
     private int placement = 0;
     //0 = wood, 1 = stone, 2 = fruit
     private int currentSelectedButton = -1;
-    private int numberOfCarts = 0;
 
     public void initialize() {
+        activeTowers = new ArrayList<Tower>();
+        activeCarts = new ArrayList<Cart>();
+        tileResources = new ArrayList<Integer>();
+
         generateLevel();
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> spawnCart()));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.playFromStart();
+        Timeline spawner = new Timeline(new KeyFrame(Duration.seconds(5), e -> spawnCart()));
+        spawner.setCycleCount(Animation.INDEFINITE);
+        spawner.playFromStart();
+
+        Timeline rangeCheck = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> checkRange()));
+        rangeCheck.setCycleCount(Animation.INDEFINITE);
+        rangeCheck.playFromStart();
+    }
+
+    private void checkRange(){
+        for (Cart cart : activeCarts) {
+            for (Tower tower : activeTowers) {
+                double distance = cart.getPosition().distance(tower.getPosition());
+                if(distance<100){
+                    System.out.println("In range!");
+                }
+            }
+        }
     }
 
     private void spawnCart(){
-        new Cart(anchorPane, 1, 0);
+        activeCarts.add(new Cart(anchorPane, 1, 0));
     }
 
     private void generateLevel(){
@@ -119,8 +138,6 @@ public class MainGameController {
         List<ImageView> leftTiles = List.of(placeTile, placeTile1, placeTile2, placeTile3, placeTile4, placeTile5, placeTile6, placeTile7);
         List<ImageView> rightTiles = List.of(placeTile8, placeTile9, placeTile10, placeTile11, placeTile12, placeTile13, placeTile14, placeTile15);
         displayTiles = List.of(displayTile, displayTile1, displayTile2, displayTile3, displayTile4, displayTile5, displayTile6, displayTile7, displayTile8, displayTile9, displayTile10, displayTile11, displayTile12, displayTile13, displayTile14, displayTile15);
-        activeTowers = new ArrayList<Tower>();
-        tileResources = new ArrayList<Integer>();
 
         List<Image> roadTileSprites = List.of(roadTileSprite, roadTileSprite1, roadTileSprite2, roadTileSprite3, roadTileSprite4);
         List<Image> leftGrassTileSprites = List.of(grassTileLeftSprite, grassTileLeftSprite1, grassTileLeftSprite2, grassTileLeftSprite3);
@@ -166,7 +183,7 @@ public class MainGameController {
 
     private void generateTile(List<ImageView> tiles, List<Image> tileImages, boolean directionLeft, Random rng){
         boolean notGrass = false;
-        int cuurentTile = 0;
+        int currentTile = 0;
         for (ImageView tile : tiles) {
             int tileType = rng.nextInt(4);
             int randomInt = rng.nextInt(tileImages.size());
@@ -196,7 +213,7 @@ public class MainGameController {
                 notGrass = true;
             }
             placement += 1;
-            cuurentTile += 1;
+            currentTile += 1;
         }
     }
 
