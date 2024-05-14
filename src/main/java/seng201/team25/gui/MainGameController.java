@@ -18,8 +18,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import seng201.team25.services.WindowManager;
 
 public class MainGameController {
+
+    WindowManager windowManager;
+    public MainGameController(WindowManager newWindowManager) {
+        this.windowManager = newWindowManager;
+    }
+
+
+
     @FXML private ImageView roadTile;
     @FXML private ImageView roadTile1;
     @FXML private ImageView roadTile2;
@@ -101,6 +110,9 @@ public class MainGameController {
     //0 = wood, 1 = stone, 2 = fruit
     private int currentSelectedButton = -1;
     private int numberOfCarts = 0;
+
+    public MainGameController() {
+    }
 
     public void initialize() {
         generateLevel();

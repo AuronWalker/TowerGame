@@ -4,7 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import seng201.team25.models.Tower;
 import seng201.team25.services.AvailableTowerManager;
-import seng201.team25.services.MenuManager;
+import seng201.team25.services.WindowManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TowerScreenController {
-    MenuManager menuManager;
+    WindowManager windowManager;
 
     @FXML
     ImageView imgTower0;
@@ -57,15 +57,16 @@ public class TowerScreenController {
         referenceTowerImage = imgLoadedTower0.getImage();
     }
 
-    public TowerScreenController(MenuManager menuManager) {
-        this.menuManager = menuManager;
+    public TowerScreenController(WindowManager windowManager) {
+        this.windowManager = windowManager;
     }
 
     public void continuePressed() {
-        menuManager.toTowerScreen();
+        windowManager.toGameScreen();
+        System.out.println("ContunuePressed called");
     }
     public void backPressed() {
-        menuManager.toSetupScreen();
+        windowManager.toSetupScreen();
     }
 
     public void towerSelected(Event event) {
@@ -107,5 +108,4 @@ public class TowerScreenController {
         }
 
     }
-
 }
