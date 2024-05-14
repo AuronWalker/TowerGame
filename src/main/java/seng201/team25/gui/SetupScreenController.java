@@ -28,6 +28,8 @@ public class SetupScreenController {
     private Slider sldRounds;
     @FXML
     private Label lblSliderPosition;
+    @FXML
+    private Label lblValidName;
     private Label selectedDifficulty;
 
     private List<Label> difficultyLabels = new ArrayList<>();
@@ -50,9 +52,19 @@ public class SetupScreenController {
     }
 
     public void continuePressed() {
-        // check name conditions here
-        playerManager.storeValues(txtName.getText(), (int) sldRounds.getValue(), difficultyLabels.indexOf(selectedDifficulty));
-        windowManager.toTowerScreen();
+
+            if (txtName.getText().length() > 2 && txtName.getText().length() < 16) {
+                if (txtName.getText().matches("[A-Za-z0-9]+")) {
+                    playerManager.storeValues(txtName.getText(), (int) sldRounds.getValue(), difficultyLabels.indexOf(selectedDifficulty));
+                    windowManager.toTowerScreen();
+                } else {
+                    lblValidName.setText("Name cannot include special characters");
+                    lblValidName.setVisible(true);
+                }
+            } else {
+                lblValidName.setText("Name must be between 3 and 15 characters");
+                lblValidName.setVisible(true);
+            }
     }
 
     public void backPressed() {
@@ -62,5 +74,11 @@ public class SetupScreenController {
     public void sliderChanged() {
         lblSliderPosition.setText(String.valueOf(((int) sldRounds.getValue())));
     }
+
+    public void txtChanged() {
+        lblValidName.setVisible(false);
+    }
+
+
 
 }
