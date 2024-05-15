@@ -47,7 +47,7 @@ public class AvailableTowerManager {
         return false;
     }
 
-    public int getTowersOfType(int towerType) {
+    public int numberOfTowers(int towerType) {
         int towersOfType = 0;
         for (Tower tower : towers) {
             if (tower.getResourceType() == towerType) {
