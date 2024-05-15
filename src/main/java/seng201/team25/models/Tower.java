@@ -79,18 +79,15 @@ public class Tower {
         }
     }
 
-    public void setResourceAmount(int amount) {
-        this.resourceAmount = amount;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
+    public void increaseLevel() {
+        this.level ++;
     }
 
     public int getLevel() {
         return level;
     }
 
+    public void increaseReloadSpeed() { this.reloadSpeed ++; }
     public int getReloadSpeed() {
         return reloadSpeed;
     }
@@ -100,6 +97,9 @@ public class Tower {
     }
     public int getResourceAmount() {
         return resourceAmount;
+    }
+    public void setResourceAmount(int amount) {
+        this.resourceAmount = amount;
     }
 
     public int getResourceType() {
