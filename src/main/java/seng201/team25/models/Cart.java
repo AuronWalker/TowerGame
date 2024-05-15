@@ -13,22 +13,25 @@ public class Cart {
     private Image cartSprite = new Image(getClass().getResourceAsStream("/assets/cart/cart.png"));
     private Image treeDisplay = new Image(getClass().getResourceAsStream("/assets/cart/cartTree.png"));
     private int xLayout = 531;
+    private int totalResource;
+    private int currentResource=0;
     private Label amount;
     private Point2D position;
 
-    public Cart(AnchorPane anchorPane, int speed, int resourceType){
+    public Cart(AnchorPane anchorPane, int speed, int resourceType, int _totalResource){
         ImageView cart = new ImageView();
         ImageView cartDisplay = new ImageView();
         amount = new Label();
+        totalResource = _totalResource;
 
         cart.setImage(cartSprite);
         setDisplay(cartDisplay, resourceType);
 
         cartDisplay.setLayoutX(xLayout);
         cartDisplay.setLayoutY(505);
-        amount.setLayoutX(580);
+        amount.setLayoutX(575);
         amount.setLayoutY(720);
-        amount.setText("0/10");
+        amount.setText(currentResource+"/"+totalResource);
         amount.setTextFill(Color.BLACK);
 
         cart.setLayoutX(528);
@@ -64,6 +67,12 @@ public class Cart {
         if(resourceType == 0){
             cartDisplay.setImage(treeDisplay);
         }
+    }
+
+    public void fillCart(int fillAmount){
+        currentResource += fillAmount;
+        if(currentResource > totalResource) currentResource = totalResource;
+        amount.setText(currentResource+"/"+totalResource);
     }
 
     public Point2D getPosition(){

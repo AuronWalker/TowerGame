@@ -131,18 +131,20 @@ public class MainGameController {
     }
 
     private void checkRange(){
-        for (Cart cart : activeCarts) {
-            for (Tower tower : activeTowers) {
+        for (Tower tower : activeTowers) {
+            tower.lowerCurrentReloadSpeed();
+            for (Cart cart : activeCarts) {
                 double distance = cart.getPosition().distance(tower.getPosition());
-                if(distance<100){
-                    System.out.println("In range!");
+                if(distance<80 && tower.getCurrentReloadSpeed() <= 0){
+                    cart.fillCart(1);
+                    tower.resetCurrentReloadSpeed();
                 }
             }
         }
     }
 
     private void spawnCart(){
-        activeCarts.add(new Cart(anchorPane, 1, 0));
+        activeCarts.add(new Cart(anchorPane, 1, 0, 10));
     }
 
     private void generateLevel(){

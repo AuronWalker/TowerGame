@@ -9,8 +9,9 @@ public class Tower {
 
     //0 = wood, 1 = stone, 2 = fruit
     private int resourceType;
-    private int resourceAmount = 5;
-    private int reloadSpeed = 1;
+    private int resourceAmount = 1;
+    private int reloadSpeed = 4;
+    private int currentReloadSpeed = reloadSpeed;
 
     public ImageView currentTile;
     public ImageView currentDisplay;
@@ -81,6 +82,20 @@ public class Tower {
 
     public int getReloadSpeed() {
         return reloadSpeed;
+    }
+
+    public int getCurrentReloadSpeed() {
+        System.out.println(currentReloadSpeed);
+        return currentReloadSpeed;
+        
+    }
+
+    public void lowerCurrentReloadSpeed() {
+        currentReloadSpeed -= 1;
+    }
+
+    public void resetCurrentReloadSpeed(){
+        currentReloadSpeed = reloadSpeed;
     }
 
     /*
