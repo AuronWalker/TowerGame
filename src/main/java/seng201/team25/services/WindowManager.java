@@ -1,6 +1,9 @@
 package seng201.team25.services;
-
 import java.util.function.Consumer;
+
+/**
+ * Used to control movement between game screens using the same JavaFX window.
+ */
 
 public class WindowManager {
     private final Consumer<WindowManager> homeScreenLauncher;
@@ -23,44 +26,52 @@ public class WindowManager {
         launchHomeScreen();
     }
 
+    /**
+     * Launches the home screen without clearing.
+     * Used when no screen is already loaded.
+     */
     public void launchHomeScreen() {
         homeScreenLauncher.accept(this);
     }
-    public void launchSetupScreen() {
-        setupScreenLauncher.accept(this);
-    }
-    public void launchTowerScreen() {
-        towerScreenLauncher.accept(this);
-    }
-    public void launchGameScreen() {
-        gameScreenLauncher.accept(this);
-    }
-    public void launchShopScreen() {
-        shopScreenLauncher.accept(this);
-    }
 
+    /**
+     * Clears the existing screen, then launches the home screen.
+     * Used when another screen is already loaded.
+     */
     public void toHomeScreen() {
         clearScreen.run();
-        launchHomeScreen();
+        homeScreenLauncher.accept(this);
     }
+
+    /**
+     * Clears the existing screen, then launches the setup screen.
+     */
     public void toSetupScreen() {
         clearScreen.run();
-        launchSetupScreen();
+        setupScreenLauncher.accept(this);
     }
+
+    /**
+     * Clears the existing screen, then launches the tower selection screen.
+     */
     public void toTowerScreen() {
         clearScreen.run();
-        launchTowerScreen();
+        towerScreenLauncher.accept(this);
     }
 
+    /**
+     * Clears the existing screen, then launches the main game screen.
+     */
     public void toGameScreen() {
         clearScreen.run();
-        launchGameScreen();
+        gameScreenLauncher.accept(this);
     }
 
+    /**
+     * Clears the existing screen, then launches the shop screen.
+     */
     public void toShopScreen() {
         clearScreen.run();
-        launchShopScreen();
+        shopScreenLauncher.accept(this);
     }
-
-
 }
