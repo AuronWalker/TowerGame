@@ -15,11 +15,28 @@ public class GoldManager {
         return gold;
     }
 
-    public static void increaseGoldBalance(int goldToAdd) {
+    /**
+     * Increases the player's gold balance.
+     * @param goldToAdd Amount of gold to add to balance
+     * @return Current balance
+     */
+    public static int increaseGoldBalance(int goldToAdd) {
         gold += goldToAdd;
+        return gold;
     }
 
-    public static void decreaseGoldBalance(int goldToTake) {
+    /**
+     * Decreases the players gold balance.
+     * Returns -1 if insufficient gold is available. This does not change the
+     * player's gold balance.
+     * @param goldToTake Amount of gold to add to balance
+     * @return Current balance, or -1 if insufficient funds
+     */
+    public static int decreaseGoldBalance(int goldToTake) {
+        if (goldToTake > gold) {
+            return -1;
+        }
         gold -= goldToTake;
+        return gold;
     }
 }

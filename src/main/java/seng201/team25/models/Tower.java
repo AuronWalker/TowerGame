@@ -12,11 +12,13 @@ public class Tower {
     private int resourceAmount = 1;
     private int reloadSpeed = 4;
     private int currentReloadSpeed = reloadSpeed;
+    private int cost = 5;
 
     public ImageView currentTile;
     public ImageView currentDisplay;
     private boolean directionLeft;
     private Point2D position;
+    private String name ="";
 
     private final Image treeLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeLeft.png"));
     private final Image treeRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeRight.png"));
@@ -26,10 +28,12 @@ public class Tower {
     private Image towerLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png"));
 
 
+    // Constructor used for starter towers with no stats
     public Tower(int newResourceType) {
         this.resourceType = newResourceType;
     }
 
+    // Constructor used for towers placed on the map
     public Tower(int newResourceType, ImageView emptyTile, ImageView displayTile, boolean direction) {
         this.resourceType = newResourceType;
         this.currentDisplay = displayTile;
@@ -37,6 +41,15 @@ public class Tower {
         this.directionLeft = direction;
         position = new Point2D(0, emptyTile.getLayoutY());
         System.out.println(position);
+    }
+
+    // Constructor used for towers listed in the shop
+    public Tower(int newResourceType, int newStartingResources, int newReloadSpeed, int newLevel, int newCost) {
+        this.resourceType = newResourceType;
+        this.resourceAmount = newStartingResources;
+        this.reloadSpeed = newReloadSpeed;
+        this.level = newLevel;
+        this.cost = newCost;
     }
 
     public Point2D getPosition(){
@@ -68,18 +81,15 @@ public class Tower {
         }
     }
 
-    public void setResourceAmount(int amount) {
-        this.resourceAmount = amount;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
+    public void increaseLevel() {
+        this.level ++;
     }
 
     public int getLevel() {
         return level;
     }
 
+    public void increaseReloadSpeed() { this.reloadSpeed ++; }
     public int getReloadSpeed() {
         return reloadSpeed;
     }
@@ -98,21 +108,24 @@ public class Tower {
         currentReloadSpeed = reloadSpeed;
     }
 
-    /*
+    
     public String getName() {
-        //return name;
+        return name;
     }
 
-   // public int getCost() {
+   public int getCost() {
         return cost;
     }
-*/
     public int getResourceAmount() {
         return resourceAmount;
+    }
+    public void setResourceAmount(int amount) {
+        this.resourceAmount = amount;
     }
 
     public int getResourceType() {
         return resourceType;
     }
+    
 
 }
