@@ -35,6 +35,7 @@ public class AvailableTowerManager {
      */
     public static void addAvailableTower(Tower tower) {
         towers.add(tower);
+        System.out.println("Adding");
     }
 
     /**
@@ -72,11 +73,11 @@ public class AvailableTowerManager {
      * @param towerType Resource type to search for
      * @return Number of towers of specified type available for placement
      */
-    public int numberOfTowers(int towerType) {
+    public static int numberOfTowers(int towerType) {
         int towersOfType = 0;
         for (Tower tower : towers) {
             if (tower.getResourceType() == towerType) {
-                towersOfType ++;
+                towersOfType +=1;
             }
         }
         return towersOfType;

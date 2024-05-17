@@ -6,8 +6,6 @@ import java.util.List;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -18,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import seng201.team25.services.AvailableTowerManager;
 import seng201.team25.services.WindowManager;
 
 public class MainGameController {
@@ -65,6 +64,8 @@ public class MainGameController {
     @FXML private Button woodTowerButton;
     @FXML private Button stoneTowerButton;
     @FXML private Button fruitTowerButton;
+    @FXML private Button startButton;
+    @FXML private Button shopButton;
 
     private Image roadTileSprite = new Image(getClass().getResourceAsStream("/assets/roadTiles/road1.png"));
     private Image roadTileSprite1 = new Image(getClass().getResourceAsStream("/assets/roadTiles/road2.png"));
@@ -94,14 +95,19 @@ public class MainGameController {
 
     @FXML private AnchorPane anchorPane;
 
-
     private List<ImageView> displayTiles;
     private List<Tower> activeTowers;
     private List<Cart> activeCarts;
     private List<Integer> tileResources;
+    private List<Integer> amountOfTowers;
+    List<Button> selectButtons;
     private int placement = 0;
+    private int amountOfCarts = 0;
     //0 = wood, 1 = stone, 2 = fruit
     private int currentSelectedButton = -1;
+    private int spawnerTimer;
+    private Timeline spawner;
+    private Timeline rangeCheck;
 
 
     // Added to allow calling of new windows (i.e shop) from the main game
@@ -112,39 +118,71 @@ public class MainGameController {
     }
 
     public MainGameController() {
+
     }
 
     public void initialize() {
         activeTowers = new ArrayList<Tower>();
         activeCarts = new ArrayList<Cart>();
         tileResources = new ArrayList<Integer>();
+        amountOfTowers = new ArrayList<Integer>();
+
+        spawner = new Timeline(new KeyFrame(Duration.seconds(1), e -> spawnCart()));
+        spawner.setCycleCount(Animation.INDEFINITE);
+        rangeCheck = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> checkRange()));
+        rangeCheck.setCycleCount(Animation.INDEFINITE);
 
         generateLevel();
+        setRoundButton();
+    }
 
-        Timeline spawner = new Timeline(new KeyFrame(Duration.seconds(5), e -> spawnCart()));
-        spawner.setCycleCount(Animation.INDEFINITE);
-        spawner.playFromStart();
+    private void setRoundButton(){
+        startButton.setOnAction(event -> {
+            spawner.playFromStart();
+            rangeCheck.playFromStart();
+            spawnerTimer = 5;
 
-        Timeline rangeCheck = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> checkRange()));
-        rangeCheck.setCycleCount(Animation.INDEFINITE);
-        rangeCheck.playFromStart();
+            startButton.setVisible(false);
+            shopButton.setVisible(false);
+        });
     }
 
     private void checkRange(){
+        int killDistance = -40;
         for (Tower tower : activeTowers) {
             tower.lowerCurrentReloadSpeed();
+            int cartIndex = 0;
             for (Cart cart : activeCarts) {
+                cartIndex += 1;
                 double distance = cart.getPosition().distance(tower.getPosition());
                 if(distance<80 && tower.getCurrentReloadSpeed() <= 0){
                     cart.fillCart(1);
                     tower.resetCurrentReloadSpeed();
+                }
+                if(cartIndex == activeCarts.size()){
+                    if(cart.getPosition().getY() <= killDistance && spawner.getStatus().equals(Animation.Status.STOPPED)){
+                        rangeCheck.stop();
+                        startButton.setVisible(true);
+                        shopButton.setVisible(true);
+                        activeCarts = new ArrayList<Cart>();
+                    }
                 }
             }
         }
     }
 
     private void spawnCart(){
-        activeCarts.add(new Cart(anchorPane, 1, 0, 10));
+        spawnerTimer += 1;
+        if(spawnerTimer >= 5){
+            activeCarts.add(new Cart(anchorPane, 1, 0, 10));
+            amountOfCarts += 1;
+            spawnerTimer = 0;
+        }
+        
+        if(amountOfCarts >= 3){
+            spawner.stop();
+            spawnerTimer = 5; 
+        }
     }
 
     private void generateLevel(){
@@ -157,7 +195,7 @@ public class MainGameController {
         List<Image> leftGrassTileSprites = List.of(grassTileLeftSprite, grassTileLeftSprite1, grassTileLeftSprite2, grassTileLeftSprite3);
         List<Image> rightGrassTileSprites = List.of(grassTileRightSprite, grassTileRightSprite1, grassTileRightSprite2, grassTileRightSprite3);
 
-        List<Button> selectButtons = List.of(woodTowerButton, stoneTowerButton, fruitTowerButton);
+        selectButtons = List.of(woodTowerButton, stoneTowerButton, fruitTowerButton);
         setupSelectButtons(selectButtons);
 
         Random rng = new Random();
@@ -182,7 +220,12 @@ public class MainGameController {
     private void setupSelectButtons(List<Button> selectButtons){
         for (int i = 0; i < selectButtons.size(); i++) {
             int finalI = i; // variables used within lambdas must be final
-            selectButtons.get(i).setOnAction(event -> {
+            int amountOfTower = AvailableTowerManager.numberOfTowers(i);
+            amountOfTowers.add(amountOfTower);
+            Button currentButton = selectButtons.get(i);
+            currentButton.setText(currentButton.getText()+amountOfTower);
+
+            currentButton.setOnAction(event -> {
                 currentSelectedButton = finalI;
                 selectButtons.forEach(button -> {
                     if (button == selectButtons.get(finalI)) {
@@ -240,8 +283,10 @@ public class MainGameController {
     private ImageView placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement){
         emptyTile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             System.out.println("You clicked");
+            int numOfTower = amountOfTowers.get(currentSelectedButton);
 
             if(currentSelectedButton == -1) return;
+            if(numOfTower == 0) return;
             if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton) return;
 
             displayTile = displayTiles.get(placement);
@@ -251,7 +296,11 @@ public class MainGameController {
             List<Image> towerSprites = newTower.getTileImage();
             emptyTile.setImage(towerSprites.get(0));
             displayTile.setImage(towerSprites.get(1));
-            System.out.println(emptyTile.getImage());
+
+            amountOfTowers.set(currentSelectedButton, numOfTower-=1);
+            Button currentButton = selectButtons.get(currentSelectedButton);
+            String buttonText = currentButton.getText();
+            currentButton.setText(buttonText.substring(0, buttonText.length()-1) + numOfTower);
 
             event.consume();
         });

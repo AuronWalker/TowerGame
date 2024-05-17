@@ -52,12 +52,15 @@ public class Cart {
                 cartDisplay.setLayoutY(cartDisplay.getLayoutY() - speed);
                 amount.setLayoutY(amount.getLayoutY() - speed);
                 position = new Point2D(0, cart.getLayoutY());
+                if(cart.getLayoutY() <= -100){
+                    anchorPane.getChildren().remove(cart);
+                    anchorPane.getChildren().remove(cartDisplay);
+                    anchorPane.getChildren().remove(amount);
+                }
             }
         };
         timer.start();
 
-
-        
         anchorPane.getChildren().add(cart);
         anchorPane.getChildren().add(cartDisplay);
         anchorPane.getChildren().add(amount);

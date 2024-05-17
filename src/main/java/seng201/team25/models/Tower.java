@@ -22,10 +22,12 @@ public class Tower {
 
     private final Image treeLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeLeft.png"));
     private final Image treeRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeRight.png"));
-    private Image stoneLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/stoneLeft.png"));
-    private Image stoneRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/stoneRight.png"));
+    private final Image stoneLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/stoneLeft.png"));
+    private final Image stoneRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/stoneRight.png"));
+    private final Image fruitLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/fruitLeft.png"));
+    private final Image fruitRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/fruitRight.png"));
     private final Image towerRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSprite.png"));
-    private Image towerLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png"));
+    private final Image towerLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png"));
 
 
     // Constructor used for starter towers with no stats
@@ -56,19 +58,6 @@ public class Tower {
         return position;
     }
 
-    //didn't work as intended
-    // private void setTile(){
-    //     if(resourceType == 1){
-    //         if(directionLeft) setImageview(towerLeftSprite, treeLeftDisply);
-    //         else setImageview(towerRightSprite, treeRightDisply);
-    //     }
-    // }
-
-    // private void setImageview(Image tileImage, Image displayImage){
-    //     currentTile.setImage(tileImage);
-    //     currentDisplay.setImage(displayImage);
-    // }
-
     public List<Image> getTileImage(){
         if(resourceType == 0){
             if(directionLeft) return List.of(towerLeftSprite, treeLeftDisply);
@@ -76,6 +65,9 @@ public class Tower {
         }else if(resourceType == 1){
             if(directionLeft) return List.of(towerLeftSprite, stoneLeftDisply);
             else return List.of(towerRightSprite, stoneRightDisply);
+        }else if(resourceType == 2){
+            if(directionLeft) return List.of(towerLeftSprite, fruitLeftDisply);
+            else return List.of(towerRightSprite, fruitRightDisply);
         }else{
             return List.of(towerLeftSprite, treeLeftDisply);
         }
@@ -108,7 +100,6 @@ public class Tower {
         currentReloadSpeed = reloadSpeed;
     }
 
-    
     public String getName() {
         return name;
     }
@@ -126,6 +117,4 @@ public class Tower {
     public int getResourceType() {
         return resourceType;
     }
-    
-
 }
