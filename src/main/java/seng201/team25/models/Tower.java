@@ -10,7 +10,7 @@ public class Tower {
     //0 = wood, 1 = stone, 2 = fruit, 3 = vertical, 4 = horizontal
     private int resourceType;
     private int resourceAmount = 1;
-    private int reloadSpeed = 4;
+    private int reloadSpeed = 3;
     private int currentReloadSpeed = reloadSpeed;
     private int cost = 0;
 

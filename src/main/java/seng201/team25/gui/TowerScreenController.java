@@ -4,6 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import seng201.team25.models.Tower;
 import seng201.team25.services.AvailableTowerManager;
+import seng201.team25.services.GoldManager;
 import seng201.team25.services.WindowManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -61,6 +62,7 @@ public class TowerScreenController {
     }
 
     public void continuePressed() {
+        GoldManager.setGold(3);
         windowManager.toGameScreen();
     }
     public void backPressed() {

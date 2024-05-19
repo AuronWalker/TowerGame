@@ -7,26 +7,31 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import seng201.team25.gui.MainGameController;
 import seng201.team25.services.GameOverManager;
 import javafx.geometry.Point2D;
 
 public class Cart {
     private Image cartSprite = new Image(getClass().getResourceAsStream("/assets/cart/cart.png"));
     private Image treeDisplay = new Image(getClass().getResourceAsStream("/assets/cart/cartTree.png"));
+    private Image rockDisplay = new Image(getClass().getResourceAsStream("/assets/cart/cartRock.png"));
+    private Image fruitDisplay = new Image(getClass().getResourceAsStream("/assets/cart/cartFruit.png"));
     private int xLayout = 531;
     private int totalResource;
     private int currentResource=0;
     private Label amount;
     private Point2D position;
+    private int resourceType;
 
-    public Cart(AnchorPane anchorPane, int speed, int resourceType, int _totalResource){
+    public Cart(AnchorPane anchorPane, int speed, int _resourceType, int _totalResource, MainGameController mg){
         ImageView cart = new ImageView();
         ImageView cartDisplay = new ImageView();
         amount = new Label();
         totalResource = _totalResource;
+        resourceType = _resourceType;
 
         cart.setImage(cartSprite);
-        setDisplay(cartDisplay, resourceType);
+        setDisplay(cartDisplay, _resourceType);
 
         cartDisplay.setLayoutX(xLayout);
         cartDisplay.setLayoutY(505);
@@ -57,13 +62,12 @@ public class Cart {
                     anchorPane.getChildren().remove(cart);
                     anchorPane.getChildren().remove(cartDisplay);
                     anchorPane.getChildren().remove(amount);
-
+                    
                     if(currentResource != totalResource){
-                        if(GameOverManager.gameOver == false){
-                            GameOverManager.gameOver = true;
-                            GameOverManager.GameOverScreen(anchorPane);
-                        }
+                        GameOverManager.gameOver = true;
+                        GameOverManager.GameOverScreen(anchorPane, mg);
                     }
+                    this.stop();
                 }
             }
         };
@@ -77,6 +81,10 @@ public class Cart {
     private void setDisplay(ImageView cartDisplay, int resourceType){
         if(resourceType == 0){
             cartDisplay.setImage(treeDisplay);
+        }else if(resourceType == 1){
+            cartDisplay.setImage(rockDisplay);
+        }else if(resourceType == 2){
+            cartDisplay.setImage(fruitDisplay);
         }
     }
 
@@ -88,5 +96,9 @@ public class Cart {
 
     public Point2D getPosition(){
         return position;
+    }
+
+    public int getResourceType(){
+        return resourceType;
     }
 }

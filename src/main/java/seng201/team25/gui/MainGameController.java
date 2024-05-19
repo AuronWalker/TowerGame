@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import seng201.team25.services.AvailableTowerManager;
 import seng201.team25.services.GameOverManager;
 import seng201.team25.services.GoldManager;
@@ -116,7 +117,8 @@ public class MainGameController {
     
     // Added to allow calling of new windows (i.e shop) from the main game
     // would use windowManager.toShopWindow(), although not yet implemented
-    WindowManager windowManager;
+    private WindowManager windowManager;
+    private RoundManager rm;
     public MainGameController(WindowManager newWindowManager) {
         this.windowManager = newWindowManager;
     }
@@ -127,12 +129,21 @@ public class MainGameController {
 
     public void initialize() {
         //Adding and hiding the buttons rather than making new ones as it was causing to many bugs
-        GameOverManager.restartButton = restartButton;
-        GameOverManager.quitButton = quitButton;
         GameOverManager.windowManager = windowManager;
-        anchorPane.getChildren().remove(quitButton);
-        anchorPane.getChildren().remove(restartButton);
-        
+        rm = new RoundManager();
+        GameOverManager.gameOver = false;
+        restartButton.setVisible(false);
+        quitButton.setVisible(false);
+
+        restartButton.setOnAction(event -> {
+            GoldManager.setGold(3);
+            windowManager.toGameScreen();  
+        });
+
+        quitButton.setOnAction(event -> {
+            Stage stage = (Stage) restartButton.getScene().getWindow();
+            stage.close();
+        });
 
         activeTowers = new ArrayList<Tower>();
         tileResources = new ArrayList<Integer>();
@@ -142,8 +153,15 @@ public class MainGameController {
         setRoundButton();
         goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
 
-        RoundManager.setMaxRounds(PlayerManager.getRounds());
-        setRoundText();
+        rm.setMaxRounds(PlayerManager.getRounds());
+        rm.setRoundLabel(roundLabel);
+        roundLabel.setText(rm.getCurrentRound() + "/" + rm.getMaxRounds());
+    }
+
+    public void displayButtons(){
+        restartButton.setVisible(true);
+        quitButton.setVisible(true);
+        System.out.println();
     }
 
     public void openShop(){
@@ -152,7 +170,7 @@ public class MainGameController {
 
     private void setRoundButton(){
         startButton.setOnAction(event -> {
-            new Round(0, activeTowers, anchorPane, startButton, shopButton);
+            new Round(activeTowers, anchorPane, startButton, shopButton, this, rm);
             startButton.setVisible(false);
             shopButton.setVisible(false);
         });
@@ -312,9 +330,5 @@ public class MainGameController {
             event.consume();
         });
         return emptyTile;
-    }
-
-    private void setRoundText(){
-        roundLabel.setText(RoundManager.getCurrentRound() + "/" + RoundManager.getMaxRounds());
     }
 }

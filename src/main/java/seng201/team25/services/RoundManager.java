@@ -1,22 +1,35 @@
 package seng201.team25.services;
 
-public class RoundManager {
-    private static int currentRound = 0;
-    private static int maxRounds = 0;
+import javafx.scene.control.Label;
 
-    public static void setMaxRounds(int max){
+public class RoundManager {
+    private int currentRound = 0;
+    private int maxRounds = 0;
+    private Label roundLabel;
+    private int diffculty = PlayerManager.getDifficulty();
+
+    public void setMaxRounds(int max){
         maxRounds = max;
     }
 
-    public static void incrementCurrentRound(){
-        currentRound++;
+    public void setRoundLabel(Label newRoundLabel){
+        roundLabel = newRoundLabel;
     }
 
-    public static int getCurrentRound(){
+    public void incrementCurrentRound(){
+        currentRound++;
+        roundLabel.setText(currentRound + "/" + maxRounds);
+    }
+
+    public int getCurrentRound(){
         return currentRound;
     }
 
-    public static int getMaxRounds(){
+    public int getMaxRounds(){
         return maxRounds;
+    }
+
+    public void resetCurrentRound(){
+        currentRound = 0;
     }
 }
