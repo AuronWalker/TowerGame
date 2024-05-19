@@ -7,7 +7,7 @@ import javafx.geometry.Point2D;
 public class Tower {
     private int level = 1;
 
-    //0 = wood, 1 = stone, 2 = fruit
+    //0 = wood, 1 = stone, 2 = fruit, 3 = vertical, 4 = horizontal
     private int resourceType;
     private int resourceAmount = 1;
     private int reloadSpeed = 4;
@@ -26,6 +26,11 @@ public class Tower {
     private final Image stoneRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/stoneRight.png"));
     private final Image fruitLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/fruitLeft.png"));
     private final Image fruitRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/fruitRight.png"));
+    private final Image verticalLevelRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/verticalLevelRight.png"));
+    private final Image verticalLevelLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/verticalLevelLeft.png"));
+    private final Image horizontalLevelRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/horizontalLevelRight.png"));
+    private final Image horizontalLevelLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/horizontalLevelLeft.png"));
+
     private final Image towerRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSprite.png"));
     private final Image towerLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png"));
 
@@ -68,13 +73,25 @@ public class Tower {
         }else if(resourceType == 2){
             if(directionLeft) return List.of(towerLeftSprite, fruitLeftDisply);
             else return List.of(towerRightSprite, fruitRightDisply);
+        }else if(resourceType == 3){
+            if(directionLeft) return List.of(towerLeftSprite, verticalLevelLeftDisply);
+            else return List.of(towerRightSprite, verticalLevelRightDisply);
         }else{
-            return List.of(towerLeftSprite, treeLeftDisply);
+            if(directionLeft) return List.of(towerLeftSprite, horizontalLevelLeftDisply);
+            else return List.of(towerRightSprite, horizontalLevelRightDisply);
         }
     }
 
     public void increaseLevel() {
-        this.level ++;
+        this.level++;
+        this.reloadSpeed++;
+        this.resourceAmount++;
+    }
+
+    public void decreaseLevel() {
+        this.level--;
+        this.reloadSpeed--;
+        this.resourceAmount--;
     }
 
     public int getLevel() {

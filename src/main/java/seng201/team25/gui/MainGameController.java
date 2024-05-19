@@ -1,6 +1,7 @@
 package seng201.team25.gui;
 import seng201.team25.models.Tower;
 import seng201.team25.models.Cart;
+import seng201.team25.models.Tile;
 
 import java.util.List;
 import javafx.util.Duration;
@@ -64,6 +65,8 @@ public class MainGameController {
     @FXML private Button woodTowerButton;
     @FXML private Button stoneTowerButton;
     @FXML private Button fruitTowerButton;
+    @FXML private Button verticalTowerButton;
+    @FXML private Button horizontalTowerButton;
     @FXML private Button startButton;
     @FXML private Button shopButton;
 
@@ -100,6 +103,7 @@ public class MainGameController {
     private List<Cart> activeCarts;
     private List<Integer> tileResources;
     private List<Integer> amountOfTowers;
+    private List<Tile> allTiles;
     List<Button> selectButtons;
     private int placement = 0;
     private int amountOfCarts = 0;
@@ -108,6 +112,7 @@ public class MainGameController {
     private int spawnerTimer;
     private Timeline spawner;
     private Timeline rangeCheck;
+
 
 
     // Added to allow calling of new windows (i.e shop) from the main game
@@ -126,6 +131,7 @@ public class MainGameController {
         activeCarts = new ArrayList<Cart>();
         tileResources = new ArrayList<Integer>();
         amountOfTowers = new ArrayList<Integer>();
+        allTiles = new ArrayList<Tile>();
 
         spawner = new Timeline(new KeyFrame(Duration.seconds(1), e -> spawnCart()));
         spawner.setCycleCount(Animation.INDEFINITE);
@@ -195,7 +201,7 @@ public class MainGameController {
         List<Image> leftGrassTileSprites = List.of(grassTileLeftSprite, grassTileLeftSprite1, grassTileLeftSprite2, grassTileLeftSprite3);
         List<Image> rightGrassTileSprites = List.of(grassTileRightSprite, grassTileRightSprite1, grassTileRightSprite2, grassTileRightSprite3);
 
-        selectButtons = List.of(woodTowerButton, stoneTowerButton, fruitTowerButton);
+        selectButtons = List.of(woodTowerButton, stoneTowerButton, fruitTowerButton, verticalTowerButton, horizontalTowerButton);
         setupSelectButtons(selectButtons);
 
         Random rng = new Random();
@@ -242,13 +248,16 @@ public class MainGameController {
         boolean notGrass = false;
         int currentTile = 0;
         for (ImageView tile : tiles) {
-            int tileType = rng.nextInt(4);
+            int tileType = rng.nextInt(5);
             int randomInt = rng.nextInt(tileImages.size());
+
+            Tile newTile = new Tile(tile, randomInt);
+            allTiles.add(newTile);
 
             //Makes sure to trees/rocks wont spawn beside each other
             if(notGrass == true){
                 tile.setImage(tileImages.get(randomInt));
-                tile = placeTowerEvent(tile, directionLeft, placement);
+                tile = placeTowerEvent(tile, directionLeft, placement, newTile);
                 tileResources.add(-1);
                 notGrass = false;
                 placement += 1;
@@ -257,15 +266,15 @@ public class MainGameController {
 
             if(tileType == 0 ){
                 tile.setImage(tileImages.get(randomInt));
-                tile = placeTowerEvent(tile, directionLeft, placement);
+                tile = placeTowerEvent(tile, directionLeft, placement, newTile);
                 tileResources.add(-1);
-            }else if(tileType == 1){
+            }else if(tileType == 1 || tileType == 2){
                 setTile(directionLeft, tile, rockTileLeftSprite, rockTileRightSprite, 1);
                 notGrass = true;
-            }else if(tileType == 2) {
+            }else if(tileType == 3) {
                 setTile(directionLeft, tile, treeTileLeftSprite, treeTileRightSprite, 0);
                 notGrass = true;
-            }else if(tileType == 3) {
+            }else if(tileType == 4) {
                 setTile(directionLeft, tile, fruitTileLeftSprite, fruitTileRightSprite, 2);
                 notGrass = true;
             }
@@ -280,23 +289,37 @@ public class MainGameController {
         tileResources.add(resourceType);
     }
 
-    private ImageView placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement){
+    private ImageView placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement, Tile tileObj){
         emptyTile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             System.out.println("You clicked");
             int numOfTower = amountOfTowers.get(currentSelectedButton);
 
             if(currentSelectedButton == -1) return;
             if(numOfTower == 0) return;
-            if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton) return;
+            if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton && currentSelectedButton <= 2) return;
 
             displayTile = displayTiles.get(placement);
             Tower newTower = new Tower(currentSelectedButton, emptyTile, displayTile, directionLeft);
+            tileObj.setTower(newTower);
             activeTowers.add(newTower);
 
             List<Image> towerSprites = newTower.getTileImage();
             emptyTile.setImage(towerSprites.get(0));
             displayTile.setImage(towerSprites.get(1));
 
+            //Logic for upgrade towers
+            if(currentSelectedButton == 3){
+                allTiles.get(placement + 8).getTower().increaseLevel();
+                allTiles.get(placement + 8).getTower().increaseLevel();
+            }else if(currentSelectedButton == 4){
+                if(placement <= 7){
+                    allTiles.get(placement + 8).getTower().increaseLevel();
+                }else{
+                    allTiles.get(placement + 8).getTower().increaseLevel();
+                }         
+            }
+
+            //Removing the number of placed tower by one and displaying that in the button
             amountOfTowers.set(currentSelectedButton, numOfTower-=1);
             Button currentButton = selectButtons.get(currentSelectedButton);
             String buttonText = currentButton.getText();
