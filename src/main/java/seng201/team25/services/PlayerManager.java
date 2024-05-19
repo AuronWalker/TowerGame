@@ -15,7 +15,7 @@ public class PlayerManager {
      * @param requestedDifficulty The difficulty requested by the player, from 0 through 2
      * @param requestedRounds The number of rounds requested by the player, from 5 through 15
      */
-    public void storeValues(String name, int requestedDifficulty, int requestedRounds) {
+    public static void storeValues(String name, int requestedDifficulty, int requestedRounds) {
         playerName = name;
         difficulty = requestedDifficulty;
         rounds = requestedRounds;

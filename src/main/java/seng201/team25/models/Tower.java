@@ -12,7 +12,7 @@ public class Tower {
     private int resourceAmount = 1;
     private int reloadSpeed = 4;
     private int currentReloadSpeed = reloadSpeed;
-    private int cost = 5;
+    private int cost = 0;
 
     public ImageView currentTile;
     public ImageView currentDisplay;
@@ -47,7 +47,7 @@ public class Tower {
         this.currentTile = emptyTile;
         this.directionLeft = direction;
         position = new Point2D(0, emptyTile.getLayoutY());
-        System.out.println(position);
+        setCost();
     }
 
     // Constructor used for towers listed in the shop
@@ -57,6 +57,14 @@ public class Tower {
         this.reloadSpeed = newReloadSpeed;
         this.level = newLevel;
         this.cost = newCost;
+    }
+
+    private void setCost(){
+        if(resourceType == 0) cost = 1;
+        else if(resourceType == 1) cost = 2;
+        else if(resourceType == 2) cost = 3;
+        else if(resourceType == 3) cost = 4;
+        else if(resourceType == 4) cost = 5;
     }
 
     public Point2D getPosition(){
@@ -84,13 +92,13 @@ public class Tower {
 
     public void increaseLevel() {
         this.level++;
-        this.reloadSpeed++;
+        this.reloadSpeed--;
         this.resourceAmount++;
     }
 
     public void decreaseLevel() {
         this.level--;
-        this.reloadSpeed--;
+        this.reloadSpeed++;
         this.resourceAmount--;
     }
 
@@ -104,9 +112,7 @@ public class Tower {
     }
 
     public int getCurrentReloadSpeed() {
-        System.out.println(currentReloadSpeed);
         return currentReloadSpeed;
-        
     }
 
     public void lowerCurrentReloadSpeed() {

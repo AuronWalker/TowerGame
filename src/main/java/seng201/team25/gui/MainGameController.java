@@ -1,16 +1,12 @@
 package seng201.team25.gui;
 import seng201.team25.models.Tower;
-import seng201.team25.models.Cart;
+import seng201.team25.models.Round;
 import seng201.team25.models.Tile;
 
 import java.util.List;
-import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,6 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import seng201.team25.services.AvailableTowerManager;
 import seng201.team25.services.GameOverManager;
 import seng201.team25.services.GoldManager;
+import seng201.team25.services.PlayerManager;
+import seng201.team25.services.RoundManager;
 import seng201.team25.services.WindowManager;
 
 public class MainGameController {
@@ -72,8 +70,11 @@ public class MainGameController {
     @FXML private Button horizontalTowerButton;
     @FXML private Button startButton;
     @FXML private Button shopButton;
+    @FXML private Button restartButton;
+    @FXML private Button quitButton;
 
     @FXML private Label goldLabel;
+    @FXML private Label roundLabel;
 
     private Image roadTileSprite = new Image(getClass().getResourceAsStream("/assets/roadTiles/road1.png"));
     private Image roadTileSprite1 = new Image(getClass().getResourceAsStream("/assets/roadTiles/road2.png"));
@@ -105,21 +106,14 @@ public class MainGameController {
 
     private List<ImageView> displayTiles;
     private List<Tower> activeTowers;
-    private List<Cart> activeCarts;
     private List<Integer> tileResources;
     private List<Integer> amountOfTowers;
     private List<Tile> allTiles;
     private List<Button> selectButtons;
     private int placement = 0;
-    private int amountOfCarts = 0;
     //0 = wood, 1 = stone, 2 = fruit
     private int currentSelectedButton = -1;
-    private int spawnerTimer;
-    private Timeline spawner;
-    private Timeline rangeCheck;
-
-
-
+    
     // Added to allow calling of new windows (i.e shop) from the main game
     // would use windowManager.toShopWindow(), although not yet implemented
     WindowManager windowManager;
@@ -132,21 +126,24 @@ public class MainGameController {
     }
 
     public void initialize() {
+        //Adding and hiding the buttons rather than making new ones as it was causing to many bugs
+        GameOverManager.restartButton = restartButton;
+        GameOverManager.quitButton = quitButton;
+        GameOverManager.windowManager = windowManager;
+        anchorPane.getChildren().remove(quitButton);
+        anchorPane.getChildren().remove(restartButton);
+        
+
         activeTowers = new ArrayList<Tower>();
-        activeCarts = new ArrayList<Cart>();
         tileResources = new ArrayList<Integer>();
         amountOfTowers = new ArrayList<Integer>();
         allTiles = new ArrayList<Tile>();
-
-        spawner = new Timeline(new KeyFrame(Duration.seconds(1), e -> spawnCart()));
-        spawner.setCycleCount(Animation.INDEFINITE);
-        rangeCheck = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> checkRange()));
-        rangeCheck.setCycleCount(Animation.INDEFINITE);
-
         generateLevel();
         setRoundButton();
         goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
-        // GameOverManager.GameOverScreen(anchorPane);
+
+        RoundManager.setMaxRounds(PlayerManager.getRounds());
+        setRoundText();
     }
 
     public void openShop(){
@@ -155,55 +152,11 @@ public class MainGameController {
 
     private void setRoundButton(){
         startButton.setOnAction(event -> {
-            spawner.playFromStart();
-            rangeCheck.playFromStart();
-            spawnerTimer = 5;
-
+            new Round(0, activeTowers, anchorPane, startButton, shopButton);
             startButton.setVisible(false);
             shopButton.setVisible(false);
         });
-    }
-
-    private void checkRange(){
-        int killDistance = -40;
-        for (Tower tower : activeTowers) {
-            tower.lowerCurrentReloadSpeed();
-            int cartIndex = 0;
-            for (Cart cart : activeCarts) {
-                cartIndex += 1;
-                double distance = cart.getPosition().distance(tower.getPosition());
-                if(distance<80 && tower.getCurrentReloadSpeed() <= 0){
-                    cart.fillCart(1);
-                    tower.resetCurrentReloadSpeed();
-                }
-                if(cartIndex == activeCarts.size()){
-                    if(cart.getPosition().getY() <= killDistance && spawner.getStatus().equals(Animation.Status.STOPPED)){
-                        rangeCheck.stop();
-                        if(!GameOverManager.gameOver){
-                            startButton.setVisible(true);
-                            shopButton.setVisible(true);
-                            activeCarts = new ArrayList<Cart>();
-                            GoldManager.setGold(5);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void spawnCart(){
-        spawnerTimer += 1;
-        if(spawnerTimer >= 5){
-            activeCarts.add(new Cart(anchorPane, 1, 0, 10));
-            amountOfCarts += 1;
-            spawnerTimer = 0;
-        }
-        
-        if(amountOfCarts >= 3){
-            spawner.stop();
-            spawnerTimer = 5; 
-        }
-    }
+    }    
 
     private void generateLevel(){
         List<ImageView> roadTiles = List.of(roadTile, roadTile1, roadTile2, roadTile3, roadTile4, roadTile5, roadTile6, roadTile7);
@@ -265,14 +218,14 @@ public class MainGameController {
         for (ImageView tile : tiles) {
             int tileType = rng.nextInt(5);
             int randomInt = rng.nextInt(tileImages.size());
-
+            Image grassImage = tileImages.get(randomInt);
             Tile newTile = new Tile(tile, randomInt);
             allTiles.add(newTile);
 
             //Makes sure to trees/rocks wont spawn beside each other
             if(notGrass == true){
-                tile.setImage(tileImages.get(randomInt));
-                tile = placeTowerEvent(tile, directionLeft, placement, newTile);
+                tile.setImage(grassImage);
+                tile = placeTowerEvent(tile, directionLeft, placement, newTile, grassImage);
                 tileResources.add(-1);
                 notGrass = false;
                 placement += 1;
@@ -280,8 +233,8 @@ public class MainGameController {
             }
 
             if(tileType == 0 ){
-                tile.setImage(tileImages.get(randomInt));
-                tile = placeTowerEvent(tile, directionLeft, placement, newTile);
+                tile.setImage(grassImage);
+                tile = placeTowerEvent(tile, directionLeft, placement, newTile, grassImage);
                 tileResources.add(-1);
             }else if(tileType == 1 || tileType == 2){
                 setTile(directionLeft, tile, rockTileLeftSprite, rockTileRightSprite, 1);
@@ -304,16 +257,30 @@ public class MainGameController {
         tileResources.add(resourceType);
     }
 
-    private ImageView placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement, Tile tileObj){
+    private ImageView placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement, Tile tileObj, Image grassImage){
         emptyTile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             System.out.println("You clicked");
             int numOfTower = amountOfTowers.get(currentSelectedButton);
+
+            //Selling a tower if it is placed on the tile
+            displayTile = displayTiles.get(placement);
+            if(allTiles.get(placement).hasTower()){
+                Tower currentTower = allTiles.get(placement).getTower();
+                activeTowers.remove(currentTower);
+
+                allTiles.get(placement).sellTower();
+                goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
+                
+                emptyTile.setImage(grassImage);
+                displayTile.setImage(emptyDisply);
+                return;
+            }
 
             if(currentSelectedButton == -1) return;
             if(numOfTower == 0) return;
             if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton && currentSelectedButton <= 2) return;
 
-            displayTile = displayTiles.get(placement);
+            
             Tower newTower = new Tower(currentSelectedButton, emptyTile, displayTile, directionLeft);
             tileObj.setTower(newTower);
             activeTowers.add(newTower);
@@ -324,13 +291,15 @@ public class MainGameController {
 
             //Logic for upgrade towers
             if(currentSelectedButton == 3){
-                allTiles.get(placement + 8).getTower().increaseLevel();
-                allTiles.get(placement + 8).getTower().increaseLevel();
+                if(allTiles.get(placement + 1).hasTower()) allTiles.get(placement + 1).getTower().increaseLevel();
+                if(allTiles.get(placement - 1).hasTower()) allTiles.get(placement -1).getTower().increaseLevel();
             }else if(currentSelectedButton == 4){
                 if(placement <= 7){
+                    if(!allTiles.get(placement + 8).hasTower()) return;
                     allTiles.get(placement + 8).getTower().increaseLevel();
                 }else{
-                    allTiles.get(placement + 8).getTower().increaseLevel();
+                    if(!allTiles.get(placement - 8).hasTower()) return;
+                    allTiles.get(placement - 8).getTower().increaseLevel();
                 }         
             }
 
@@ -343,5 +312,9 @@ public class MainGameController {
             event.consume();
         });
         return emptyTile;
+    }
+
+    private void setRoundText(){
+        roundLabel.setText(RoundManager.getCurrentRound() + "/" + RoundManager.getMaxRounds());
     }
 }

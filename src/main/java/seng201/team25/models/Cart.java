@@ -59,8 +59,10 @@ public class Cart {
                     anchorPane.getChildren().remove(amount);
 
                     if(currentResource != totalResource){
-                        GameOverManager.gameOver = true;
-                        GameOverManager.GameOverScreen(anchorPane);
+                        if(GameOverManager.gameOver == false){
+                            GameOverManager.gameOver = true;
+                            GameOverManager.GameOverScreen(anchorPane);
+                        }
                     }
                 }
             }

@@ -273,7 +273,7 @@
             </Button>
          </children>
       </GridPane>
-      <GridPane layoutX="866.0" layoutY="540.0" prefHeight="178.0" prefWidth="418.0">
+      <GridPane layoutX="861.0" layoutY="632.0" prefHeight="84.0" prefWidth="418.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -325,10 +325,20 @@
             </Label>
          </children>
       </GridPane>
-      <ImageView fitHeight="100.0" fitWidth="105.0" layoutX="890.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="105.0" fitWidth="105.0" layoutX="890.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/coin.png" />
          </image>
       </ImageView>
+      <Button fx:id="restartButton" layoutX="913.0" layoutY="399.0" mnemonicParsing="false" text="Restart" visible="false">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </Button>
+      <Button fx:id="quitButton" layoutX="1098.0" layoutY="399.0" mnemonicParsing="false" text="Quit" visible="false">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </Button>
    </children>
 </AnchorPane>

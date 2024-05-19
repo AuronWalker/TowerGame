@@ -14,7 +14,6 @@ import java.util.List;
 
 public class SetupScreenController {
     WindowManager windowManager;
-    PlayerManager playerManager = new PlayerManager();
 
     @FXML
     private Label lblEasy;
@@ -55,7 +54,7 @@ public class SetupScreenController {
 
             if (txtName.getText().length() > 2 && txtName.getText().length() < 16) {
                 if (txtName.getText().matches("[A-Za-z0-9]+")) {
-                    playerManager.storeValues(txtName.getText(), (int) sldRounds.getValue(), difficultyLabels.indexOf(selectedDifficulty));
+                    PlayerManager.storeValues(txtName.getText(), difficultyLabels.indexOf(selectedDifficulty), (int) sldRounds.getValue());
                     windowManager.toTowerScreen();
                 } else {
                     lblValidName.setText("Name cannot include special characters");
