@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import seng201.team25.services.GameOverManager;
 import javafx.geometry.Point2D;
 
 public class Cart {
@@ -56,6 +57,11 @@ public class Cart {
                     anchorPane.getChildren().remove(cart);
                     anchorPane.getChildren().remove(cartDisplay);
                     anchorPane.getChildren().remove(amount);
+
+                    if(currentResource != totalResource){
+                        GameOverManager.gameOver = true;
+                        GameOverManager.GameOverScreen(anchorPane);
+                    }
                 }
             }
         };

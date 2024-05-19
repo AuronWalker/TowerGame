@@ -47,7 +47,6 @@ public class ShopScreenController {
 
 
     public void initialize() {
-        GoldManager.setGold(100);
         lblBalance.setText(String.valueOf(GoldManager.getGoldBalance()));
         selectedTowerElement = imgTower0;
 
@@ -93,7 +92,6 @@ public class ShopScreenController {
     }
 
     public void buySelectedTower() {
-
         int newGoldBalance = GoldManager.decreaseGoldBalance(selectedTower.getCost());
         if (newGoldBalance == -1) {
             txtStatus.setText("Insufficient Gold!");

@@ -271,7 +271,7 @@
           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="77.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT">
+            <ImageView fitHeight="105.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT">
                <image>
                   <Image url="@../assets/coin.png" />
                </image>

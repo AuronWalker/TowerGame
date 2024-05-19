@@ -13,11 +13,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import seng201.team25.services.AvailableTowerManager;
+import seng201.team25.services.GameOverManager;
+import seng201.team25.services.GoldManager;
 import seng201.team25.services.WindowManager;
 
 public class MainGameController {
@@ -70,6 +73,8 @@ public class MainGameController {
     @FXML private Button startButton;
     @FXML private Button shopButton;
 
+    @FXML private Label goldLabel;
+
     private Image roadTileSprite = new Image(getClass().getResourceAsStream("/assets/roadTiles/road1.png"));
     private Image roadTileSprite1 = new Image(getClass().getResourceAsStream("/assets/roadTiles/road2.png"));
     private Image roadTileSprite2 = new Image(getClass().getResourceAsStream("/assets/roadTiles/road3.png"));
@@ -104,7 +109,7 @@ public class MainGameController {
     private List<Integer> tileResources;
     private List<Integer> amountOfTowers;
     private List<Tile> allTiles;
-    List<Button> selectButtons;
+    private List<Button> selectButtons;
     private int placement = 0;
     private int amountOfCarts = 0;
     //0 = wood, 1 = stone, 2 = fruit
@@ -140,6 +145,12 @@ public class MainGameController {
 
         generateLevel();
         setRoundButton();
+        goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
+        // GameOverManager.GameOverScreen(anchorPane);
+    }
+
+    public void openShop(){
+        windowManager.toShopScreen();
     }
 
     private void setRoundButton(){
@@ -168,9 +179,12 @@ public class MainGameController {
                 if(cartIndex == activeCarts.size()){
                     if(cart.getPosition().getY() <= killDistance && spawner.getStatus().equals(Animation.Status.STOPPED)){
                         rangeCheck.stop();
-                        startButton.setVisible(true);
-                        shopButton.setVisible(true);
-                        activeCarts = new ArrayList<Cart>();
+                        if(!GameOverManager.gameOver){
+                            startButton.setVisible(true);
+                            shopButton.setVisible(true);
+                            activeCarts = new ArrayList<Cart>();
+                            GoldManager.setGold(5);
+                        }
                     }
                 }
             }
@@ -229,7 +243,8 @@ public class MainGameController {
             int amountOfTower = AvailableTowerManager.numberOfTowers(i);
             amountOfTowers.add(amountOfTower);
             Button currentButton = selectButtons.get(i);
-            currentButton.setText(currentButton.getText()+amountOfTower);
+            String startingString = currentButton.getText()+amountOfTower;
+            currentButton.setText(startingString);
 
             currentButton.setOnAction(event -> {
                 currentSelectedButton = finalI;
