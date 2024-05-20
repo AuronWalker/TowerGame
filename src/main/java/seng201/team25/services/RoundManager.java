@@ -6,7 +6,7 @@ public class RoundManager {
     private int currentRound = 0;
     private int maxRounds = 0;
     private Label roundLabel;
-    private int diffculty = PlayerManager.getDifficulty();
+    private int difficulty = PlayerManager.getDifficulty();
 
     /**
     * Sets the RoundManager with the players maxRound picked from setup screen.
