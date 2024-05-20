@@ -112,13 +112,18 @@ public class MainGameController {
     private List<Tile> allTiles;
     private List<Button> selectButtons;
     private int placement = 0;
+
     //0 = wood, 1 = stone, 2 = fruit
     private int currentSelectedButton = -1;
-    
-    // Added to allow calling of new windows (i.e shop) from the main game
-    // would use windowManager.toShopWindow(), although not yet implemented
+
     private WindowManager windowManager;
     private RoundManager rm;
+
+    /**
+    * Added to allow calling of new windows (i.e shop) from the main game
+    * Would use windowManager.toShopWindow(), although not yet implemented
+    * @param newWindowManager games class for loading different classes
+    **/
     public MainGameController(WindowManager newWindowManager) {
         this.windowManager = newWindowManager;
     }
@@ -128,9 +133,7 @@ public class MainGameController {
     }
 
     public void initialize() {
-        //Adding and hiding the buttons rather than making new ones as it was causing to many bugs
-        GameOverManager.windowManager = windowManager;
-        rm = new RoundManager();
+        rm = new RoundManager(roundLabel);
         GameOverManager.gameOver = false;
         restartButton.setVisible(false);
         quitButton.setVisible(false);
@@ -151,23 +154,31 @@ public class MainGameController {
         allTiles = new ArrayList<Tile>();
         generateLevel();
         setRoundButton();
-        goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
 
-        rm.setMaxRounds(PlayerManager.getRounds());
-        rm.setRoundLabel(roundLabel);
+        goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
         roundLabel.setText(rm.getCurrentRound() + "/" + rm.getMaxRounds());
     }
 
+    /**
+    * Called by game over manager to show restart and quit buttons.
+    * Turning off visible rathering than removing to avoid werid error.
+    **/
     public void displayButtons(){
         restartButton.setVisible(true);
         quitButton.setVisible(true);
         System.out.println();
     }
 
+    /**
+    * Shop button logic that takes you to shop.
+    **/
     public void openShop(){
         windowManager.toShopScreen();
     }
 
+    /**
+    * Start round button logic the creates a new round and hides the button so multiple rounds cant be running at once.
+    **/
     private void setRoundButton(){
         startButton.setOnAction(event -> {
             new Round(activeTowers, anchorPane, startButton, shopButton, this, rm);
@@ -176,6 +187,10 @@ public class MainGameController {
         });
     }    
 
+    /**
+    * Generates the level layout for the game.
+    * Loops through each side of the road setting tiles to random resources
+    **/
     private void generateLevel(){
         List<ImageView> roadTiles = List.of(roadTile, roadTile1, roadTile2, roadTile3, roadTile4, roadTile5, roadTile6, roadTile7);
         List<ImageView> leftTiles = List.of(placeTile, placeTile1, placeTile2, placeTile3, placeTile4, placeTile5, placeTile6, placeTile7);
@@ -208,6 +223,11 @@ public class MainGameController {
         generateTile(rightTiles, rightGrassTileSprites, false, rng);
     }
 
+    /**
+    * Loops through the buttons for placing towers setting it to active if clicked
+    * The resource for towers is indicated with the index to allow for easier scaling when adding buttons
+    * @param slectButtons buttons used to place towers
+    **/
     private void setupSelectButtons(List<Button> selectButtons){
         for (int i = 0; i < selectButtons.size(); i++) {
             int finalI = i; // variables used within lambdas must be final
@@ -230,6 +250,13 @@ public class MainGameController {
         }
     }
 
+    /**
+    * Assigns a resource to each tile and assigns event to empty tile.
+    * @param tiles list of tiles to give resource to.
+    * @param tileImages list of random grass sprites that are assigned randomly to empty tile.
+    * @param directionLeft the direction of the list of tiles
+    * @param rng Random class to generate random nums
+    **/
     private void generateTile(List<ImageView> tiles, List<Image> tileImages, boolean directionLeft, Random rng){
         boolean notGrass = false;
         int currentTile = 0;
@@ -237,7 +264,7 @@ public class MainGameController {
             int tileType = rng.nextInt(5);
             int randomInt = rng.nextInt(tileImages.size());
             Image grassImage = tileImages.get(randomInt);
-            Tile newTile = new Tile(tile, randomInt);
+            Tile newTile = new Tile();
             allTiles.add(newTile);
 
             //Makes sure to trees/rocks wont spawn beside each other
@@ -269,12 +296,29 @@ public class MainGameController {
         }
     }
 
+    /**
+    * Set sprite of tile to specific sprite based on direction.
+    * @param directionLeft the direction of the list of tiles.
+    * @param tile Image view to set sprite of.
+    * @param tileLeftSprite Image of sprite facing left.
+    * @param tileRightSprite Image of sprite facing right.
+    * @param resourceType The type of resource to set tile to.
+    **/
     private void setTile(boolean directionLeft, ImageView tile, Image tileLeftSprite, Image tileRightSprite, int resourceType){
         if(directionLeft) tile.setImage(tileLeftSprite);
         else tile.setImage(tileRightSprite);
         tileResources.add(resourceType);
     }
-
+    
+    /**
+    * Places a tower when clicking on a empty tile.
+    * Sells tower when clicking on a tower.
+    * @param emptyTile Image view that is being clicked.
+    * @param directionLeft the direction of the tile.
+    * @param placement Int that shows the index in tiles.
+    * @param tileObj Tile object that was clicked.
+    * @param grassImage Empty tile sprite that was assgined to tile
+    **/
     private ImageView placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement, Tile tileObj, Image grassImage){
         emptyTile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             System.out.println("You clicked");

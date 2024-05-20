@@ -53,11 +53,11 @@ public class AvailableTowerManager {
     }
 
     /**
-     * Removes a tower with a specified resource type from the list of available towers.
-     * Returns true if tower removed, false if no tower of specified type available.
-     * @param towerType Type of resource type to search for
-     * @return Whether the removal was successful
-     */
+    * Removes a tower with a specified resource type from the list of available towers.
+    * Returns true if tower removed, false if no tower of specified type available.
+    * @param towerType Type of resource type to search for
+    * @return Whether the removal was successful
+    */
     public boolean removeTowerOfType(int towerType) {
         for (Tower tower : towers) {
             if (tower.getResourceType() == towerType) {

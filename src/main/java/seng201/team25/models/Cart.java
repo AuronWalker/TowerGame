@@ -23,6 +23,14 @@ public class Cart {
     private Point2D position;
     private int resourceType;
 
+    /**
+    * Spawns a cart that moves upwards by a certain speed
+    * @param _anchorPane Anchor pane to attach the cart image to.
+    * @param speed Speed at which the cart moves
+    * @param _resourceType Type of resource the cart can be filled by.
+    * @param _totalResource Amount of resources it needs to be filled with
+    * @param mg Game controller to send to game over manager.
+    **/
     public Cart(AnchorPane anchorPane, int speed, int _resourceType, int _totalResource, MainGameController mg){
         ImageView cart = new ImageView();
         ImageView cartDisplay = new ImageView();
@@ -31,7 +39,7 @@ public class Cart {
         resourceType = _resourceType;
 
         cart.setImage(cartSprite);
-        setDisplay(cartDisplay, _resourceType);
+        setDisplay(cartDisplay);
 
         cartDisplay.setLayoutX(xLayout);
         cartDisplay.setLayoutY(505);
@@ -78,7 +86,11 @@ public class Cart {
         anchorPane.getChildren().add(amount);
     }
 
-    private void setDisplay(ImageView cartDisplay, int resourceType){
+    /**
+    * Sets the display image of the cart to the resource of the cart
+    * @param cartDisplay To attach the cart image to.
+    **/
+    private void setDisplay(ImageView cartDisplay){
         if(resourceType == 0){
             cartDisplay.setImage(treeDisplay);
         }else if(resourceType == 1){
@@ -88,16 +100,26 @@ public class Cart {
         }
     }
 
+    /**
+    * Fills the cart and changes label to display fill.
+    * @param fillAmount Amount to fill cart changes depending on level of tower.
+    **/
     public void fillCart(int fillAmount){
         currentResource += fillAmount;
         if(currentResource > totalResource) currentResource = totalResource;
         amount.setText(currentResource+"/"+totalResource);
     }
 
+    /**
+    * Returns carts x and y position.
+    **/
     public Point2D getPosition(){
         return position;
     }
 
+    /**
+    * Returns carts resource type.
+    **/
     public int getResourceType(){
         return resourceType;
     }

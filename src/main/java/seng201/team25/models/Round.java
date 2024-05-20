@@ -17,7 +17,6 @@ import seng201.team25.services.PlayerManager;
 import seng201.team25.services.RoundManager;
 
 public class Round {
-    private int diffculty = PlayerManager.getDifficulty();
     private int spawnerTimer;
     private List<Cart> activeCarts;
     private List<Tower> activeTowers;
@@ -28,14 +27,27 @@ public class Round {
     private Button startButton;
     private Button shopButton;
     private Random rng;
-    
 
-    public Round(List<Tower> _activeTowers, AnchorPane anchorPane, Button _startButton, Button _shopButton, MainGameController mg, RoundManager rm){
-        spawner = new Timeline(new KeyFrame(Duration.seconds(1), e -> spawnCart(anchorPane, mg, rm)));
+    private RoundManager rm;
+    private MainGameController mg;
+    
+    /**
+    * Sets the Round based on difficulty and what round it currently is.
+    * @param _activeTowers List of all current towers in the game.
+    * @param _anchorPane Anchor pane to attach the cart image to.
+    * @param _startButton Button that starts the round.
+    * @param _shopButton Button that opens the shop.
+    * @param mg Game controller to send to cart when spawned.
+    * @param rm Round manager with all the relevant info for the round.
+    **/
+    public Round(List<Tower> _activeTowers, AnchorPane anchorPane, Button _startButton, Button _shopButton, MainGameController _mg, RoundManager _rm){
+        spawner = new Timeline(new KeyFrame(Duration.seconds(1), e -> spawnCart(anchorPane)));
         spawner.setCycleCount(Animation.INDEFINITE);
-        rangeCheck = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> checkRange(rm)));
+        rangeCheck = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> checkRange()));
         rangeCheck.setCycleCount(Animation.INDEFINITE);
 
+        rm = _rm;
+        mg = _mg;
         rng = new Random();
 
         startButton = _startButton;
@@ -50,7 +62,11 @@ public class Round {
         rangeCheck.playFromStart();
     }
 
-    private void spawnCart(AnchorPane anchorPane, MainGameController mg, RoundManager rm){
+    /**
+    * Spawns the cart at an interval set by spwnerTimer
+    * @param _anchorPane Anchor pane to attach the cart image to.
+    **/
+    private void spawnCart(AnchorPane anchorPane){
         int resourceType = rng.nextInt(1);
         if(rm.getCurrentRound() == 1){
             resourceType = rng.nextInt(2);
@@ -71,7 +87,10 @@ public class Round {
         }
     }
 
-    private void checkRange(RoundManager rm){
+    /**
+    * Checks the distance between the tower and the cart to know when to fill
+    **/
+    private void checkRange(){
         int killDistance = -40;
         for (Tower tower : activeTowers) {
             tower.lowerCurrentReloadSpeed();
@@ -84,9 +103,7 @@ public class Round {
                     tower.resetCurrentReloadSpeed();
                 }
                 if(cartIndex == activeCarts.size()){
-                    System.out.println("Nearly there");
                     if(cart.getPosition().getY() <= killDistance && spawner.getStatus().equals(Animation.Status.STOPPED)){
-                        System.out.println(GameOverManager.gameOver);
                         if(GameOverManager.gameOver == false){
                             startButton.setVisible(true);
                             shopButton.setVisible(true);

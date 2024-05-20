@@ -34,13 +34,21 @@ public class Tower {
     private final Image towerRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSprite.png"));
     private final Image towerLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png"));
 
-
-    // Constructor used for starter towers with no stats
+    /**
+    * Constructor used for starter towers with no stats.
+    * @param newResourceType the type of resource this tower is set to
+    **/
     public Tower(int newResourceType) {
         this.resourceType = newResourceType;
     }
 
-    // Constructor used for towers placed on the map
+    /**
+    * Constructor used for towers placed on the map
+    * @param newResourceType the type of resource this tower is set to
+    * @param emptyTile the imageview containing the sprite of the tower
+    * @param displayTile the imageview displaying the resource of the tower
+    * @param direction the boolean that determines the way the image is facing
+    **/
     public Tower(int newResourceType, ImageView emptyTile, ImageView displayTile, boolean direction) {
         this.resourceType = newResourceType;
         this.currentDisplay = displayTile;
@@ -50,7 +58,14 @@ public class Tower {
         setCost();
     }
 
-    // Constructor used for towers listed in the shop
+    /**
+    * Constructor used for towers listed in the shop
+    * @param newResourceType the type of resource this tower is set to
+    * @param newStartongResources the amount of resource it fills per reload count
+    * @param newReloadSpeed the rate at which the tower fills carts
+    * @param newLevel the starting level of the tower
+    * @param newCost the tower cost
+    **/
     public Tower(int newResourceType, int newStartingResources, int newReloadSpeed, int newLevel, int newCost) {
         this.resourceType = newResourceType;
         this.resourceAmount = newStartingResources;
@@ -59,6 +74,10 @@ public class Tower {
         this.cost = newCost;
     }
 
+    /**
+    * Sets cost of tower depending on the resource.
+    * Each resource is more expensive as they appear in harder difficultys
+    **/
     private void setCost(){
         if(resourceType == 0) cost = 1;
         else if(resourceType == 1) cost = 2;
@@ -67,10 +86,16 @@ public class Tower {
         else if(resourceType == 4) cost = 5;
     }
 
+    /**
+    * Returns towers x and y position
+    **/
     public Point2D getPosition(){
         return position;
     }
 
+    /**
+    * Returns a List with the tower sprite and display sprite depending on resource type and direction.
+    **/
     public List<Image> getTileImage(){
         if(resourceType == 0){
             if(directionLeft) return List.of(towerLeftSprite, treeLeftDisply);
@@ -90,53 +115,78 @@ public class Tower {
         }
     }
 
+    /**
+    * Makes reload time quicker and increases level, the amount of resources filled per reload cycle.
+    **/
     public void increaseLevel() {
         this.level++;
         this.reloadSpeed--;
         this.resourceAmount++;
     }
 
+    /**
+    * Makes reload time slower and decrease level, the amount of resources filled per reload cycle.
+    **/
     public void decreaseLevel() {
         this.level--;
         this.reloadSpeed++;
         this.resourceAmount--;
     }
 
+    /**
+    * Returns towers level
+    **/
     public int getLevel() {
         return level;
     }
 
-    public void increaseReloadSpeed() { this.reloadSpeed ++; }
+    /**
+    * Returns towers base reload speed
+    **/
     public int getReloadSpeed() {
         return reloadSpeed;
     }
 
+    /**
+    * Returns towers current reload speed
+    **/
     public int getCurrentReloadSpeed() {
         return currentReloadSpeed;
     }
 
+    /**
+    * Increments current reload speed down one
+    **/
     public void lowerCurrentReloadSpeed() {
         currentReloadSpeed -= 1;
     }
 
+    /**
+    * Resets current speed back to the base reload speed
+    **/
     public void resetCurrentReloadSpeed(){
         currentReloadSpeed = reloadSpeed;
     }
 
-    public String getName() {
-        return name;
-    }
-
-   public int getCost() {
+    /**
+    * Returns towers cost
+    * Used to get sell value
+    **/
+    public int getCost() {
         return cost;
     }
+
+    /**
+    * Returns how much the tower will fill the cart per increment.
+    * Used so the cart knows how much to fill up by.
+    **/
     public int getResourceAmount() {
         return resourceAmount;
     }
-    public void setResourceAmount(int amount) {
-        this.resourceAmount = amount;
-    }
 
+    /**
+    * Returns what resource tower can fill
+    **/
     public int getResourceType() {
         return resourceType;
     }
