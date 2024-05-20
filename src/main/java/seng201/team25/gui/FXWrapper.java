@@ -16,7 +16,7 @@ public class FXWrapper {
 
     public void init(Stage stage) {
         this.stage = stage;
-        new WindowManager(this::launchHomeScreen, this::launchSetupScreen, this::launchTowerScreen, this::launchGameScreen, this::launchShopScreen, this::clearPane);
+        new WindowManager(this::launchHomeScreen, this::launchSetupScreen, this::launchTowerScreen, this::launchGameScreen, this::clearPane);
     }
 
     public void launchHomeScreen(WindowManager windowManager) {
@@ -58,22 +58,9 @@ public class FXWrapper {
 
     public void launchGameScreen(WindowManager windowManager) {
         try {
-            FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/new_main.fxml"));
+            FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
             // provide a custom Controller with parameters
             setupLoader.setControllerFactory(param -> new MainGameController(windowManager));
-            Parent setupParent  = setupLoader.load();
-            pane.getChildren().add(setupParent);
-            stage.setTitle("Tower Game");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void launchShopScreen(WindowManager windowManager) {
-        try {
-            FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/shop.fxml"));
-            // provide a custom Controller with parameters
-            setupLoader.setControllerFactory(param -> new ShopScreenController(windowManager));
             Parent setupParent  = setupLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Tower Game");

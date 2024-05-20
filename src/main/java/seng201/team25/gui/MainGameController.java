@@ -1,8 +1,11 @@
 package seng201.team25.gui;
+import javafx.event.Event;
+import javafx.scene.control.TabPane;
 import seng201.team25.models.Tower;
 import seng201.team25.models.Round;
 import seng201.team25.models.Tile;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
@@ -76,6 +79,28 @@ public class MainGameController {
     @FXML private Label goldLabel;
     @FXML private Label roundLabel;
 
+    // Shop elements
+    @FXML ImageView imgTower0;
+    @FXML ImageView imgTowerSelected;
+    @FXML Label lblTowerName;
+    @FXML Label txtStatus;
+    @FXML Label lblBalance;
+    @FXML Label lblResources;
+    @FXML Label lblReloadSpeed;
+    @FXML Label lblLevel;
+    @FXML Label lblCost;
+
+    private int recurrentPurchaseCounter = 1;
+
+
+    // Tower data
+    private final Tower[] towersToBuy = AvailableTowerManager.getTowersToBuy();
+    private Tower selectedTower = towersToBuy[0];
+    private ImageView selectedTowerElement;
+
+    @FXML
+    TabPane gameTabs;
+
     private Image roadTileSprite = new Image(getClass().getResourceAsStream("/assets/roadTiles/road1.png"));
     private Image roadTileSprite1 = new Image(getClass().getResourceAsStream("/assets/roadTiles/road2.png"));
     private Image roadTileSprite2 = new Image(getClass().getResourceAsStream("/assets/roadTiles/road3.png"));
@@ -127,9 +152,7 @@ public class MainGameController {
         this.windowManager = newWindowManager;
     }
 
-    public MainGameController() {
-
-    }
+    public MainGameController() {}
 
     public void initialize() {
         rm = new RoundManager(roundLabel);
@@ -149,13 +172,15 @@ public class MainGameController {
 
         activeTowers = new ArrayList<Tower>();
         tileResources = new ArrayList<Integer>();
-        amountOfTowers = new ArrayList<Integer>();
         allTiles = new ArrayList<Tile>();
         generateLevel();
         setRoundButton();
 
         goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
         roundLabel.setText(rm.getCurrentRound() + "/" + rm.getMaxRounds());
+
+        lblBalance.setText(String.valueOf(GoldManager.getGoldBalance()));
+        selectedTowerElement = imgTower0;
     }
 
     /**
@@ -172,7 +197,11 @@ public class MainGameController {
     * Shop button logic that takes you to shop.
     **/
     public void openShop(){
-        windowManager.toShopScreen();
+        gameTabs.getSelectionModel().select(1);
+    }
+    public void closeShop(){
+        setupSelectButtons(selectButtons);
+        gameTabs.getSelectionModel().select(0);
     }
 
     /**
@@ -228,13 +257,15 @@ public class MainGameController {
     * @param slectButtons buttons used to place towers
     **/
     private void setupSelectButtons(List<Button> selectButtons){
+        this.amountOfTowers = new ArrayList<Integer>();
         for (int i = 0; i < selectButtons.size(); i++) {
             int finalI = i; // variables used within lambdas must be final
             int amountOfTower = AvailableTowerManager.numberOfTowers(i);
             amountOfTowers.add(amountOfTower);
             Button currentButton = selectButtons.get(i);
-            String startingString = currentButton.getText()+amountOfTower;
-            currentButton.setText(startingString);
+            String startingString = currentButton.getText();
+            startingString = startingString.split("x")[0];
+            currentButton.setText(startingString + "x" + amountOfTower);
 
             currentButton.setOnAction(event -> {
                 currentSelectedButton = finalI;
@@ -374,4 +405,54 @@ public class MainGameController {
         });
         return emptyTile;
     }
+
+    public void towerSelected(Event event) {
+        txtStatus.setVisible(false);
+        ImageView pressedTower = (ImageView) event.getSource();
+        if ( pressedTower == selectedTowerElement ) { return; }
+
+        // Get Resource ID, Tower model and resource string for selected tower
+        int selectedTowerResourceID = Integer.parseInt(pressedTower.getId().substring(pressedTower.getId().length() - 1));
+        selectedTower = Arrays.stream(towersToBuy)
+                .filter(tower -> (tower.getResourceType() == selectedTowerResourceID))
+                .findFirst()
+                .orElse(null);
+
+        String resourceString = AvailableTowerManager.getResourceTypeString(selectedTowerResourceID);
+        lblTowerName.setText(String.format("%s Tower", resourceString));
+
+        pressedTower.setOpacity(1);
+
+        selectedTowerElement.setOpacity(0.4);
+        selectedTowerElement = pressedTower;
+
+        imgTowerSelected.setImage(selectedTowerElement.getImage());
+        lblResources.setText(String.valueOf(selectedTower.getResourceAmount()));
+        lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));
+        lblLevel.setText(String.valueOf(selectedTower.getLevel()));
+        lblCost.setText(String.valueOf(selectedTower.getCost()));
+
+    }
+
+    public void buySelectedTower() {
+        int newGoldBalance = GoldManager.decreaseGoldBalance(selectedTower.getCost());
+        if (newGoldBalance == -1) {
+            txtStatus.setText("Insufficient Gold!");
+            txtStatus.setVisible(true);
+        } else {
+            lblBalance.setText(String.valueOf(GoldManager.getGoldBalance()));
+            String resourceString = AvailableTowerManager.getResourceTypeString(selectedTower.getResourceType());
+            if ( txtStatus.isVisible() ) {
+                recurrentPurchaseCounter += 1;
+                txtStatus.setText(String.format("Purchased %d %s towers!", recurrentPurchaseCounter, resourceString));
+            } else {
+                recurrentPurchaseCounter = 1;
+                txtStatus.setText(String.format("Purchased 1 %s tower!", resourceString));
+            }
+
+            txtStatus.setVisible(true);
+            AvailableTowerManager.addAvailableTower(new Tower(selectedTower.getResourceType()));
+        }
+    }
+
 }
