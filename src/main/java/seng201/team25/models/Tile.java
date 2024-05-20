@@ -1,11 +1,7 @@
 package seng201.team25.models;
-
-import javafx.scene.image.ImageView;
 import seng201.team25.services.GoldManager;
 
 public class Tile {
-    private ImageView tile;
-    private int resource;
     private Tower tileTower = null;
 
     /**

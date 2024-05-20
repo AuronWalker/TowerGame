@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import seng201.team25.services.AvailableTowerManager;
 import seng201.team25.services.GameOverManager;
 import seng201.team25.services.GoldManager;
-import seng201.team25.services.PlayerManager;
 import seng201.team25.services.RoundManager;
 import seng201.team25.services.WindowManager;
 
