@@ -58,7 +58,7 @@ public class AvailableTowerManager {
     * @param towerType Type of resource type to search for
     * @return Whether the removal was successful
     */
-    public boolean removeTowerOfType(int towerType) {
+    public static boolean removeTowerOfType(int towerType) {
         for (Tower tower : towers) {
             if (tower.getResourceType() == towerType) {
                 towers.remove(tower);

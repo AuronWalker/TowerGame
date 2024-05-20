@@ -374,6 +374,7 @@ public class MainGameController {
 
             
             Tower newTower = new Tower(currentSelectedButton, emptyTile, displayTile, directionLeft);
+            AvailableTowerManager.removeTowerOfType(currentSelectedButton);
             tileObj.setTower(newTower);
             activeTowers.add(newTower);
 
