@@ -253,7 +253,7 @@ public class MainGameController {
     /**
     * Loops through the buttons for placing towers setting it to active if clicked
     * The resource for towers is indicated with the index to allow for easier scaling when adding buttons
-    * @param slectButtons buttons used to place towers
+    * @param selectButtons buttons used to place towers
     **/
     private void setupSelectButtons(List<Button> selectButtons){
         this.amountOfTowers = new ArrayList<Integer>();
@@ -369,6 +369,7 @@ public class MainGameController {
 
             if(currentSelectedButton == -1) return;
             if(numOfTower == 0) return;
+            if (activeTowers.size() > 5) return; // ADD A MESSAGE HERE - untested
             if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton && currentSelectedButton <= 2) return;
 
             
@@ -382,10 +383,10 @@ public class MainGameController {
             displayTile.setImage(towerSprites.get(1));
 
             //Logic for upgrade towers
-            if(currentSelectedButton == 3){
+            if ( currentSelectedButton == 3 ){
                 if(allTiles.get(placement + 1).hasTower()) allTiles.get(placement + 1).getTower().increaseLevel();
                 if(allTiles.get(placement - 1).hasTower()) allTiles.get(placement -1).getTower().increaseLevel();
-            }else if(currentSelectedButton == 4){
+            } else if ( currentSelectedButton == 4 ){
                 if(placement <= 7){
                     if(!allTiles.get(placement + 8).hasTower()) return;
                     allTiles.get(placement + 8).getTower().increaseLevel();
@@ -428,16 +429,19 @@ public class MainGameController {
 
         imgTowerSelected.setImage(selectedTowerElement.getImage());
         lblResources.setText(String.valueOf(selectedTower.getResourceAmount()));
-        lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));
+        if ( selectedTower.getReloadSpeed() < 0 ) lblReloadSpeed.setText("x" + String.valueOf(-1 * selectedTower.getReloadSpeed()));
+        else lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));
         lblLevel.setText(String.valueOf(selectedTower.getLevel()));
         lblCost.setText(String.valueOf(selectedTower.getCost()));
-
     }
 
     public void buySelectedTower() {
         int newGoldBalance = GoldManager.decreaseGoldBalance(selectedTower.getCost());
         if (newGoldBalance == -1) {
             txtStatus.setText("Insufficient Gold!");
+            txtStatus.setVisible(true);
+        } else if (AvailableTowerManager.numberOfTowers() >= 5) {
+            txtStatus.setText("Inventory Full!");
             txtStatus.setVisible(true);
         } else {
             lblBalance.setText(String.valueOf(GoldManager.getGoldBalance()));
