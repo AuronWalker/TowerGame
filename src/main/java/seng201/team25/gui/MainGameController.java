@@ -370,6 +370,7 @@ public class MainGameController {
 
             if(currentSelectedButton == -1) return;
             if(numOfTower == 0) return;
+            if (activeTowers.size() > 5) return; // ADD A MESSAGE HERE - untested
             if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton && currentSelectedButton <= 2) return;
 
             
@@ -383,10 +384,10 @@ public class MainGameController {
             displayTile.setImage(towerSprites.get(1));
 
             //Logic for upgrade towers
-            if(currentSelectedButton == 3){
+            if ( currentSelectedButton == 3 ){
                 if(allTiles.get(placement + 1).hasTower()) allTiles.get(placement + 1).getTower().increaseLevel();
                 if(allTiles.get(placement - 1).hasTower()) allTiles.get(placement -1).getTower().increaseLevel();
-            }else if(currentSelectedButton == 4){
+            } else if ( currentSelectedButton == 4 ){
                 if(placement <= 7){
                     if(!allTiles.get(placement + 8).hasTower()) return;
                     allTiles.get(placement + 8).getTower().increaseLevel();
