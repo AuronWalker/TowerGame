@@ -55,6 +55,7 @@ public class TowerScreenController {
         loadedTowerLabels.addAll(List.of(lblLoadedTower0, lblLoadedTower1, lblLoadedTower2));
 
         referenceTowerImage = imgLoadedTower0.getImage();
+        AvailableTowerManager.clearAvailableTowers();
     }
 
     public TowerScreenController(WindowManager windowManager) {

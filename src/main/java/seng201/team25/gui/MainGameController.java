@@ -161,8 +161,7 @@ public class MainGameController {
         quitButton.setVisible(false);
 
         restartButton.setOnAction(event -> {
-            GoldManager.setGold(3);
-            windowManager.toGameScreen();  
+            windowManager.toTowerScreen();
         });
 
         quitButton.setOnAction(event -> {
@@ -209,7 +208,7 @@ public class MainGameController {
     **/
     private void setRoundButton(){
         startButton.setOnAction(event -> {
-            new Round(activeTowers, anchorPane, startButton, shopButton, this, rm);
+            new Round(activeTowers, anchorPane, startButton, shopButton, this, rm, goldLabel);
             startButton.setVisible(false);
             shopButton.setVisible(false);
         });

@@ -8,6 +8,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import seng201.team25.gui.MainGameController;
@@ -28,6 +29,7 @@ public class Round {
     private Button startButton;
     private Button shopButton;
     private Random rng;
+    private Label goldLabel;
 
     private RoundManager rm;
     private MainGameController mg;
@@ -40,8 +42,9 @@ public class Round {
     * @param _shopButton Button that opens the shop.
     * @param mg Game controller to send to cart when spawned.
     * @param rm Round manager with all the relevant info for the round.
+    * @param goldLabel Label that displays current gold
     **/
-    public Round(List<Tower> _activeTowers, AnchorPane anchorPane, Button _startButton, Button _shopButton, MainGameController _mg, RoundManager _rm){
+    public Round(List<Tower> _activeTowers, AnchorPane anchorPane, Button _startButton, Button _shopButton, MainGameController _mg, RoundManager _rm, Label _goldLabel){
         spawner = new Timeline(new KeyFrame(Duration.seconds(1), e -> spawnCart(anchorPane)));
         spawner.setCycleCount(Animation.INDEFINITE);
         rangeCheck = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> checkRange()));
@@ -49,6 +52,7 @@ public class Round {
 
         rm = _rm;
         mg = _mg;
+        goldLabel = _goldLabel;
         rng = new Random();
 
         startButton = _startButton;
@@ -105,17 +109,20 @@ public class Round {
                 }
                 if(cartIndex == activeCarts.size()){
                     if(cart.getPosition().getY() <= killDistance && spawner.getStatus().equals(Animation.Status.STOPPED)){
-                        if(GameOverManager.gameOver == false){
-                            startButton.setVisible(true);
-                            shopButton.setVisible(true);
-                            activeCarts = new ArrayList<Cart>();
-                            GoldManager.setGold(5);
-                            rm.incrementCurrentRound();
-                        }
+                        if(GameOverManager.gameOver == false) endRound();
                         rangeCheck.stop();
                     }
                 }
             }
         }
+    }
+
+    private void endRound(){
+        startButton.setVisible(true);
+        shopButton.setVisible(true);
+        activeCarts = new ArrayList<Cart>();
+        GoldManager.increaseGoldBalance(3);
+        goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
+        rm.incrementCurrentRound();
     }
 }

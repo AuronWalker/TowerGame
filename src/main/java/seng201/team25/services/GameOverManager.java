@@ -8,7 +8,6 @@ import seng201.team25.gui.MainGameController;
 
 public class GameOverManager {
     public static boolean gameOver = false;
-    public static boolean newGame = true;
 
     /**
     * Displays the text and buttons for game over screen.
