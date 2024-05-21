@@ -31,7 +31,7 @@ public class Cart {
     * @param _totalResource Amount of resources it needs to be filled with
     * @param mg Game controller to send to game over manager.
     **/
-    public Cart(AnchorPane anchorPane, int speed, int _resourceType, int _totalResource, MainGameController mg){
+    public Cart(AnchorPane anchorPane, float speed, int _resourceType, int _totalResource, MainGameController mg){
         ImageView cart = new ImageView();
         ImageView cartDisplay = new ImageView();
         amount = new Label();

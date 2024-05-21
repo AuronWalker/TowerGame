@@ -64,6 +64,7 @@ public class TowerScreenController {
 
     public void continuePressed() {
         GoldManager.setGold(3);
+        System.out.println("Working");
         windowManager.toGameScreen();
     }
     public void backPressed() {

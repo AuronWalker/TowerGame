@@ -75,9 +75,12 @@ public class MainGameController {
     @FXML private Button shopButton;
     @FXML private Button restartButton;
     @FXML private Button quitButton;
+    @FXML private Button easyRoundButton;
+    @FXML private Button hardRoundButton;
 
     @FXML private Label goldLabel;
     @FXML private Label roundLabel;
+    @FXML private Label info;
 
     // Shop elements
     @FXML ImageView imgTower0;
@@ -89,6 +92,7 @@ public class MainGameController {
     @FXML Label lblReloadSpeed;
     @FXML Label lblLevel;
     @FXML Label lblCost;
+    
 
     private int recurrentPurchaseCounter = 1;
 
@@ -157,8 +161,11 @@ public class MainGameController {
     public void initialize() {
         rm = new RoundManager(roundLabel);
         GameOverManager.gameOver = false;
+
+        //Hiding all buttons till needed
         restartButton.setVisible(false);
         quitButton.setVisible(false);
+        hideRoundInfo();
 
         restartButton.setOnAction(event -> {
             windowManager.toTowerScreen();
@@ -208,11 +215,23 @@ public class MainGameController {
     **/
     private void setRoundButton(){
         startButton.setOnAction(event -> {
-            new Round(activeTowers, anchorPane, startButton, shopButton, this, rm, goldLabel);
+            //Code takes u into the next round.
+            info.setVisible(true);
             startButton.setVisible(false);
             shopButton.setVisible(false);
+            rm.displayRoundButton(easyRoundButton, true, activeTowers, anchorPane, startButton, shopButton, this, rm);
+            rm.displayRoundButton(hardRoundButton, false, activeTowers, anchorPane, startButton, shopButton, this, rm);
         });
     }    
+
+    /**
+    * Hides round select info so multiple rounds cant be called.
+    **/
+    public void hideRoundInfo(){
+        easyRoundButton.setVisible(false);
+        hardRoundButton.setVisible(false);
+        info.setVisible(false);
+    }
 
     /**
     * Generates the level layout for the game.
@@ -360,7 +379,7 @@ public class MainGameController {
                 activeTowers.remove(currentTower);
 
                 allTiles.get(placement).sellTower();
-                goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
+                updateGoldLabels();
                 
                 emptyTile.setImage(grassImage);
                 displayTile.setImage(emptyDisply);
@@ -444,7 +463,7 @@ public class MainGameController {
             txtStatus.setText("Inventory Full!");
             txtStatus.setVisible(true);
         } else {
-            lblBalance.setText(String.valueOf(GoldManager.getGoldBalance()));
+            updateGoldLabels();
             String resourceString = AvailableTowerManager.getResourceTypeString(selectedTower.getResourceType());
             if ( txtStatus.isVisible() ) {
                 recurrentPurchaseCounter += 1;
@@ -459,4 +478,8 @@ public class MainGameController {
         }
     }
 
+    public void updateGoldLabels(){
+        goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
+        lblBalance.setText(""+GoldManager.getGoldBalance());
+    }
 }

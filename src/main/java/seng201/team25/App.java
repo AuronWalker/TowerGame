@@ -6,7 +6,7 @@ import seng201.team25.gui.FXWindow;
  * Default entry point class
  * @author seng202 teaching team
  */
-public class Launch {
+public class App {
 
     /**
      * Entry point which runs the javaFX application
