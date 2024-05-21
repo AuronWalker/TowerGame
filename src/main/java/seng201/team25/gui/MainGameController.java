@@ -430,10 +430,10 @@ public class MainGameController {
 
         imgTowerSelected.setImage(selectedTowerElement.getImage());
         lblResources.setText(String.valueOf(selectedTower.getResourceAmount()));
-        lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));
+        if ( selectedTower.getReloadSpeed() < 0 ) lblReloadSpeed.setText("x" + String.valueOf(-1 * selectedTower.getReloadSpeed()));
+        else lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));
         lblLevel.setText(String.valueOf(selectedTower.getLevel()));
         lblCost.setText(String.valueOf(selectedTower.getCost()));
-
     }
 
     public void buySelectedTower() {

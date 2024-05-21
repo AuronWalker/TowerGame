@@ -19,8 +19,8 @@ public class AvailableTowerManager {
             new Tower(0, 1, 2,1,1),
             new Tower(1, 1, 1, 1, 2),
             new Tower(2, 1, 1, 1, 3),
-            new Tower(3, 0, -1, -1, 4),
-            new Tower(4, 0, -1, -1, 5)};
+            new Tower(3, 0, -2, 1, 4),
+            new Tower(4, 0, -2, 1, 5)};
 
     /**
      * @return A list of Towers available to buy in the shop
