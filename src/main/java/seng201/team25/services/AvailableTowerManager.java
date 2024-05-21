@@ -30,6 +30,14 @@ public class AvailableTowerManager {
     }
 
     /**
+     * @return The number of towers in the inventory
+     */
+    public static int numberOfTowers() {
+        return towers.size();
+    }
+
+
+    /**
      * Adds a Tower to the available towers for placement.
      * @param tower Tower element to add
      */

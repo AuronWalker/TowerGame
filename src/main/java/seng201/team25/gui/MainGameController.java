@@ -254,7 +254,7 @@ public class MainGameController {
     /**
     * Loops through the buttons for placing towers setting it to active if clicked
     * The resource for towers is indicated with the index to allow for easier scaling when adding buttons
-    * @param slectButtons buttons used to place towers
+    * @param selectButtons buttons used to place towers
     **/
     private void setupSelectButtons(List<Button> selectButtons){
         this.amountOfTowers = new ArrayList<Integer>();
@@ -440,6 +440,9 @@ public class MainGameController {
         int newGoldBalance = GoldManager.decreaseGoldBalance(selectedTower.getCost());
         if (newGoldBalance == -1) {
             txtStatus.setText("Insufficient Gold!");
+            txtStatus.setVisible(true);
+        } else if (AvailableTowerManager.numberOfTowers() >= 5) {
+            txtStatus.setText("Inventory Full!");
             txtStatus.setVisible(true);
         } else {
             lblBalance.setText(String.valueOf(GoldManager.getGoldBalance()));
