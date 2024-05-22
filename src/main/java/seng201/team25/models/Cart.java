@@ -25,7 +25,6 @@ public class Cart {
 
     /**
     * Spawns a cart that moves upwards by a certain speed
-    * @param _anchorPane Anchor pane to attach the cart image to.
     * @param speed Speed at which the cart moves
     * @param _resourceType Type of resource the cart can be filled by.
     * @param _totalResource Amount of resources it needs to be filled with

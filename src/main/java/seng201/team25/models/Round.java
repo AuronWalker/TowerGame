@@ -45,9 +45,8 @@ public class Round {
     * @param _anchorPane Anchor pane to attach the cart image to.
     * @param _startButton Button that starts the round.
     * @param _shopButton Button that opens the shop.
-    * @param mg Game controller to send to cart when spawned.
-    * @param rm Round manager with all the relevant info for the round.
-    * @param goldLabel Label that displays current gold
+    * @param _mg Game controller to send to cart when spawned.
+    * @param _rm Round manager with all the relevant info for the round.
     **/
     public Round(boolean _roundDifficulty, int treeCarts, int rockCarts, int fruitCarts, List<Tower> _activeTowers, AnchorPane _anchorPane, Button _startButton, Button _shopButton, MainGameController _mg, RoundManager _rm){
         anchorPane = _anchorPane;
@@ -78,8 +77,8 @@ public class Round {
     }
 
     /**
-    * Spawns the cart at an interval set by spwnerTimer
-    * @param _anchorPane Anchor pane to attach the cart image to.
+    * Spawns the cart at an interval set by spwnerTimer.
+    * @param anchorPane Anchor pane to attach the cart image to.
     **/
     private void spawnCart(AnchorPane anchorPane){
         //Gets how many of each resource is spawning.
@@ -185,7 +184,7 @@ public class Round {
     }
 
     /**
-    * Displays the round and shop button again while restting active carts and adding gold.
+    * Displays the round and shop button again while resetting active carts and adding gold.
     **/
     private void endRound(){
         startButton.setVisible(true);

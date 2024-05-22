@@ -202,9 +202,11 @@ public class MainGameController {
     * Shop button logic that takes you to shop.
     **/
     public void openShop(){
+        goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
         gameTabs.getSelectionModel().select(1);
     }
     public void closeShop(){
+        goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
         setupSelectButtons(selectButtons);
         gameTabs.getSelectionModel().select(0);
     }

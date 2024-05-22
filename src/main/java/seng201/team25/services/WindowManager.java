@@ -19,7 +19,6 @@ public class WindowManager {
      * @param setupScreenLauncher Reference to the setupScreenLauncher function of WindowManager
      * @param towerScreenLauncher Reference to the towerScreenLauncher function of WindowManager
      * @param gameScreenLauncher Reference to the gameScreenLauncher function of WindowManager
-     * @param shopScreenLauncher Reference to the shopScreenLauncher function of WindowManager
      * @param clearScreen Reference to the clearScreen function of WindowManager
      */
     public WindowManager(Consumer<WindowManager> homeScreenLauncher, Consumer<WindowManager> setupScreenLauncher, Consumer<WindowManager> towerScreenLauncher, Consumer<WindowManager> gameScreenLauncher, Runnable clearScreen) {

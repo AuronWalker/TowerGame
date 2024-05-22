@@ -60,7 +60,7 @@ public class Tower {
     /**
     * Constructor used for towers listed in the shop
     * @param newResourceType the type of resource this tower is set to
-    * @param newStartongResources the amount of resource it fills per reload count
+    * @param newStartingResources the amount of resource it fills per reload count
     * @param newReloadSpeed the rate at which the tower fills carts
     * @param newLevel the starting level of the tower
     * @param newCost the tower cost
@@ -75,7 +75,7 @@ public class Tower {
 
     /**
     * Sets cost of tower depending on the resource.
-    * Each resource is more expensive as they appear in harder difficultys
+    * Each resource is more expensive as they appear in harder difficulties
     **/
     private void setCost(){
         if(resourceType == 0) cost = 1;
@@ -86,7 +86,8 @@ public class Tower {
     }
 
     /**
-    * Returns towers x and y position
+    * Returns a towers x and y position.
+     * @return Position of the tower
     **/
     public Point2D getPosition(){
         return position;
@@ -94,6 +95,7 @@ public class Tower {
 
     /**
     * Returns a List with the tower sprite and display sprite depending on resource type and direction.
+     * @return List of sprites
     **/
     public List<Image> getTileImage(){
         if(resourceType == 0){
@@ -133,35 +135,38 @@ public class Tower {
     }
 
     /**
-    * Returns towers level
+    * Returns a tower's level.
+     * @ return level of the tower
     **/
     public int getLevel() {
         return level;
     }
 
     /**
-    * Returns towers base reload speed
+     * Returns a tower's base reload speed.
+     * @return reload speed
     **/
     public int getReloadSpeed() {
         return reloadSpeed;
     }
 
     /**
-    * Returns towers current reload speed
+     * Returns a tower's current reload speed.
+     * @return reload speed
     **/
     public int getCurrentReloadSpeed() {
         return currentReloadSpeed;
     }
 
     /**
-    * Increments current reload speed down one
+    * Decrements current reload speed by one.
     **/
     public void lowerCurrentReloadSpeed() {
         currentReloadSpeed -= 1;
     }
 
     /**
-    * Resets current speed back to the base reload speed
+    * Resets current speed back to the base reload speed.
     **/
     public void resetCurrentReloadSpeed(){
         currentReloadSpeed = reloadSpeed;
@@ -184,7 +189,8 @@ public class Tower {
     }
 
     /**
-    * Returns what resource tower can fill
+    * Returns what resource a tower provides
+     * @return integer representation of resource type
     **/
     public int getResourceType() {
         return resourceType;

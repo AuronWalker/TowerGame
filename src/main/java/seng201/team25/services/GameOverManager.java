@@ -11,11 +11,11 @@ public class GameOverManager {
 
     /**
     * Displays the text and buttons for game over screen.
-    * @param anchorPane anchor pane to attach text to.
-    * @param mg main game controller to call a function that displays game over buttons.
+    * @param anchorPane Anchor pane to attach text to.
+    * @param mg Main game controller to call a function that displays game over buttons.
     **/
-    public static void gameOverScreen(AnchorPane anchorPane, MainGameController mg){
-        mg.displayButtons();
+    public static void gameOverScreen(AnchorPane anchorPane, MainGameController mainGameController){
+        mainGameController.displayButtons();
         Label gameOverText = new Label();
         Label gameOverSpice = new Label();
         
@@ -36,7 +36,12 @@ public class GameOverManager {
         anchorPane.getChildren().add(gameOverSpice);
     }
 
-    public static void winScreen(AnchorPane anchorPane, MainGameController mg){
+    /**
+     * Displays the text and buttons when the user wins the game.
+     * @param anchorPane Anchor pane to attach text to
+     */
+    public static void winScreen(AnchorPane anchorPane, MainGameController mainGameController){
+        mainGameController.displayButtons();
         Label winText = new Label();
         Label winSpice = new Label();
         

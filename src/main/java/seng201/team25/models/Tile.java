@@ -23,14 +23,14 @@ public class Tile {
     /**
     * Used to know if there is a tower on the tile or not.
     * Returns false if there is no tower and true if there is.
+     * @return boolean representation of whether the tile is empty
     **/
     public boolean hasTower(){
-        if(tileTower == null) return false;
-        else return true;
+        return tileTower != null;
     }
 
     /**
-    * Returns tower on tile.
+     * @return Tower element on this tile
     **/
     public Tower getTower(){
         return tileTower;

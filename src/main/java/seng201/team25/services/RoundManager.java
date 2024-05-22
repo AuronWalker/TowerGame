@@ -19,7 +19,6 @@ public class RoundManager {
     * Sets the RoundManager with the players maxRound picked from setup screen.
     * Additonally gets the label that will display round info.
     * @param newRoundLabel label that sets the label.
-    * @param max int to set maxRounds to.
     **/
     public RoundManager(Label newRoundLabel){
         maxRounds = PlayerManager.getRounds();
