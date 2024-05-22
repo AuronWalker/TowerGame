@@ -23,6 +23,10 @@ import seng201.team25.services.GoldManager;
 import seng201.team25.services.RoundManager;
 import seng201.team25.services.WindowManager;
 
+/**
+ * Game and Shop FXML controllers. Conjoined at this stage, as cannot define two separate controllers.
+ */
+
 public class MainGameController {
     @FXML private ImageView roadTile;
     @FXML private ImageView roadTile1;
@@ -155,8 +159,14 @@ public class MainGameController {
         this.windowManager = newWindowManager;
     }
 
-    public MainGameController() {}
+    /**
+     * Used for JUnit testing - creates a headless controller.
+     */
+    public MainGameController() {};
 
+    /**
+     * FXML: Initialize the object, called by JavaFX on UI load
+     **/
     public void initialize() {
         rm = new RoundManager(roundLabel);
         GameOverManager.gameOver = false;
@@ -190,7 +200,6 @@ public class MainGameController {
 
     /**
     * Called by game over manager to show restart and quit buttons.
-    * Turning off visible rathering than removing to avoid werid error.
     **/
     public void displayButtons(){
         restartButton.setVisible(true);
@@ -199,12 +208,16 @@ public class MainGameController {
     }
 
     /**
-    * Shop button logic that takes you to shop.
+    * Switch the display to the shop screen
     **/
     public void openShop(){
         goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
         gameTabs.getSelectionModel().select(1);
     }
+
+    /**
+     * Switch the display to the game screen
+     **/
     public void closeShop(){
         goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
         setupSelectButtons(selectButtons);
@@ -212,7 +225,7 @@ public class MainGameController {
     }
 
     /**
-    * Start round button logic the creates a new round and hides the button so multiple rounds cant be running at once.
+    * Start round button logic. Creates a new round and hides the button so multiple rounds can't be running at once.
     **/
     private void setRoundButton(){
         startButton.setOnAction(event -> {
@@ -439,6 +452,10 @@ public class MainGameController {
         return emptyTile;
     }
 
+    /**
+     * FXML: Updates stats when a new tower is selected.
+     * @param event FXML event reference
+     */
     public void towerSelected(Event event) {
         txtStatus.setVisible(false);
         ImageView pressedTower = (ImageView) event.getSource();
@@ -471,6 +488,9 @@ public class MainGameController {
         lblCost.setText(String.valueOf(selectedTower.getCost()));
     }
 
+    /**
+     * FXML: Handles purchasing towers when the "Buy" button is clicked.
+     */
     public void buySelectedTower() {
         int newGoldBalance = GoldManager.decreaseGoldBalance(selectedTower.getCost());
         if (newGoldBalance == -1) {
@@ -495,6 +515,9 @@ public class MainGameController {
         }
     }
 
+    /**
+     * Updates the shop and game page gold labels
+     */
     public void updateGoldLabels(){
         goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
         lblBalance.setText(""+GoldManager.getGoldBalance());
