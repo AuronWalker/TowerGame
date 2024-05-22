@@ -570,7 +570,7 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label prefHeight="23.0" prefWidth="154.0" text="Starting Resources:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                                          <Label prefHeight="23.0" prefWidth="154.0" text="Resources Per Load:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                                              <font>
                                                 <Font name="Comic Sans MS" size="16.0" />
                                              </font>
@@ -578,7 +578,7 @@
                                                 <Insets right="10.0" />
                                              </GridPane.margin>
                                           </Label>
-                                          <Label text="Reload Speed:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                          <Label text="Cart Reload Speed:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                              <font>
                                                 <Font name="Comic Sans MS" size="16.0" />
                                              </font>
@@ -602,7 +602,7 @@
                                                 <Insets right="10.0" />
                                              </GridPane.margin>
                                           </Label>
-                                          <Label fx:id="lblCost" text="10" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <Label fx:id="lblCost" text="1" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <font>
                                                 <Font name="Comic Sans MS" size="16.0" />
                                              </font>
@@ -617,7 +617,7 @@
                                                 <Font name="Comic Sans MS" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="lblResources" text="5" textFill="WHITE" GridPane.columnIndex="1">
+                                          <Label fx:id="lblResources" text="2" textFill="WHITE" GridPane.columnIndex="1">
                                              <font>
                                                 <Font name="Comic Sans MS" size="16.0" />
                                              </font>

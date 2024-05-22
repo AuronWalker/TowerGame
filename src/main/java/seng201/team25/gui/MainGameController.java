@@ -92,7 +92,7 @@ public class MainGameController {
     @FXML Label lblReloadSpeed;
     @FXML Label lblLevel;
     @FXML Label lblCost;
-    
+
 
     private int recurrentPurchaseCounter = 1;
 
@@ -222,7 +222,7 @@ public class MainGameController {
             rm.displayRoundButton(easyRoundButton, true, activeTowers, anchorPane, startButton, shopButton, this, rm);
             rm.displayRoundButton(hardRoundButton, false, activeTowers, anchorPane, startButton, shopButton, this, rm);
         });
-    }    
+    }
 
     /**
     * Hides round select info so multiple rounds cant be called.
@@ -357,7 +357,7 @@ public class MainGameController {
         else tile.setImage(tileRightSprite);
         tileResources.add(resourceType);
     }
-    
+
     /**
     * Places a tower when clicking on a empty tile.
     * Sells tower when clicking on a tower.
@@ -380,7 +380,7 @@ public class MainGameController {
 
                 allTiles.get(placement).sellTower();
                 updateGoldLabels();
-                
+
                 emptyTile.setImage(grassImage);
                 displayTile.setImage(emptyDisply);
                 return;
@@ -391,7 +391,7 @@ public class MainGameController {
             if (activeTowers.size() > 5) return; // ADD A MESSAGE HERE - untested
             if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton && currentSelectedButton <= 2) return;
 
-            
+
             Tower newTower = new Tower(currentSelectedButton, emptyTile, displayTile, directionLeft);
             AvailableTowerManager.removeTowerOfType(currentSelectedButton);
             tileObj.setTower(newTower);
@@ -412,7 +412,7 @@ public class MainGameController {
                 }else{
                     if(!allTiles.get(placement - 8).hasTower()) return;
                     allTiles.get(placement - 8).getTower().increaseLevel();
-                }         
+                }
             }
 
             //Removing the number of placed tower by one and displaying that in the button
@@ -447,9 +447,13 @@ public class MainGameController {
         selectedTowerElement = pressedTower;
 
         imgTowerSelected.setImage(selectedTowerElement.getImage());
-        lblResources.setText(String.valueOf(selectedTower.getResourceAmount()));
-        if ( selectedTower.getReloadSpeed() < 0 ) lblReloadSpeed.setText("x" + String.valueOf(-1 * selectedTower.getReloadSpeed()));
-        else lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));
+        if ( selectedTower.getReloadSpeed() < 0 ) {
+            lblResources.setText("N/A");
+            lblReloadSpeed.setText("x" + String.valueOf(-1 * selectedTower.getReloadSpeed()));
+        } else {
+            lblResources.setText(String.valueOf(selectedTower.getResourceAmount()));
+            lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));
+        }
         lblLevel.setText(String.valueOf(selectedTower.getLevel()));
         lblCost.setText(String.valueOf(selectedTower.getCost()));
     }
