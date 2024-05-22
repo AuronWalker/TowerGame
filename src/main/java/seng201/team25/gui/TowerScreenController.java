@@ -15,26 +15,19 @@ import java.util.List;
 
 public class TowerScreenController {
     WindowManager windowManager;
-    @FXML
-    ImageView imgTower0;
-    @FXML
-    ImageView imgTowerSelected;
-    @FXML
-    Label lblTowerName;
+    @FXML ImageView imgTower0;
+    @FXML ImageView imgTowerSelected;
+    @FXML Label lblTowerName;
 
-    @FXML
-    ImageView imgLoadedTower0;
-    @FXML
-    ImageView imgLoadedTower1;
-    @FXML
-    ImageView imgLoadedTower2;
+    @FXML ImageView imgLoadedTower0;
+    @FXML ImageView imgLoadedTower1;
+    @FXML ImageView imgLoadedTower2;
 
-    @FXML
-    Label lblLoadedTower0;
-    @FXML
-    Label lblLoadedTower1;
-    @FXML
-    Label lblLoadedTower2;
+    @FXML Label lblLoadedTower0;
+    @FXML Label lblLoadedTower1;
+    @FXML Label lblLoadedTower2;
+
+    @FXML Label lblStartGame;
 
 
 
@@ -63,9 +56,7 @@ public class TowerScreenController {
     }
 
     public void continuePressed() {
-        GoldManager.setGold(3);
-        System.out.println("Working");
-        windowManager.toGameScreen();
+        if ( AvailableTowerManager.getNextAvailableIndex() == -1 ) windowManager.toGameScreen();
     }
     public void backPressed() {
         windowManager.toSetupScreen();
@@ -97,9 +88,11 @@ public class TowerScreenController {
             String resourceString = AvailableTowerManager.getResourceTypeString(selectedTowerResourceID);
             loadedTowerLabels.get(nextIndex).setText(String.format("%s Tower", resourceString));
 
+            if (AvailableTowerManager.getNextAvailableIndex() == -1) lblStartGame.setOpacity(1);
         }
     }
     public void resetLoadout() {
+        lblStartGame.setOpacity(0.4);
         AvailableTowerManager.clearAvailableTowers();
         for (ImageView towerImage : loadedTowerImages) {
             towerImage.setImage(referenceTowerImage);
