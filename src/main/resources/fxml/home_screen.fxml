@@ -15,9 +15,8 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="312.1675109863281" minHeight="10.0" prefHeight="312.1675109863281" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="297.0" minHeight="0.0" prefHeight="59.468505859375" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="313.0" minHeight="0.0" prefHeight="55.031494140625" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="455.068115234375" minHeight="0.0" prefHeight="293.1867980957031" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="297.0" minHeight="0.0" prefHeight="46.24951171875" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="455.068115234375" minHeight="0.0" prefHeight="360.75048828125" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <ImageView fitHeight="721.0" fitWidth="1285.0" pickOnBounds="true" GridPane.valignment="TOP">
@@ -38,15 +37,7 @@
             <Insets bottom="10.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Settings" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-         <font>
-            <Font name="Comic Sans MS" size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </GridPane.margin>
-      </Label>
-      <Label onMouseReleased="#btnQuitPressed" text="Quit" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+      <Label onMouseReleased="#btnQuitPressed" text="Quit" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font>
