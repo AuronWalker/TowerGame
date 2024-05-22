@@ -64,7 +64,7 @@
                   <Insets right="20.0" />
                </GridPane.margin>
             </Label>
-            <Slider fx:id="sldRounds" majorTickUnit="1.0" max="15.0" maxWidth="-Infinity" min="5.0" minorTickCount="15" onMouseDragged="#sliderChanged" prefHeight="38.0" prefWidth="219.0" snapToTicks="true" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Slider fx:id="sldRounds" majorTickUnit="1.0" max="15.0" maxWidth="-Infinity" min="5.0" minorTickCount="15" onDragDropped="#sliderChanged" onDragEntered="#sliderChanged" onDragExited="#sliderChanged" onMouseDragged="#sliderChanged" onMouseExited="#sliderChanged" prefHeight="38.0" prefWidth="219.0" snapToTicks="true" value="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="lblSliderPosition" text="5" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="-220.0" />
