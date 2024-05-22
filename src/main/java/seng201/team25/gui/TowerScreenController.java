@@ -75,7 +75,7 @@ public class TowerScreenController {
         // Get Resource ID then Resource String from selected tower
         this.selectedTowerResourceID = Integer.parseInt(pressedTower.getId().substring(pressedTower.getId().length() - 1));
         String resourceString = AvailableTowerManager.getResourceTypeString(selectedTowerResourceID);
-        lblTowerName.setText(String.format("%s Tower", resourceString));
+        lblTowerName.setText(resourceString);
 
         pressedTower.setOpacity(1);
 
@@ -87,7 +87,7 @@ public class TowerScreenController {
                 .findFirst()
                 .orElse(null);
 
-        lblTowerName.setText(String.format("%s Tower", resourceString));
+        lblTowerName.setText(resourceString);
 
         pressedTower.setOpacity(1);
 
@@ -111,7 +111,7 @@ public class TowerScreenController {
             loadedTowerImages.get(nextIndex).setImage(imgTowerSelected.getImage());
             loadedTowerImages.get(nextIndex).setOpacity(1);
             String resourceString = AvailableTowerManager.getResourceTypeString(selectedTowerResourceID);
-            loadedTowerLabels.get(nextIndex).setText(String.format("%s Tower", resourceString));
+            loadedTowerLabels.get(nextIndex).setText(resourceString);
 
             if (AvailableTowerManager.getNextAvailableIndex() == -1) lblStartGame.setOpacity(1);
         }

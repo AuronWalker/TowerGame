@@ -12,7 +12,7 @@ import java.util.List;
 
 public class AvailableTowerManager {
     private static List<Tower> towers = new ArrayList<>();
-    private static final String[] resourceTypeMap = {"Wood", "Stone", "Fruit", "Vertical Upgrade", "Horizontal Upgrade"};
+    private static final String[] resourceTypeMap = {"Wood", "Stone", "Fruit", "Upgrade 1", "Upgrade 2"};
 
     // Stores towers available in the shop
     private static final Tower[] towersToBuy = {
