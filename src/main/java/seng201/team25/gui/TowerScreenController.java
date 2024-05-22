@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TowerScreenController {
@@ -28,7 +29,12 @@ public class TowerScreenController {
     @FXML Label lblLoadedTower2;
 
     @FXML Label lblStartGame;
+    @FXML Label lblResources;
+    @FXML Label lblReloadSpeed;
 
+
+    private final Tower[] towersToBuy = AvailableTowerManager.getTowersToBuy();
+    private Tower selectedTower = towersToBuy[0];
 
 
     private ImageView selectedTowerElement;
@@ -73,10 +79,29 @@ public class TowerScreenController {
 
         pressedTower.setOpacity(1);
 
+        imgTowerSelected.setImage(pressedTower.getImage());
+
+        int selectedTowerResourceID = Integer.parseInt(pressedTower.getId().substring(pressedTower.getId().length() - 1));
+        Tower selectedTower = Arrays.stream(towersToBuy)
+                .filter(tower -> (tower.getResourceType() == selectedTowerResourceID))
+                .findFirst()
+                .orElse(null);
+
+        lblTowerName.setText(String.format("%s Tower", resourceString));
+
+        pressedTower.setOpacity(1);
+
         selectedTowerElement.setOpacity(0.4);
         selectedTowerElement = pressedTower;
 
         imgTowerSelected.setImage(selectedTowerElement.getImage());
+        if ( selectedTower.getReloadSpeed() < 0 ) {
+            lblResources.setText("N/A");
+            lblReloadSpeed.setText("x" + String.valueOf(-1 * selectedTower.getReloadSpeed()));
+        } else {
+            lblResources.setText(String.valueOf(selectedTower.getResourceAmount()));
+            lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));
+        }
     }
 
     public void addSelectedToLoadout() {
