@@ -11,36 +11,46 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * FXML Controller for the setup screen stage.
+ */
+
 public class SetupScreenController {
     WindowManager windowManager;
 
-    @FXML
-    private Label lblEasy;
-    @FXML
-    private Label lblNormal;
-    @FXML
-    private Label lblHard;
-    @FXML
-    private TextField txtName;
-    @FXML
-    private Slider sldRounds;
-    @FXML
-    private Label lblSliderPosition;
-    @FXML
-    private Label lblValidName;
+    @FXML private Label lblEasy;
+    @FXML private Label lblNormal;
+    @FXML private Label lblHard;
+    @FXML private TextField txtName;
+    @FXML private Slider sldRounds;
+    @FXML private Label lblSliderPosition;
+    @FXML private Label lblValidName;
     private Label selectedDifficulty;
-
     private List<Label> difficultyLabels = new ArrayList<>();
 
+
+    /**
+     * Constructor to set the private windowManager when SetupScreen is created
+     * @param windowManager FXWindow controller object
+     */
     public SetupScreenController(WindowManager windowManager) {
         this.windowManager = windowManager;
     }
 
+
+    /**
+     * FXML: Initialize the object, called by JavaFX on UI load
+     */
     public void initialize() {
         this.selectedDifficulty = lblEasy;
         difficultyLabels.addAll(List.of(lblEasy, lblNormal, lblHard));
     }
 
+
+    /**
+     * FXML: Update the display when a new difficulty is selected.
+     * @param event button press event
+     */
     public void difficultyPressed(Event event) {
         Label pressedDifficulty = (Label) event.getSource();
         if ( pressedDifficulty == selectedDifficulty ) { return; }
@@ -49,9 +59,14 @@ public class SetupScreenController {
         this.selectedDifficulty = pressedDifficulty;
     }
 
-    public void continuePressed() {
 
+    /**
+     * FXML: Verify name validity and continue when "Continue" button pressed.
+     */
+    public void continuePressed() {
+            // Check name is longer than 2 characters
             if (txtName.getText().length() > 2 && txtName.getText().length() < 16) {
+                // Check name has no special characters
                 if (txtName.getText().matches("[A-Za-z0-9]+")) {
                     PlayerManager.storeValues(txtName.getText(), difficultyLabels.indexOf(selectedDifficulty), (int) sldRounds.getValue());
                     windowManager.toTowerScreen();
@@ -65,18 +80,27 @@ public class SetupScreenController {
             }
     }
 
+
+    /**
+     * FXML: Returns to previous screen when back button pressed
+     */
     public void backPressed() {
         windowManager.toHomeScreen();
     }
 
+
+    /**
+     * FXML: Update the slider position label when the slider changes state.
+     */
     public void sliderChanged() {
         lblSliderPosition.setText(String.valueOf(((int) sldRounds.getValue())));
     }
 
+
+    /**
+     * FXML: Hide the invalid name text when the user changes their name.
+     */
     public void txtChanged() {
         lblValidName.setVisible(false);
     }
-
-
-
 }
