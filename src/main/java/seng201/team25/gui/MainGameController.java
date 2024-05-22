@@ -307,13 +307,27 @@ public class MainGameController {
     **/
     private void generateTile(List<ImageView> tiles, List<Image> tileImages, boolean directionLeft, Random rng){
         boolean notGrass = false;
-        int currentTile = 0;
+        int currentTile = -1;
         for (ImageView tile : tiles) {
             int tileType = rng.nextInt(5);
             int randomInt = rng.nextInt(tileImages.size());
             Image grassImage = tileImages.get(randomInt);
             Tile newTile = new Tile();
             allTiles.add(newTile);
+            currentTile += 1;
+
+            //Making so all resources are on the map at least once.
+            if(currentTile == tiles.size()-1) {
+                tileType = 3;
+                notGrass = false;
+            }else if(currentTile == 0 && !directionLeft) {
+                tileType = 1;
+                notGrass = false;
+            }else if(currentTile == 0 && directionLeft) {
+                tileType = 4;
+                notGrass = false;
+            }
+            else if(currentTile == tiles.size()-2) notGrass = true;
 
             //Makes sure to trees/rocks wont spawn beside each other
             if(notGrass == true){
@@ -325,14 +339,15 @@ public class MainGameController {
                 continue;
             }
 
+            //Selecting of resource.
             if(tileType == 0 ){
                 tile.setImage(grassImage);
                 tile = placeTowerEvent(tile, directionLeft, placement, newTile, grassImage);
                 tileResources.add(-1);
-            }else if(tileType == 1 || tileType == 2){
+            }else if(tileType == 1){
                 setTile(directionLeft, tile, rockTileLeftSprite, rockTileRightSprite, 1);
                 notGrass = true;
-            }else if(tileType == 3) {
+            }else if(tileType == 2 || tileType == 3) {
                 setTile(directionLeft, tile, treeTileLeftSprite, treeTileRightSprite, 0);
                 notGrass = true;
             }else if(tileType == 4) {
@@ -340,7 +355,6 @@ public class MainGameController {
                 notGrass = true;
             }
             placement += 1;
-            currentTile += 1;
         }
     }
 
