@@ -388,7 +388,7 @@ public class MainGameController {
 
             if(currentSelectedButton == -1) return;
             if(numOfTower == 0) return;
-            if (activeTowers.size() > 5) return; // ADD A MESSAGE HERE - untested
+            if(activeTowers.size() > 5) return; // ADD A MESSAGE HERE - untested
             if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton && currentSelectedButton <= 2) return;
 
             

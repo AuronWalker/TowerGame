@@ -22,7 +22,7 @@
    <children>
       <ImageView fitHeight="721.0" fitWidth="1285.0" pickOnBounds="true" GridPane.valignment="TOP">
          <image>
-            <Image url="@/assets/background.jpeg" />
+            <Image url="@../assets/grass.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" prefHeight="91.0" prefWidth="419.0" text="Tower Game" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
