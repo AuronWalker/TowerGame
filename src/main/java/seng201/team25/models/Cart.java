@@ -73,7 +73,7 @@ public class Cart {
                     
                     if(currentResource != totalResource){
                         GameOverManager.gameOver = true;
-                        GameOverManager.GameOverScreen(anchorPane, mg);
+                        GameOverManager.gameOverScreen(anchorPane, mg);
                     }
                     this.stop();
                 }

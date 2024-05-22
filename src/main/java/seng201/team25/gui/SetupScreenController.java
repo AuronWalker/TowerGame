@@ -4,7 +4,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import seng201.team25.services.PlayerManager;
 import seng201.team25.services.WindowManager;
 import javafx.scene.control.Label;

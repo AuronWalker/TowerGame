@@ -2,7 +2,6 @@ package seng201.team25.gui;
 import javafx.event.Event;
 import javafx.scene.control.TabPane;
 import seng201.team25.models.Tower;
-import seng201.team25.models.Round;
 import seng201.team25.models.Tile;
 
 import java.util.Arrays;

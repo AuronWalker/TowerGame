@@ -18,7 +18,6 @@ public class Tower {
     public ImageView currentDisplay;
     private boolean directionLeft;
     private Point2D position;
-    private String name ="";
 
     private final Image treeLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeLeft.png"));
     private final Image treeRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeRight.png"));

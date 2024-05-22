@@ -8,7 +8,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import seng201.team25.gui.MainGameController;
@@ -31,6 +30,7 @@ public class Round {
     private Button shopButton;
     private Random rng;
     private boolean roundDifficulty;
+    private AnchorPane anchorPane;
 
     private int amountOfTree;
     private int amountOfRock;
@@ -49,7 +49,8 @@ public class Round {
     * @param rm Round manager with all the relevant info for the round.
     * @param goldLabel Label that displays current gold
     **/
-    public Round(boolean _roundDifficulty, int treeCarts, int rockCarts, int fruitCarts, List<Tower> _activeTowers, AnchorPane anchorPane, Button _startButton, Button _shopButton, MainGameController _mg, RoundManager _rm){
+    public Round(boolean _roundDifficulty, int treeCarts, int rockCarts, int fruitCarts, List<Tower> _activeTowers, AnchorPane _anchorPane, Button _startButton, Button _shopButton, MainGameController _mg, RoundManager _rm){
+        anchorPane = _anchorPane;
         spawner = new Timeline(new KeyFrame(Duration.seconds(1), e -> spawnCart(anchorPane)));
         spawner.setCycleCount(Animation.INDEFINITE);
         rangeCheck = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> checkRange()));
@@ -169,7 +170,10 @@ public class Round {
                 }
                 if(cartIndex == activeCarts.size()){
                     if(cart.getPosition().getY() <= killDistance && spawner.getStatus().equals(Animation.Status.STOPPED)){
-                        if(GameOverManager.gameOver == false) endRound();
+                        if(rm.checkWon()){
+                            GameOverManager.winScreen(anchorPane, mg);
+                        }else if(GameOverManager.gameOver == false) endRound();
+                        
                         rangeCheck.stop();
                     }
                 }

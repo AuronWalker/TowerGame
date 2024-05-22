@@ -5,9 +5,9 @@ package seng201.team25.services;
  * as set by the player during setup.
  */
 public class PlayerManager {
-    static String playerName;
-    static int difficulty;
-    static int rounds;
+    private static String playerName;
+    private static int difficulty;
+    private static int rounds;
 
     /**
      * Stores the values provided by the player in the static variables of the class.
