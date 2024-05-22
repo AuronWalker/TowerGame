@@ -15,15 +15,9 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="312.1675109863281" minHeight="10.0" prefHeight="312.1675109863281" vgrow="SOMETIMES" />
-<<<<<<< HEAD
     <RowConstraints maxHeight="297.0" minHeight="0.0" prefHeight="59.468505859375" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="313.0" minHeight="0.0" prefHeight="70.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="455.068115234375" minHeight="0.0" prefHeight="62.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="455.068115234375" minHeight="10.0" prefHeight="239.0" vgrow="SOMETIMES" />
-=======
-    <RowConstraints maxHeight="297.0" minHeight="0.0" prefHeight="46.24951171875" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="455.068115234375" minHeight="0.0" prefHeight="360.75048828125" vgrow="SOMETIMES" />
->>>>>>> ff6bd4338a9a908a970a016790b0d9da43cc6a1d
+    <RowConstraints maxHeight="313.0" minHeight="0.0" prefHeight="55.031494140625" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="455.068115234375" minHeight="0.0" prefHeight="293.1867980957031" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <ImageView fitHeight="721.0" fitWidth="1285.0" pickOnBounds="true" GridPane.valignment="TOP">
@@ -52,7 +46,7 @@
             <Insets top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label text="A game by Auron Walker and Connor Varney" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+      <Label text="A game by Auron Walker and Connor Varney" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3">
          <font>
             <Font name="Comic Sans MS" size="20.0" />
          </font>
