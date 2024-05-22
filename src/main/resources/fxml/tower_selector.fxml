@@ -188,7 +188,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label prefHeight="23.0" prefWidth="154.0" text="Resources Per Load:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                        <Label prefHeight="23.0" prefWidth="154.0" text="Resources / Load:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                            <font>
                               <Font name="Comic Sans MS" size="16.0" />
                            </font>
@@ -196,7 +196,7 @@
                               <Insets right="10.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label text="Cart Reload Speed:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Label text="Reload Speed:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <font>
                               <Font name="Comic Sans MS" size="16.0" />
                            </font>

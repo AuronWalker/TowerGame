@@ -4,6 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import seng201.team25.models.Tower;
 import seng201.team25.services.AvailableTowerManager;
+import seng201.team25.services.GoldManager;
 import seng201.team25.services.WindowManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -60,7 +61,10 @@ public class TowerScreenController {
     }
 
     public void continuePressed() {
-        if ( AvailableTowerManager.getNextAvailableIndex() == -1 ) windowManager.toGameScreen();
+        if ( AvailableTowerManager.getNextAvailableIndex() == -1 ) {
+            windowManager.toGameScreen();
+            GoldManager.setGold(0);
+        }
     }
     public void backPressed() {
         windowManager.toSetupScreen();
@@ -73,7 +77,7 @@ public class TowerScreenController {
         // Get Resource ID then Resource String from selected tower
         this.selectedTowerResourceID = Integer.parseInt(pressedTower.getId().substring(pressedTower.getId().length() - 1));
         String resourceString = AvailableTowerManager.getResourceTypeString(selectedTowerResourceID);
-        lblTowerName.setText(String.format("%s Tower", resourceString));
+        lblTowerName.setText(resourceString);
 
         pressedTower.setOpacity(1);
 
@@ -85,7 +89,7 @@ public class TowerScreenController {
                 .findFirst()
                 .orElse(null);
 
-        lblTowerName.setText(String.format("%s Tower", resourceString));
+        lblTowerName.setText(resourceString);
 
         pressedTower.setOpacity(1);
 
@@ -109,7 +113,7 @@ public class TowerScreenController {
             loadedTowerImages.get(nextIndex).setImage(imgTowerSelected.getImage());
             loadedTowerImages.get(nextIndex).setOpacity(1);
             String resourceString = AvailableTowerManager.getResourceTypeString(selectedTowerResourceID);
-            loadedTowerLabels.get(nextIndex).setText(String.format("%s Tower", resourceString));
+            loadedTowerLabels.get(nextIndex).setText(resourceString);
 
             if (AvailableTowerManager.getNextAvailableIndex() == -1) lblStartGame.setOpacity(1);
         }
