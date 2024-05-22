@@ -88,7 +88,6 @@ public class Round {
         else if(amountOfFruit != 0) amountResources +=1;
 
         //Picks a random one of those resources
-        
         spawnerTimer += 1;
         if(spawnerTimer >= 5){
             int resourceType = rng.nextInt(amountResources);
@@ -109,7 +108,7 @@ public class Round {
             spawnerTimer = 5; 
         }
     }
-
+    
     private int getResource(int resourceType){
         if(resourceType == 0){
             if(amountOfTree <= 0){
