@@ -41,8 +41,8 @@ class TowerTest {
     void testConstructorWithTilesAndDirection() {
         tower = new Tower(1, mockEmptyTile, mockDisplayTile, true);
         assertEquals(1, tower.getResourceType());
-        assertEquals(mockDisplayTile, tower.currentDisplay);
-        assertEquals(mockEmptyTile, tower.currentTile);
+        assertEquals(mockDisplayTile, tower.getCurrentDisplay());
+        assertEquals(mockEmptyTile, tower.getCurrentTile());
     }
 
     @Test

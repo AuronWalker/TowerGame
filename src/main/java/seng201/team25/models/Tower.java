@@ -17,8 +17,8 @@ public class Tower {
     private int currentReloadSpeed = reloadSpeed;
     private int cost = 0;
 
-    public ImageView currentTile;
-    public ImageView currentDisplay;
+    private ImageView currentTile;
+    private ImageView currentDisplay;
     private boolean directionLeft;
     private Point2D position;
 
@@ -139,7 +139,7 @@ public class Tower {
 
     /**
     * Returns a tower's level.
-     * @ return level of the tower
+     * @return level of the tower
     **/
     public int getLevel() {
         return level;
@@ -176,8 +176,9 @@ public class Tower {
     }
 
     /**
-    * Returns towers cost
+    * Returns towers cost.
     * Used to get sell value
+     * @return sell price
     **/
     public int getCost() {
         return cost;
@@ -186,6 +187,7 @@ public class Tower {
     /**
     * Returns how much the tower will fill the cart per increment.
     * Used so the cart knows how much to fill up by.
+     * @return number of resources
     **/
     public int getResourceAmount() {
         return resourceAmount;
@@ -197,5 +199,17 @@ public class Tower {
     **/
     public int getResourceType() {
         return resourceType;
+    }
+
+    public ImageView getCurrentTile() {
+        return currentTile;
+    }
+
+    public void setCurrentTile(ImageView currentTile) {
+        this.currentTile = currentTile;
+    }
+
+    public ImageView getCurrentDisplay() {
+        return currentDisplay;
     }
 }

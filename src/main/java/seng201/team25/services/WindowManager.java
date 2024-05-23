@@ -14,7 +14,7 @@ public class WindowManager {
     private final Runnable clearScreen;
 
     /**
-     *
+     * Constructor to allow various screen launchers to be defined
      * @param homeScreenLauncher Reference to the homeScreenLauncher function of WindowManager
      * @param setupScreenLauncher Reference to the setupScreenLauncher function of WindowManager
      * @param towerScreenLauncher Reference to the towerScreenLauncher function of WindowManager

@@ -10,6 +10,9 @@ import seng201.team25.gui.MainGameController;
 import seng201.team25.models.Round;
 import seng201.team25.models.Tower;
 
+/**
+ * Manages game rounds and checks for win / loss conditions.
+ */
 public class RoundManager {
     private int currentRound = 0;
     private int maxRounds = 0;
@@ -35,6 +38,7 @@ public class RoundManager {
 
     /**
     * Returns current round.
+     * @return number of round
     **/
     public int getCurrentRound(){
         return currentRound;
@@ -42,11 +46,16 @@ public class RoundManager {
 
     /**
     * Returns the players set max number of rounds.
+     * @return max number of rounds
     **/
     public int getMaxRounds(){
         return maxRounds;
     }
 
+    /**
+     * Checks if the game has been won.
+     * @return win state
+     */
     public boolean checkWon(){
         if(currentRound == maxRounds) return true;
         else return false;
@@ -59,7 +68,18 @@ public class RoundManager {
         currentRound = 0;
     }
 
-    public void displayRoundButton(Button roundButton, boolean easy, List<Tower> activeTowers, AnchorPane anchorPane, Button startButton, Button shopButton, MainGameController mg, RoundManager rm){
+    /**
+     * Displays buttons to allow the user to select an easy or hard round at the beginning of each round
+     * @param roundButton button element
+     * @param easy whether the overall gamemode is set to easy
+     * @param activeTowers list of active towers
+     * @param anchorPane anchor pane to display buttons
+     * @param startButton button element to start the game
+     * @param shopButton button element to switch to the shop
+     * @param mainGameController global mainGameController
+     * @param roundManager global roundManager
+     */
+    public void displayRoundButton(Button roundButton, boolean easy, List<Tower> activeTowers, AnchorPane anchorPane, Button startButton, Button shopButton, MainGameController mainGameController, RoundManager roundManager){
         roundButton.setVisible(true);
 
         String difficultyString = "";
@@ -80,12 +100,12 @@ public class RoundManager {
         int fruitAmount = 0;
 
 
-        if(rm.getCurrentRound() == 0){
+        if(roundManager.getCurrentRound() == 0){
             treeAmount = rng.nextInt(2) + baseAmount;
-        } else if(rm.getCurrentRound() == 1){
+        } else if(roundManager.getCurrentRound() == 1){
             treeAmount = rng.nextInt(3) + baseAmount;
             rockAmount = rng.nextInt(2) + baseAmount;
-        }else if(rm.getCurrentRound() >= 2){
+        }else if(roundManager.getCurrentRound() >= 2){
             treeAmount = rng.nextInt(4) + baseAmount;
             rockAmount = rng.nextInt(3) + baseAmount;
             fruitAmount = rng.nextInt(2) + baseAmount;
@@ -99,8 +119,8 @@ public class RoundManager {
         roundButton.setText(difficultyString + " Trees: " + treeAmount + " Rocks: " + rockAmount + " Fruit: " + fruitAmount);
 
         roundButton.setOnAction(event -> {
-            new Round(easy, finalTreeAmount, finalRockAmount, finalFruitAmount, activeTowers, anchorPane, startButton, shopButton, mg, rm);
-            mg.hideRoundInfo();
+            new Round(easy, finalTreeAmount, finalRockAmount, finalFruitAmount, activeTowers, anchorPane, startButton, shopButton, mainGameController, roundManager);
+            mainGameController.hideRoundInfo();
         });
     }
 }

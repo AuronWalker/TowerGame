@@ -1,6 +1,9 @@
 package seng201.team25.models;
 import seng201.team25.services.GoldManager;
 
+/**
+ * Stores information about tiles placed on the board.
+ */
 public class Tile {
     private Tower tileTower = null;
 
@@ -30,7 +33,8 @@ public class Tile {
     }
 
     /**
-     * @return Tower element on this tile
+     * Returns the tower element on this tile
+     * @return Tower element
     **/
     public Tower getTower(){
         return tileTower;
