@@ -18,6 +18,12 @@ There are two types of towers to choose from:
 - Harvest Towers: These generate resources for your carts. These towers must be placed next to their appropriate resource on the map.
 - Upgrade Towers: These upgrade nearby harvest towers to improve their production speed. These either upgrade the harvest towers to the side of the upgrade tower, or above and below the upgrade tower, as shown by the symbols.
 
+These towers have a range of stats:
+- Resources per Load: How many resources are transferred to a cart each pass. This is increased by upgrade towers.
+- Reload Speed: How long the tower waits before resource transfers. This is increased with tower level.
+- Level: The level of the tower. This increases over time, which in turns increases reload speed.
+- Cost: The amount of gold the tower costs.
+
 At the start of the game, you can choose three starting towers. Click a tower to preview its stats, click "Add to Loadout", then "Start Game" once your towers are chosen.
 
 These towers can then be placed on the map. Using the buttons down the side, click on a tower type, then click on the map to place it. Click on a placed tower at any time to sell it.
