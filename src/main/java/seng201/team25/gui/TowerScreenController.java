@@ -73,8 +73,8 @@ public class TowerScreenController {
      */
     public void continuePressed() {
         if ( AvailableTowerManager.getNextAvailableIndex() == -1 ) {
-            windowManager.toGameScreen();
             GoldManager.setGold(0);
+            windowManager.toGameScreen();
         }
     }
 
