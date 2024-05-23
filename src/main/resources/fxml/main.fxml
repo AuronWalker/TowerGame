@@ -228,8 +228,8 @@
                         </ImageView>
                         <GridPane layoutY="17.0" prefHeight="734.0" prefWidth="363.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="315.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="48.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -244,7 +244,7 @@
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </padding>
                                  <GridPane.margin>
-                                    <Insets left="40.0" />
+                                    <Insets left="100.0" />
                                  </GridPane.margin>
                               </Button>
                               <Button fx:id="stoneTowerButton" mnemonicParsing="false" text="Stone Tower x" GridPane.rowIndex="1">
@@ -252,7 +252,7 @@
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </padding>
                                  <GridPane.margin>
-                                    <Insets left="40.0" />
+                                    <Insets left="100.0" />
                                  </GridPane.margin>
                               </Button>
                               <Button fx:id="fruitTowerButton" mnemonicParsing="false" text="Fruit Tower x" GridPane.rowIndex="2">
@@ -260,23 +260,23 @@
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </padding>
                                  <GridPane.margin>
-                                    <Insets left="40.0" />
+                                    <Insets left="100.0" />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="verticalTowerButton" mnemonicParsing="false" prefHeight="57.0" prefWidth="183.0" text="Level Vertical Tower x" GridPane.rowIndex="3">
+                              <Button fx:id="verticalTowerButton" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text="Level Vertical Tower x" GridPane.rowIndex="3">
                                  <padding>
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </padding>
                                  <GridPane.margin>
-                                    <Insets />
+                                    <Insets left="5.0" />
                                  </GridPane.margin>
                               </Button>
-                              <Button fx:id="horizontalTowerButton" mnemonicParsing="false" prefHeight="57.0" prefWidth="206.0" text="Level Horizontal Tower x" GridPane.rowIndex="4">
+                              <Button fx:id="horizontalTowerButton" mnemonicParsing="false" prefHeight="57.0" prefWidth="286.0" text="Level Horizontal Tower x" GridPane.rowIndex="4">
                                  <padding>
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </padding>
                                  <GridPane.margin>
-                                    <Insets />
+                                    <Insets left="5.0" />
                                  </GridPane.margin>
                               </Button>
                            </children>
@@ -378,7 +378,7 @@
                               </Button>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="890.0" layoutY="480.0" prefHeight="43.0" prefWidth="695.0">
+                        <GridPane layoutX="857.0" layoutY="489.0" prefHeight="34.0" prefWidth="728.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1037.0" minWidth="10.0" prefWidth="1037.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="621.0" minWidth="10.0" prefWidth="215.0" />
@@ -389,7 +389,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label fx:id="infoLabel" prefHeight="40.0" prefWidth="710.0" text="Easy gives 2G and Hard gives 3G" textFill="WHITE">
+                              <Label fx:id="infoLabel" prefHeight="66.0" prefWidth="665.0" text="Easy gives 2G and Hard gives 3G" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="24.0" />
                                  </font>

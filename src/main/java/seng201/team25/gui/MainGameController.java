@@ -390,7 +390,6 @@ public class MainGameController {
      **/
     private void placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement, Tile tileObj, Image grassImage){
         emptyTile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            System.out.println("You clicked");
             int numOfTower = amountOfTowers.get(currentSelectedButton);
 
             //Selling a tower if it is placed on the tile

@@ -104,8 +104,7 @@ public class Round {
             //Scale how likely cart is to get a speed boost by current round and game difficulty
             int randomSpeedBoost = rng.nextInt(10 - rm.getCurrentRound() - PlayerManager.getDifficulty());
             float speed = 0.7f + ((float) PlayerManager.getDifficulty() /10) + ((float) rm.getCurrentRound() /10);
-            if(randomSpeedBoost == 0) speed += 0.3f;
-            System.out.println(speed);
+            if(randomSpeedBoost == 0) speed += 0.2f;
 
             int totalResource = 10 + rm.getCurrentRound();
             if(roundDifficulty) totalResource += 2;

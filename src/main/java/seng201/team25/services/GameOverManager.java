@@ -27,7 +27,7 @@ public class GameOverManager {
 
         gameOverText.setLayoutX(850);
         gameOverText.setLayoutY(320);
-        gameOverSpice.setLayoutX(850);
+        gameOverSpice.setLayoutX(800);
         gameOverSpice.setLayoutY(390);
 
         gameOverText.setFont(Font.font(50));
@@ -54,7 +54,7 @@ public class GameOverManager {
 
         winText.setLayoutX(850);
         winText.setLayoutY(320);
-        winSpice.setLayoutX(850);
+        winSpice.setLayoutX(800);
         winSpice.setLayoutY(390);
 
         winText.setFont(Font.font(50));
