@@ -53,7 +53,7 @@ public class RoundManager {
     }
 
     /**
-    * sets currentRound back to 0.
+    * Sets currentRound back to 0.
     **/
     public void resetCurrentRound(){
         currentRound = 0;

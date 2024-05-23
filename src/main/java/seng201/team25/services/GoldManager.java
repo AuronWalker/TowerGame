@@ -1,7 +1,7 @@
 package seng201.team25.services;
 
 /**
- * Class to manage a static gold balance between controllers
+ * Class to manage a static gold balance between controllers.
  */
 
 public class GoldManager {

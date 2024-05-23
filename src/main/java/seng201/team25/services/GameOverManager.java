@@ -12,7 +12,7 @@ public class GameOverManager {
     /**
     * Displays the text and buttons for game over screen.
     * @param anchorPane Anchor pane to attach text to.
-    * @param mg Main game controller to call a function that displays game over buttons.
+    * @param mainGameController Main game controller to call a function that displays game over buttons.
     **/
     public static void gameOverScreen(AnchorPane anchorPane, MainGameController mainGameController){
         mainGameController.displayButtons();
