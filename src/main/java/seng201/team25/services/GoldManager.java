@@ -25,12 +25,11 @@ public class GoldManager {
 
     /**
      * Increases the player's gold balance.
+     *
      * @param goldToAdd Amount of gold to add to balance
-     * @return Current balance
      */
-    public static int increaseGoldBalance(int goldToAdd) {
+    public static void increaseGoldBalance(int goldToAdd) {
         gold += goldToAdd;
-        return gold;
     }
 
     /**

@@ -10,7 +10,7 @@ import java.util.List;
  * start screen or from the shop.
  */
 public class AvailableTowerManager {
-    private static List<Tower> towers = new ArrayList<>();
+    private static final List<Tower> towers = new ArrayList<>();
     private static final String[] resourceTypeMap = {"Wood", "Stone", "Fruit", "Upgrade 1", "Upgrade 2"};
 
     // Stores towers available in the shop
@@ -23,7 +23,7 @@ public class AvailableTowerManager {
 
     /**
      * Returns a list of towers available to purchase.
-     * @return list of Towers
+     * @return array of Towers
      */
     public static Tower[] getTowersToBuy() {
             return towersToBuy;
@@ -62,19 +62,18 @@ public class AvailableTowerManager {
     }
 
     /**
-    * Removes a tower with a specified resource type from the list of available towers.
-    * Returns true if tower removed, false if no tower of specified type available.
-    * @param towerType Type of resource type to search for
-    * @return Whether the removal was successful
-    */
-    public static boolean removeTowerOfType(int towerType) {
+     * Removes a tower with a specified resource type from the list of available towers.
+     * Returns true if tower removed, false if no tower of specified type available.
+     *
+     * @param towerType Type of resource type to search for
+     */
+    public static void removeTowerOfType(int towerType) {
         for (Tower tower : towers) {
             if (tower.getResourceType() == towerType) {
                 towers.remove(tower);
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     /**

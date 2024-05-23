@@ -4,10 +4,7 @@ import javafx.scene.control.TabPane;
 import seng201.team25.models.Tower;
 import seng201.team25.models.Tile;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -106,31 +103,31 @@ public class MainGameController {
     @FXML
     TabPane gameTabs;
 
-    private Image roadTileSprite = new Image(getClass().getResourceAsStream("/assets/roadTiles/road1.png"));
-    private Image roadTileSprite1 = new Image(getClass().getResourceAsStream("/assets/roadTiles/road2.png"));
-    private Image roadTileSprite2 = new Image(getClass().getResourceAsStream("/assets/roadTiles/road3.png"));
-    private Image roadTileSprite3 = new Image(getClass().getResourceAsStream("/assets/roadTiles/road4.png"));
-    private Image roadTileSprite4 = new Image(getClass().getResourceAsStream("/assets/roadTiles/road5.png"));
+    private final Image roadTileSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/roadTiles/road1.png")));
+    private final Image roadTileSprite1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/roadTiles/road2.png")));
+    private final Image roadTileSprite2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/roadTiles/road3.png")));
+    private final Image roadTileSprite3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/roadTiles/road4.png")));
+    private final Image roadTileSprite4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/roadTiles/road5.png")));
 
-    private Image grassTileLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/grassTile1.png"));
-    private Image grassTileLeftSprite1 = new Image(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/grassTile2.png"));
-    private Image grassTileLeftSprite2 = new Image(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/grassTile3.png"));
-    private Image grassTileLeftSprite3 = new Image(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/grassTile4.png"));
+    private final Image grassTileLeftSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/grassTile1.png")));
+    private final Image grassTileLeftSprite1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/grassTile2.png")));
+    private final Image grassTileLeftSprite2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/grassTile3.png")));
+    private final Image grassTileLeftSprite3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/grassTile4.png")));
 
-    private Image rockTileLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/rockTile.png"));
-    private Image treeTileLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/treeTile.png"));
-    private Image fruitTileLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/fruitTile.png"));
+    private final Image rockTileLeftSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/rockTile.png")));
+    private final Image treeTileLeftSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/treeTile.png")));
+    private final Image fruitTileLeftSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/leftTiles/fruitTile.png")));
 
-    private Image grassTileRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/grassTile1.png"));
-    private Image grassTileRightSprite1 = new Image(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/grassTile2.png"));
-    private Image grassTileRightSprite2 = new Image(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/grassTile3.png"));
-    private Image grassTileRightSprite3 = new Image(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/grassTile4.png"));
+    private final Image grassTileRightSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/grassTile1.png")));
+    private final Image grassTileRightSprite1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/grassTile2.png")));
+    private final Image grassTileRightSprite2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/grassTile3.png")));
+    private final Image grassTileRightSprite3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/grassTile4.png")));
 
-    private Image rockTileRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/rockTile.png"));
-    private Image treeTileRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/treeTile.png"));
-    private Image fruitTileRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/fruitTile.png"));
+    private final Image rockTileRightSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/rockTile.png")));
+    private final Image treeTileRightSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/treeTile.png")));
+    private final Image fruitTileRightSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/rightTiles/fruitTile.png")));
 
-    private Image emptyDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/empty.png"));
+    private final Image emptyDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/empty.png")));
 
     @FXML private AnchorPane anchorPane;
 
@@ -149,7 +146,7 @@ public class MainGameController {
     private RoundManager roundManager;
 
     /**
-    * Added to allow calling of new windows (i.e shop) from the main game
+    * Added to allow calling of new windows (i.e. shop) from the main game
     * Would use windowManager.toShopWindow(), although not yet implemented
     * @param newWindowManager games class for loading different classes
     **/
@@ -160,32 +157,30 @@ public class MainGameController {
     /**
      * Used for JUnit testing - creates a headless controller.
      */
-    public MainGameController() {};
+    public MainGameController() {}
 
     /**
      * FXML: Initialize the object, called by JavaFX on UI load
      **/
     public void initialize() {
         roundManager = new RoundManager(roundLabel);
-        GameOverManager.gameOver = false;
+        GameOverManager.setGameOver(false);
 
         //Hiding all buttons till needed
         restartButton.setVisible(false);
         quitButton.setVisible(false);
         hideRoundInfo();
 
-        restartButton.setOnAction(event -> {
-            windowManager.toTowerScreen();
-        });
+        restartButton.setOnAction(event -> windowManager.toTowerScreen());
 
         quitButton.setOnAction(event -> {
             Stage stage = (Stage) restartButton.getScene().getWindow();
             stage.close();
         });
 
-        activeTowers = new ArrayList<Tower>();
-        tileResources = new ArrayList<Integer>();
-        allTiles = new ArrayList<Tile>();
+        activeTowers = new ArrayList<>();
+        tileResources = new ArrayList<>();
+        allTiles = new ArrayList<>();
         generateLevel();
         setRoundButton();
 
@@ -272,7 +267,7 @@ public class MainGameController {
 
         //Set display Tiles
         for (ImageView displayTile : displayTiles) {
-            displayTile.setImage(emptyDisply);
+            displayTile.setImage(emptyDisplay);
         }
 
         //Left side Generation
@@ -287,7 +282,7 @@ public class MainGameController {
     * @param selectButtons buttons used to place towers
     **/
     private void setupSelectButtons(List<Button> selectButtons){
-        this.amountOfTowers = new ArrayList<Integer>();
+        this.amountOfTowers = new ArrayList<>();
         for (int i = 0; i < selectButtons.size(); i++) {
             int finalI = i; // variables used within lambdas must be final
             int amountOfTower = AvailableTowerManager.numberOfTowers(i);
@@ -335,16 +330,16 @@ public class MainGameController {
             }else if(currentTile == 0 && !directionLeft) {
                 tileType = 1;
                 notGrass = false;
-            }else if(currentTile == 0 && directionLeft) {
+            }else if(currentTile == 0) {
                 tileType = 4;
                 notGrass = false;
             }
             else if(currentTile == tiles.size()-2) notGrass = true;
 
-            //Makes sure to trees/rocks wont spawn beside each other
-            if(notGrass == true){
+            //Makes sure to trees/rocks won't spawn beside each other
+            if(notGrass){
                 tile.setImage(grassImage);
-                tile = placeTowerEvent(tile, directionLeft, placement, newTile, grassImage);
+                placeTowerEvent(tile, directionLeft, placement, newTile, grassImage);
                 tileResources.add(-1);
                 notGrass = false;
                 placement += 1;
@@ -354,7 +349,7 @@ public class MainGameController {
             //Selecting of resource.
             if(tileType == 0 ){
                 tile.setImage(grassImage);
-                tile = placeTowerEvent(tile, directionLeft, placement, newTile, grassImage);
+                placeTowerEvent(tile, directionLeft, placement, newTile, grassImage);
                 tileResources.add(-1);
             }else if(tileType == 1){
                 setTile(directionLeft, tile, rockTileLeftSprite, rockTileRightSprite, 1);
@@ -362,7 +357,7 @@ public class MainGameController {
             }else if(tileType == 2 || tileType == 3) {
                 setTile(directionLeft, tile, treeTileLeftSprite, treeTileRightSprite, 0);
                 notGrass = true;
-            }else if(tileType == 4) {
+            }else {
                 setTile(directionLeft, tile, fruitTileLeftSprite, fruitTileRightSprite, 2);
                 notGrass = true;
             }
@@ -385,15 +380,16 @@ public class MainGameController {
     }
 
     /**
-    * Places a tower when clicking on a empty tile.
-    * Sells tower when clicking on a tower.
-    * @param emptyTile Image view that is being clicked.
-    * @param directionLeft the direction of the tile.
-    * @param placement Int that shows the index in tiles.
-    * @param tileObj Tile object that was clicked.
-    * @param grassImage Empty tile sprite that was assgined to tile
-    **/
-    private ImageView placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement, Tile tileObj, Image grassImage){
+     * Places a tower when clicking on an empty tile.
+     * Sells tower when clicking on a tower.
+     *
+     * @param emptyTile     Image view that is being clicked.
+     * @param directionLeft the direction of the tile.
+     * @param placement     Int that shows the index in tiles.
+     * @param tileObj       Tile object that was clicked.
+     * @param grassImage    Empty tile sprite that was assgined to tile
+     **/
+    private void placeTowerEvent(ImageView emptyTile, boolean directionLeft, int placement, Tile tileObj, Image grassImage){
         emptyTile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             System.out.println("You clicked");
             int numOfTower = amountOfTowers.get(currentSelectedButton);
@@ -408,7 +404,7 @@ public class MainGameController {
                 updateGoldLabels();
 
                 emptyTile.setImage(grassImage);
-                displayTile.setImage(emptyDisply);
+                displayTile.setImage(emptyDisplay);
                 return;
             }
 
@@ -447,7 +443,6 @@ public class MainGameController {
 
             event.consume();
         });
-        return emptyTile;
     }
 
     /**
@@ -477,7 +472,7 @@ public class MainGameController {
         imgTowerSelected.setImage(selectedTowerElement.getImage());
         if ( selectedTower.getReloadSpeed() < 0 ) {
             lblResources.setText("N/A");
-            lblReloadSpeed.setText("x" + String.valueOf(-1 * selectedTower.getReloadSpeed()));
+            lblReloadSpeed.setText("x" + -1 * selectedTower.getReloadSpeed());
         } else {
             lblResources.setText(String.valueOf(selectedTower.getResourceAmount()));
             lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));

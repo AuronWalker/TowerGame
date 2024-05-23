@@ -1,5 +1,7 @@
 package seng201.team25.models;
 import java.util.List;
+import java.util.Objects;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.geometry.Point2D;
@@ -11,7 +13,7 @@ public class Tower {
     private int level = 1;
 
     //0 = wood, 1 = stone, 2 = fruit, 3 = vertical, 4 = horizontal
-    private int resourceType;
+    private final int resourceType;
     private int resourceAmount = 1;
     private int reloadSpeed = 3;
     private int currentReloadSpeed = reloadSpeed;
@@ -22,19 +24,19 @@ public class Tower {
     private boolean directionLeft;
     private Point2D position;
 
-    private final Image treeLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeLeft.png"));
-    private final Image treeRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/treeRight.png"));
-    private final Image stoneLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/stoneLeft.png"));
-    private final Image stoneRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/stoneRight.png"));
-    private final Image fruitLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/fruitLeft.png"));
-    private final Image fruitRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/fruitRight.png"));
-    private final Image verticalLevelRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/verticalLevelRight.png"));
-    private final Image verticalLevelLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/verticalLevelLeft.png"));
-    private final Image horizontalLevelRightDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/horizontalLevelRight.png"));
-    private final Image horizontalLevelLeftDisply = new Image(getClass().getResourceAsStream("/assets/displayTiles/horizontalLevelLeft.png"));
+    private final Image treeLeftDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/treeLeft.png")));
+    private final Image treeRightDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/treeRight.png")));
+    private final Image stoneLeftDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/stoneLeft.png")));
+    private final Image stoneRightDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/stoneRight.png")));
+    private final Image fruitLeftDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/fruitLeft.png")));
+    private final Image fruitRightDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/fruitRight.png")));
+    private final Image verticalLevelRightDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/verticalLevelRight.png")));
+    private final Image verticalLevelLeftDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/verticalLevelLeft.png")));
+    private final Image horizontalLevelRightDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/horizontalLevelRight.png")));
+    private final Image horizontalLevelLeftDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/displayTiles/horizontalLevelLeft.png")));
 
-    private final Image towerRightSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSprite.png"));
-    private final Image towerLeftSprite = new Image(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png"));
+    private final Image towerRightSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/towerSprite.png")));
+    private final Image towerLeftSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png")));
 
     /**
     * Constructor used for starter towers with no stats.
@@ -102,20 +104,20 @@ public class Tower {
     **/
     public List<Image> getTileImage(){
         if(resourceType == 0){
-            if(directionLeft) return List.of(towerLeftSprite, treeLeftDisply);
-            else return List.of(towerRightSprite, treeRightDisply);
+            if(directionLeft) return List.of(towerLeftSprite, treeLeftDisplay);
+            else return List.of(towerRightSprite, treeRightDisplay);
         }else if(resourceType == 1){
-            if(directionLeft) return List.of(towerLeftSprite, stoneLeftDisply);
-            else return List.of(towerRightSprite, stoneRightDisply);
+            if(directionLeft) return List.of(towerLeftSprite, stoneLeftDisplay);
+            else return List.of(towerRightSprite, stoneRightDisplay);
         }else if(resourceType == 2){
-            if(directionLeft) return List.of(towerLeftSprite, fruitLeftDisply);
-            else return List.of(towerRightSprite, fruitRightDisply);
+            if(directionLeft) return List.of(towerLeftSprite, fruitLeftDisplay);
+            else return List.of(towerRightSprite, fruitRightDisplay);
         }else if(resourceType == 3){
-            if(directionLeft) return List.of(towerLeftSprite, verticalLevelLeftDisply);
-            else return List.of(towerRightSprite, verticalLevelRightDisply);
+            if(directionLeft) return List.of(towerLeftSprite, verticalLevelLeftDisplay);
+            else return List.of(towerRightSprite, verticalLevelRightDisplay);
         }else{
-            if(directionLeft) return List.of(towerLeftSprite, horizontalLevelLeftDisply);
-            else return List.of(towerRightSprite, horizontalLevelRightDisply);
+            if(directionLeft) return List.of(towerLeftSprite, horizontalLevelLeftDisplay);
+            else return List.of(towerRightSprite, horizontalLevelRightDisplay);
         }
     }
 
@@ -201,14 +203,18 @@ public class Tower {
         return resourceType;
     }
 
+    /**
+     * Returns the current image tile the tower is on
+     * @return tile image reference
+     */
     public ImageView getCurrentTile() {
         return currentTile;
     }
 
-    public void setCurrentTile(ImageView currentTile) {
-        this.currentTile = currentTile;
-    }
-
+    /**
+     * Returns the display of the tower
+     * @return display image reference
+     */
     public ImageView getCurrentDisplay() {
         return currentDisplay;
     }

@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 public class TowerScreenController {
-    WindowManager windowManager;
+    final WindowManager windowManager;
     @FXML ImageView imgTower0;
     @FXML ImageView imgTowerSelected;
     @FXML Label lblTowerName;
@@ -42,8 +42,8 @@ public class TowerScreenController {
     private ImageView selectedTowerElement;
     private int selectedTowerResourceID;
 
-    private List<ImageView> loadedTowerImages = new ArrayList<>();
-    private List<Label> loadedTowerLabels = new ArrayList<>();
+    private final List<ImageView> loadedTowerImages = new ArrayList<>();
+    private final List<Label> loadedTowerLabels = new ArrayList<>();
     Image referenceTowerImage;
 
     /**
@@ -87,6 +87,7 @@ public class TowerScreenController {
 
     /**
      * FXML: Updates the preview information when a new tower is selected
+     * @param event event identifier
      */
     public void towerSelected(Event event) {
         // Get the object ID of the selected tower, stop here if selected tower unchanged
@@ -113,9 +114,10 @@ public class TowerScreenController {
 
         // Write the statistics for the selected tower to the tower preview section of the UI
         lblTowerName.setText(resourceString);
+        assert selectedTower != null;
         if ( selectedTower.getReloadSpeed() < 0 ) {
             lblResources.setText("N/A");
-            lblReloadSpeed.setText("x" + String.valueOf(-1 * selectedTower.getReloadSpeed()));
+            lblReloadSpeed.setText("x" + -1 * selectedTower.getReloadSpeed());
         } else {
             lblResources.setText(String.valueOf(selectedTower.getResourceAmount()));
             lblReloadSpeed.setText(String.valueOf(selectedTower.getReloadSpeed()));
@@ -148,7 +150,7 @@ public class TowerScreenController {
         for (ImageView towerImage : loadedTowerImages) {
             towerImage.setImage(referenceTowerImage);
             towerImage.setOpacity(0.4);
-        };
+        }
         for (Label towerLabel : loadedTowerLabels) {
             towerLabel.setText("Not Selected");
         }

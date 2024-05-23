@@ -25,23 +25,23 @@ import seng201.team25.services.RoundManager;
 public class Round {
     private int spawnerTimer;
     private List<Cart> activeCarts;
-    private List<Tower> activeTowers;
+    private final List<Tower> activeTowers;
     private int amountOfCarts = 0;
-    private int totalCarts;
-    private Timeline spawner;
-    private Timeline rangeCheck;
-    private Button startButton;
-    private Button shopButton;
-    private Random rng;
-    private boolean roundDifficulty;
-    private AnchorPane anchorPane;
+    private final int totalCarts;
+    private final Timeline spawner;
+    private final Timeline rangeCheck;
+    private final Button startButton;
+    private final Button shopButton;
+    private final Random rng;
+    private final boolean roundDifficulty;
+    private final AnchorPane anchorPane;
 
     private int amountOfTree;
     private int amountOfRock;
     private int amountOfFruit;
 
-    private RoundManager rm;
-    private MainGameController mg;
+    private final RoundManager rm;
+    private final MainGameController mg;
     
     /**
     * Sets the Round based on difficulty and what round it currently is.
@@ -75,7 +75,7 @@ public class Round {
         amountOfRock = rockCarts;
         amountOfFruit = fruitCarts;
 
-        activeCarts = new ArrayList<Cart>();
+        activeCarts = new ArrayList<>();
         activeTowers = _activeTowers;
         spawnerTimer = 4;
         totalCarts = treeCarts + fruitCarts + rockCarts;
@@ -85,7 +85,7 @@ public class Round {
     }
 
     /**
-    * Spawns the cart at an interval set by spwnerTimer.
+    * Spawns the cart at an interval set by spawnerTimer.
     * @param anchorPane Anchor pane to attach the cart image to.
     **/
     private void spawnCart(AnchorPane anchorPane){
@@ -103,7 +103,7 @@ public class Round {
 
             //Scale how likely cart is to get a speed boost by current round and game difficulty
             int randomSpeedBoost = rng.nextInt(10 - rm.getCurrentRound() - PlayerManager.getDifficulty());
-            float speed = 0.7f + (PlayerManager.getDifficulty()/10) + (rm.getCurrentRound()/10);
+            float speed = 0.7f + ((float) PlayerManager.getDifficulty() /10) + ((float) rm.getCurrentRound() /10);
             if(randomSpeedBoost == 0) speed += 0.5f;
 
             int totalResource = 10 + rm.getCurrentRound();
@@ -128,10 +128,8 @@ public class Round {
         if(resourceType == 0){
             if(amountOfTree <= 0){
                 if(amountOfRock > 0){
-                    resourceType+=1;
                     amountOfRock --;
                 }else if(amountOfFruit > 0){
-                    resourceType+=2;
                     amountOfFruit-=1;
                 }
             }else{
@@ -141,10 +139,8 @@ public class Round {
             if(amountOfRock <= 0){
                 if(amountOfTree > 0){
                     amountOfTree -= 1;
-                    resourceType -=1 ;
                 }
                 else if(amountOfFruit > 0){
-                    resourceType +=1;
                     amountOfFruit -=1;
                 }
             }else {
@@ -154,10 +150,8 @@ public class Round {
             if(amountOfFruit <= 0){
                 if(amountOfTree > 0){
                     amountOfTree -= 2;
-                    resourceType -=1 ;
                 }
                 else if(amountOfRock > 0){
-                    resourceType -= 1;
                     amountOfRock -=1;
                 }
             }else{
@@ -185,7 +179,7 @@ public class Round {
                     if(cart.getPosition().getY() <= killDistance && spawner.getStatus().equals(Animation.Status.STOPPED)){
                         if(rm.checkWon()){
                             GameOverManager.winScreen(anchorPane, mg);
-                        }else if(GameOverManager.gameOver == false) endRound();
+                        }else if(!GameOverManager.isGameOver()) endRound();
                         
                         rangeCheck.stop();
                     }
@@ -200,7 +194,7 @@ public class Round {
     private void endRound(){
         startButton.setVisible(true);
         shopButton.setVisible(true);
-        activeCarts = new ArrayList<Cart>();
+        activeCarts = new ArrayList<>();
 
         if(roundDifficulty)GoldManager.increaseGoldBalance(2);
         else GoldManager.increaseGoldBalance(3);

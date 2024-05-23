@@ -15,12 +15,12 @@ import seng201.team25.models.Tower;
  */
 public class RoundManager {
     private int currentRound = 0;
-    private int maxRounds = 0;
-    private Label roundLabel;
+    private final int maxRounds;
+    private final Label roundLabel;
 
     /**
     * Sets the RoundManager with the players maxRound picked from setup screen.
-    * Additonally gets the label that will display round info.
+    * Additionally, gets the label that will display round info.
     * @param newRoundLabel label that sets the label.
     **/
     public RoundManager(Label newRoundLabel){
@@ -57,15 +57,7 @@ public class RoundManager {
      * @return win state
      */
     public boolean checkWon(){
-        if(currentRound == maxRounds) return true;
-        else return false;
-    }
-
-    /**
-    * Sets currentRound back to 0.
-    **/
-    public void resetCurrentRound(){
-        currentRound = 0;
+        return currentRound == maxRounds;
     }
 
     /**
@@ -82,7 +74,7 @@ public class RoundManager {
     public void displayRoundButton(Button roundButton, boolean easy, List<Tower> activeTowers, AnchorPane anchorPane, Button startButton, Button shopButton, MainGameController mainGameController, RoundManager roundManager){
         roundButton.setVisible(true);
 
-        String difficultyString = "";
+        String difficultyString;
         int baseAmount;
         if(easy) {
             difficultyString = "Easy!";

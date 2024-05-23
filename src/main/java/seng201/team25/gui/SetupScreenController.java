@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 public class SetupScreenController {
-    WindowManager windowManager;
+    final WindowManager windowManager;
 
     @FXML private Label lblEasy;
     @FXML private Label lblNormal;
@@ -26,7 +26,7 @@ public class SetupScreenController {
     @FXML private Label lblSliderPosition;
     @FXML private Label lblValidName;
     private Label selectedDifficulty;
-    private List<Label> difficultyLabels = new ArrayList<>();
+    private final List<Label> difficultyLabels = new ArrayList<>();
 
 
     /**

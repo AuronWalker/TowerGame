@@ -10,14 +10,14 @@ import seng201.team25.gui.MainGameController;
  * Handles win and lose screens at the end of the game, and resetting the game if the player requests another round.
  */
 public class GameOverManager {
-    public static boolean gameOver = false;
-
+    private static boolean gameOver = false;
     /**
     * Displays the text and buttons for game over screen.
     * @param anchorPane Anchor pane to attach text to.
     * @param mainGameController Main game controller to call a function that displays game over buttons.
     **/
     public static void gameOverScreen(AnchorPane anchorPane, MainGameController mainGameController){
+
         mainGameController.displayButtons();
         Label gameOverText = new Label();
         Label gameOverSpice = new Label();
@@ -64,5 +64,13 @@ public class GameOverManager {
         winText.setStyle("-fx-font-weight: bold");
         anchorPane.getChildren().add(winText);
         anchorPane.getChildren().add(winSpice);
+    }
+
+    public static boolean isGameOver() {
+        return gameOver;
+    }
+
+    public static void setGameOver(boolean _gameOver) {
+        gameOver = _gameOver;
     }
 }
