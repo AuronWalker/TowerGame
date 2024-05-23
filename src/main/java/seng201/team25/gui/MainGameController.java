@@ -83,7 +83,7 @@ public class MainGameController {
 
     @FXML private Label goldLabel;
     @FXML private Label roundLabel;
-    @FXML private Label info;
+    @FXML private Label infoLabel;
 
     // Shop elements
     @FXML ImageView imgTower0;
@@ -96,9 +96,7 @@ public class MainGameController {
     @FXML Label lblLevel;
     @FXML Label lblCost;
 
-
     private int recurrentPurchaseCounter = 1;
-
 
     // Tower data
     private final Tower[] towersToBuy = AvailableTowerManager.getTowersToBuy();
@@ -148,7 +146,7 @@ public class MainGameController {
     private int currentSelectedButton = -1;
 
     private WindowManager windowManager;
-    private RoundManager rm;
+    private RoundManager roundManager;
 
     /**
     * Added to allow calling of new windows (i.e shop) from the main game
@@ -168,7 +166,7 @@ public class MainGameController {
      * FXML: Initialize the object, called by JavaFX on UI load
      **/
     public void initialize() {
-        rm = new RoundManager(roundLabel);
+        roundManager = new RoundManager(roundLabel);
         GameOverManager.gameOver = false;
 
         //Hiding all buttons till needed
@@ -192,7 +190,7 @@ public class MainGameController {
         setRoundButton();
 
         goldLabel.setText("Gold: " + GoldManager.getGoldBalance());
-        roundLabel.setText(rm.getCurrentRound() + "/" + rm.getMaxRounds());
+        roundLabel.setText(roundManager.getCurrentRound() + "/" + roundManager.getMaxRounds());
 
         lblBalance.setText(String.valueOf(GoldManager.getGoldBalance()));
         selectedTowerElement = imgTower0;
@@ -230,11 +228,11 @@ public class MainGameController {
     private void setRoundButton(){
         startButton.setOnAction(event -> {
             //Code takes u into the next round.
-            info.setVisible(true);
+            infoLabel.setVisible(true);
             startButton.setVisible(false);
             shopButton.setVisible(false);
-            rm.displayRoundButton(easyRoundButton, true, activeTowers, anchorPane, startButton, shopButton, this, rm);
-            rm.displayRoundButton(hardRoundButton, false, activeTowers, anchorPane, startButton, shopButton, this, rm);
+            roundManager.displayRoundButton(easyRoundButton, true, activeTowers, anchorPane, startButton, shopButton, this, roundManager);
+            roundManager.displayRoundButton(hardRoundButton, false, activeTowers, anchorPane, startButton, shopButton, this, roundManager);
         });
     }
 
@@ -244,7 +242,7 @@ public class MainGameController {
     public void hideRoundInfo(){
         easyRoundButton.setVisible(false);
         hardRoundButton.setVisible(false);
-        info.setVisible(false);
+        infoLabel.setVisible(false);
     }
 
     /**
