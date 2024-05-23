@@ -99,12 +99,13 @@ public class Round {
         spawnerTimer += 1;
         if(spawnerTimer >= 5){
             int resourceType = rng.nextInt(amountResources);
-            getResource(resourceType);
+            resourceType = getResource(resourceType);
 
             //Scale how likely cart is to get a speed boost by current round and game difficulty
             int randomSpeedBoost = rng.nextInt(10 - rm.getCurrentRound() - PlayerManager.getDifficulty());
             float speed = 0.7f + ((float) PlayerManager.getDifficulty() /10) + ((float) rm.getCurrentRound() /10);
-            if(randomSpeedBoost == 0) speed += 0.5f;
+            if(randomSpeedBoost == 0) speed += 0.3f;
+            System.out.println(speed);
 
             int totalResource = 10 + rm.getCurrentRound();
             if(roundDifficulty) totalResource += 2;
@@ -124,12 +125,14 @@ public class Round {
      * Handles taking resources from a tower
      * @param resourceType the type of resource to take
      */
-    private void getResource(int resourceType){
+    private int getResource(int resourceType){
         if(resourceType == 0){
             if(amountOfTree <= 0){
                 if(amountOfRock > 0){
+                    resourceType+=1;
                     amountOfRock --;
                 }else if(amountOfFruit > 0){
+                    resourceType+=2;
                     amountOfFruit-=1;
                 }
             }else{
@@ -139,8 +142,10 @@ public class Round {
             if(amountOfRock <= 0){
                 if(amountOfTree > 0){
                     amountOfTree -= 1;
+                    resourceType -=1 ;
                 }
                 else if(amountOfFruit > 0){
+                    resourceType +=1;
                     amountOfFruit -=1;
                 }
             }else {
@@ -150,14 +155,17 @@ public class Round {
             if(amountOfFruit <= 0){
                 if(amountOfTree > 0){
                     amountOfTree -= 2;
+                    resourceType -=1 ;
                 }
                 else if(amountOfRock > 0){
+                    resourceType -= 1;
                     amountOfRock -=1;
                 }
             }else{
                 amountOfFruit-= 1;
             }
         }
+        return resourceType;
     }
 
     /**
