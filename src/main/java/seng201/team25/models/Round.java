@@ -103,11 +103,11 @@ public class Round {
 
             //Scale how likely cart is to get a speed boost by current round and game difficulty
             int randomSpeedBoost = rng.nextInt(10 - rm.getCurrentRound() - PlayerManager.getDifficulty());
-            float speed = 0.7f + ((float) PlayerManager.getDifficulty() /10) + ((float) rm.getCurrentRound() /10);
+            float speed = 0.7f + ((float) PlayerManager.getDifficulty() /10) + ((float) rm.getCurrentRound() / 25);
             if(randomSpeedBoost == 0) speed += 0.2f;
 
             int totalResource = 10 + rm.getCurrentRound();
-            if(roundDifficulty) totalResource += 2;
+            if(!roundDifficulty) totalResource += 1;
 
             activeCarts.add(new Cart(anchorPane, speed, resourceType, totalResource, mg));
             amountOfCarts += 1;
@@ -204,7 +204,7 @@ public class Round {
         activeCarts = new ArrayList<>();
 
         if(roundDifficulty)GoldManager.increaseGoldBalance(2);
-        else GoldManager.increaseGoldBalance(3);
+        else GoldManager.increaseGoldBalance(4);
 
         mg.updateGoldLabels();
         rm.incrementCurrentRound();

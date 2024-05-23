@@ -389,7 +389,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label fx:id="infoLabel" prefHeight="66.0" prefWidth="665.0" text="Easy gives 2G and Hard gives 3G" textFill="WHITE">
+                              <Label fx:id="infoLabel" prefHeight="66.0" prefWidth="665.0" text="Easy gives 2G and Hard gives 4G" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="24.0" />
                                  </font>
