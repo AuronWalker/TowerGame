@@ -6,6 +6,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import seng201.team25.gui.MainGameController;
 
+/**
+ * Handles win and lose screens at the end of the game, and resetting the game if the player requests another round.
+ */
 public class GameOverManager {
     public static boolean gameOver = false;
 
@@ -39,6 +42,7 @@ public class GameOverManager {
     /**
      * Displays the text and buttons when the user wins the game.
      * @param anchorPane Anchor pane to attach text to
+     * @param mainGameController global mainGameController object
      */
     public static void winScreen(AnchorPane anchorPane, MainGameController mainGameController){
         mainGameController.displayButtons();

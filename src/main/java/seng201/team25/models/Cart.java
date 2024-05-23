@@ -11,6 +11,9 @@ import seng201.team25.gui.MainGameController;
 import seng201.team25.services.GameOverManager;
 import javafx.geometry.Point2D;
 
+/**
+ * Manages statistics and resources for in-game Carts.
+ */
 public class Cart {
     private Image cartSprite = new Image(getClass().getResourceAsStream("/assets/cart/cart.png"));
     private Image treeDisplay = new Image(getClass().getResourceAsStream("/assets/cart/cartTree.png"));
@@ -29,6 +32,7 @@ public class Cart {
     * @param _resourceType Type of resource the cart can be filled by.
     * @param _totalResource Amount of resources it needs to be filled with
     * @param mg Game controller to send to game over manager.
+     * @param anchorPane AnchorPane object reference
     **/
     public Cart(AnchorPane anchorPane, float speed, int _resourceType, int _totalResource, MainGameController mg){
         ImageView cart = new ImageView();
@@ -111,6 +115,7 @@ public class Cart {
 
     /**
     * Returns carts x and y position.
+     * @return integer resource position
     **/
     public Point2D getPosition(){
         return position;
@@ -118,6 +123,7 @@ public class Cart {
 
     /**
     * Returns carts resource type.
+     * @return integer resource type
     **/
     public int getResourceType(){
         return resourceType;

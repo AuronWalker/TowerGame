@@ -4,6 +4,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.geometry.Point2D;
 
+/**
+ * Model to store statistics and other details about towers.
+ */
 public class Tower {
     private int level = 1;
 

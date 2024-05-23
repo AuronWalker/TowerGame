@@ -18,6 +18,10 @@ import seng201.team25.services.RoundManager;
 
 //No unit test due to it being more of a servcie than a class making it very hard to test
 //I may come back and add a bunch of functions to add a unit test latter if there is time.
+
+/**
+ * Manages each round of the game, including speed and difficulty.
+ */
 public class Round {
     private int spawnerTimer;
     private List<Cart> activeCarts;
@@ -47,6 +51,10 @@ public class Round {
     * @param _shopButton Button that opens the shop.
     * @param _mg Game controller to send to cart when spawned.
     * @param _rm Round manager with all the relevant info for the round.
+     * @param _roundDifficulty The requested difficulty of the game.
+     * @param treeCarts the number of tree carts in the round
+     * @param fruitCarts the number of fruit carts in the round
+     * @param rockCarts the number of stone carts in the round
     **/
     public Round(boolean _roundDifficulty, int treeCarts, int rockCarts, int fruitCarts, List<Tower> _activeTowers, AnchorPane _anchorPane, Button _startButton, Button _shopButton, MainGameController _mg, RoundManager _rm){
         anchorPane = _anchorPane;
@@ -91,7 +99,7 @@ public class Round {
         spawnerTimer += 1;
         if(spawnerTimer >= 5){
             int resourceType = rng.nextInt(amountResources);
-            resourceType = getResource(resourceType);
+            getResource(resourceType);
 
             //Scale how likely cart is to get a speed boost by current round and game difficulty
             int randomSpeedBoost = rng.nextInt(10 - rm.getCurrentRound() - PlayerManager.getDifficulty());
@@ -111,8 +119,12 @@ public class Round {
             spawnerTimer = 5; 
         }
     }
-    
-    private int getResource(int resourceType){
+
+    /**
+     * Handles taking resources from a tower
+     * @param resourceType the type of resource to take
+     */
+    private void getResource(int resourceType){
         if(resourceType == 0){
             if(amountOfTree <= 0){
                 if(amountOfRock > 0){
@@ -152,7 +164,6 @@ public class Round {
                 amountOfFruit-= 1;
             }
         }
-        return resourceType;
     }
 
     /**

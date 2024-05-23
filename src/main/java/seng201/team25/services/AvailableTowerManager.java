@@ -9,7 +9,6 @@ import java.util.List;
  * Static class to hold all available towers for placement, either from the
  * start screen or from the shop.
  */
-
 public class AvailableTowerManager {
     private static List<Tower> towers = new ArrayList<>();
     private static final String[] resourceTypeMap = {"Wood", "Stone", "Fruit", "Upgrade 1", "Upgrade 2"};
@@ -23,14 +22,16 @@ public class AvailableTowerManager {
             new Tower(4, 0, -2, 1, 5)};
 
     /**
-     * @return A list of Towers available to buy in the shop
+     * Returns a list of towers available to purchase.
+     * @return list of Towers
      */
     public static Tower[] getTowersToBuy() {
             return towersToBuy;
     }
 
     /**
-     * @return The number of towers in the inventory
+     * Returns the number of towers in the inventory.
+     * @return number of towers
      */
     public static int numberOfTowers() {
         return towers.size();
@@ -52,7 +53,7 @@ public class AvailableTowerManager {
     public static void clearAvailableTowers() {towers.clear();}
 
     /**
-     * Gets the next available empty slot in the setup screen loadout
+     * Gets the next available empty slot in the setup screen loadout.
      * @return index of next available slot
      */
     public static int getNextAvailableIndex() {
