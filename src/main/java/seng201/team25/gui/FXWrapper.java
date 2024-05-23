@@ -9,16 +9,27 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Wrapper for each FXML scene loaded by the game.
+ */
 public class FXWrapper {
     @FXML
     private Pane pane;
     private Stage stage;
 
+    /**
+     * Initialise the stage and WindowManager.
+     * @param stage blank Stage object to load FXML data to
+     */
     public void init(Stage stage) {
         this.stage = stage;
         new WindowManager(this::launchHomeScreen, this::launchSetupScreen, this::launchTowerScreen, this::launchGameScreen, this::clearPane);
     }
 
+    /**
+     * Launch the home screen.
+     * @param windowManager global WindowManager
+     */
     public void launchHomeScreen(WindowManager windowManager) {
         try {
             FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/home_screen.fxml"));
@@ -31,6 +42,11 @@ public class FXWrapper {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Launch the setup screen.
+     * @param windowManager global WindowManager
+     */
     public void launchSetupScreen(WindowManager windowManager) {
         try {
             FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/setup_screen.fxml"));
@@ -43,6 +59,11 @@ public class FXWrapper {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Launch the tower screen.
+     * @param windowManager global WindowManager
+     */
     public void launchTowerScreen(WindowManager windowManager) {
         try {
             FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/tower_selector.fxml"));
@@ -56,6 +77,10 @@ public class FXWrapper {
         }
     }
 
+    /**
+     * Launch the game screen.
+     * @param windowManager global WindowManager
+     */
     public void launchGameScreen(WindowManager windowManager) {
         try {
             FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
@@ -69,6 +94,9 @@ public class FXWrapper {
         }
     }
 
+    /**
+     * Clear the screen before loading a new FXML scene.
+     */
     public void clearPane() {
         pane.getChildren().removeAll(pane.getChildren());
     }
