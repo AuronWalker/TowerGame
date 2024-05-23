@@ -197,7 +197,6 @@ public class MainGameController {
     public void displayButtons(){
         restartButton.setVisible(true);
         quitButton.setVisible(true);
-        System.out.println();
     }
 
     /**

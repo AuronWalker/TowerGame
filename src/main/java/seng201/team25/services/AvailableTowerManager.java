@@ -44,7 +44,6 @@ public class AvailableTowerManager {
      */
     public static void addAvailableTower(Tower tower) {
         towers.add(tower);
-        System.out.println("Adding");
     }
 
     /**

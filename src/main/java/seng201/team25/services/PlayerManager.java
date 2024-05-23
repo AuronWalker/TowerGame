@@ -19,7 +19,6 @@ public class PlayerManager {
         playerName = name;
         difficulty = requestedDifficulty;
         rounds = requestedRounds;
-        System.out.printf("%s, %d, %d", getPlayerName(), getDifficulty(), getRounds());
     }
 
     /**
