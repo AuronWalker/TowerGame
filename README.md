@@ -1,5 +1,5 @@
 # SENG201 Team 25 - Tower Game
-Tower Defense style game, where you deliver resources to waves of carts, making sure that every cart has enough resources to make it to the village!
+Tower Defence style game, where you deliver resources to waves of carts, making sure that every cart has enough resources to make it to the village!
 
 ## Authors
 - Connor Varney (cva68) and Auron Walker (awa158)
