@@ -13,8 +13,11 @@ public class AvailableTowerManager {
     private static final List<Tower> towers = new ArrayList<>();
     private static final String[] resourceTypeMap = {"Wood", "Stone", "Fruit", "Upgrade 1", "Upgrade 2"};
 
-    // Stores towers available in the shop
-    private static final Tower[] towersToBuy = {
+    /**
+     * List of available towers to buy.
+     * Temporarily public to allow for JUnit Array Equality tests
+     */
+    public static final Tower[] towersToBuy = {
             new Tower(0, 1, 2,1,1),
             new Tower(1, 1, 1, 1, 2),
             new Tower(2, 1, 1, 1, 3),
@@ -65,14 +68,16 @@ public class AvailableTowerManager {
      * Returns true if tower removed, false if no tower of specified type available.
      *
      * @param towerType Type of resource type to search for
+     * @return Whether a tower was removed
      */
-    public static void removeTowerOfType(int towerType) {
+    public static boolean removeTowerOfType(int towerType) {
         for (Tower tower : towers) {
             if (tower.getResourceType() == towerType) {
                 towers.remove(tower);
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     /**
