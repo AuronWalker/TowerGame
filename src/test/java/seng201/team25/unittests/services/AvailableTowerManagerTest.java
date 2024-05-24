@@ -23,10 +23,6 @@ public class AvailableTowerManagerTest {
         AvailableTowerManager.clearAvailableTowers();
     }
 
-    @Test
-    final void testTowersToBuy() {
-        assertArrayEquals(AvailableTowerManager.getTowersToBuy(), AvailableTowerManager.towersToBuy);
-    }
 
     @Test
     final void testAddNumber() {

@@ -66,10 +66,18 @@ public class GameOverManager {
         anchorPane.getChildren().add(winSpice);
     }
 
+    /**
+     * Check whether the game has ended
+     * @return whether the game is over
+     */
     public static boolean isGameOver() {
         return gameOver;
     }
 
+    /**
+     * Set the state of gameOVer
+     * @param _gameOver whether the game is over
+     */
     public static void setGameOver(boolean _gameOver) {
         gameOver = _gameOver;
     }

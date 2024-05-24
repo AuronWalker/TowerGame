@@ -26,7 +26,6 @@ public class WindowManager {
         this.setupScreenLauncher = setupScreenLauncher;
         this.towerScreenLauncher = towerScreenLauncher;
         this.gameScreenLauncher = gameScreenLauncher;
-        //this.shopScreenLauncher = shopScreenLauncher;
         this.clearScreen = clearScreen;
         launchHomeScreen();
     }
