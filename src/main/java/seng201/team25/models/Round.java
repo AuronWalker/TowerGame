@@ -37,8 +37,8 @@ public class Round {
     private int amountOfRock;
     private int amountOfFruit;
 
-    private final RoundManager rm;
-    private final MainGameController mg;
+    private final RoundManager roundManager;
+    private final MainGameController mainGameController;
     
     /**
     * Sets the Round based on difficulty and what round it currently is.
@@ -61,8 +61,8 @@ public class Round {
         rangeCheck.setCycleCount(Animation.INDEFINITE);
 
         roundDifficulty = _roundDifficulty;
-        rm = _rm;
-        mg = _mg;
+        roundManager = _rm;
+        mainGameController = _mg;
         rng = new Random();
 
         startButton = _startButton;
@@ -99,14 +99,14 @@ public class Round {
             resourceType = getResource(resourceType);
 
             //Scale how likely cart is to get a speed boost by current round and game difficulty
-            int randomSpeedBoost = rng.nextInt(10 - rm.getCurrentRound() - PlayerManager.getDifficulty());
-            float speed = 0.7f + ((float) PlayerManager.getDifficulty() /10) + ((float) rm.getCurrentRound() / 25);
+            int randomSpeedBoost = rng.nextInt(10 - roundManager.getCurrentRound() - PlayerManager.getDifficulty());
+            float speed = 0.7f + ((float) PlayerManager.getDifficulty() /10) + ((float) roundManager.getCurrentRound() / 25);
             if(randomSpeedBoost == 0) speed += 0.2f;
 
-            int totalResource = 10 + rm.getCurrentRound();
+            int totalResource = 10 + roundManager.getCurrentRound();
             if(!roundDifficulty) totalResource += 1;
 
-            activeCarts.add(new Cart(anchorPane, speed, resourceType, totalResource, mg));
+            activeCarts.add(new Cart(anchorPane, speed, resourceType, totalResource, mainGameController));
             amountOfCarts += 1;
             spawnerTimer = 0;
         }
@@ -181,8 +181,8 @@ public class Round {
                 }
                 if(cartIndex == activeCarts.size()){
                     if(cart.getPosition().getY() <= killDistance && spawner.getStatus().equals(Animation.Status.STOPPED)){
-                        if(rm.checkWon()){
-                            GameOverManager.winScreen(anchorPane, mg);
+                        if(roundManager.checkWon()){
+                            GameOverManager.winScreen(anchorPane, mainGameController);
                         }else if(!GameOverManager.isGameOver()) endRound();
                         
                         rangeCheck.stop();
@@ -203,7 +203,7 @@ public class Round {
         if(roundDifficulty)GoldManager.increaseGoldBalance(2);
         else GoldManager.increaseGoldBalance(4);
 
-        mg.updateGoldLabels();
-        rm.incrementCurrentRound();
+        mainGameController.updateGoldLabels();
+        roundManager.incrementCurrentRound();
     }
 }
