@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.geometry.Point2D;
 
 /**
- * Model to store statistics and other details about towers.
+ * Model to store statistics, image references and other details about towers.
  */
 public class Tower {
     private int level = 1;
@@ -39,20 +39,22 @@ public class Tower {
     private final Image towerLeftSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/mainTiles/towerSpriteLeft.png")));
 
     /**
-    * Constructor used for starter towers with no stats.
-    * @param newResourceType the type of resource this tower is set to
-    **/
+     * Constructor used for starter towers with no stats.
+     *
+     * @param newResourceType the type of resource this tower is set to
+     **/
     public Tower(int newResourceType) {
         this.resourceType = newResourceType;
     }
 
     /**
-    * Constructor used for towers placed on the map
-    * @param newResourceType the type of resource this tower is set to
-    * @param emptyTile the imageview containing the sprite of the tower
-    * @param displayTile the imageview displaying the resource of the tower
-    * @param direction the boolean that determines the way the image is facing
-    **/
+     * Constructor used for towers placed on the map
+     *
+     * @param newResourceType the type of resource this tower is set to
+     * @param emptyTile       the imageview containing the sprite of the tower
+     * @param displayTile     the imageview displaying the resource of the tower
+     * @param direction       the boolean that determines the way the image is facing
+     **/
     public Tower(int newResourceType, ImageView emptyTile, ImageView displayTile, boolean direction) {
         this.resourceType = newResourceType;
         this.currentDisplay = displayTile;
@@ -63,13 +65,14 @@ public class Tower {
     }
 
     /**
-    * Constructor used for towers listed in the shop
-    * @param newResourceType the type of resource this tower is set to
-    * @param newStartingResources the amount of resource it fills per reload count
-    * @param newReloadSpeed the rate at which the tower fills carts
-    * @param newLevel the starting level of the tower
-    * @param newCost the tower cost
-    **/
+     * Constructor used for towers listed in the shop
+     *
+     * @param newResourceType      the type of resource this tower is set to
+     * @param newStartingResources the amount of resource it fills per reload count
+     * @param newReloadSpeed       the rate at which the tower fills carts
+     * @param newLevel             the starting level of the tower
+     * @param newCost              the tower cost
+     **/
     public Tower(int newResourceType, int newStartingResources, int newReloadSpeed, int newLevel, int newCost) {
         this.resourceType = newResourceType;
         this.resourceAmount = newStartingResources;
@@ -79,39 +82,41 @@ public class Tower {
     }
 
     /**
-    * Returns a towers x and y position.
+     * Returns a towers x and y position.
+     *
      * @return Position of the tower
-    **/
-    public Point2D getPosition(){
+     **/
+    public Point2D getPosition() {
         return position;
     }
 
     /**
-    * Returns a List with the tower sprite and display sprite depending on resource type and direction.
+     * Returns a List with the tower sprite and display sprite depending on resource type and direction.
+     *
      * @return List of sprites
-    **/
-    public List<Image> getTileImage(){
-        if(resourceType == 0){
-            if(directionLeft) return List.of(towerLeftSprite, treeLeftDisplay);
+     **/
+    public List<Image> getTileImage() {
+        if (resourceType == 0) {
+            if (directionLeft) return List.of(towerLeftSprite, treeLeftDisplay);
             else return List.of(towerRightSprite, treeRightDisplay);
-        }else if(resourceType == 1){
-            if(directionLeft) return List.of(towerLeftSprite, stoneLeftDisplay);
+        } else if (resourceType == 1) {
+            if (directionLeft) return List.of(towerLeftSprite, stoneLeftDisplay);
             else return List.of(towerRightSprite, stoneRightDisplay);
-        }else if(resourceType == 2){
-            if(directionLeft) return List.of(towerLeftSprite, fruitLeftDisplay);
+        } else if (resourceType == 2) {
+            if (directionLeft) return List.of(towerLeftSprite, fruitLeftDisplay);
             else return List.of(towerRightSprite, fruitRightDisplay);
-        }else if(resourceType == 3){
-            if(directionLeft) return List.of(towerLeftSprite, verticalLevelLeftDisplay);
+        } else if (resourceType == 3) {
+            if (directionLeft) return List.of(towerLeftSprite, verticalLevelLeftDisplay);
             else return List.of(towerRightSprite, verticalLevelRightDisplay);
-        }else{
-            if(directionLeft) return List.of(towerLeftSprite, horizontalLevelLeftDisplay);
+        } else {
+            if (directionLeft) return List.of(towerLeftSprite, horizontalLevelLeftDisplay);
             else return List.of(towerRightSprite, horizontalLevelRightDisplay);
         }
     }
 
     /**
-    * Makes reload time quicker and increases level, the amount of resources filled per reload cycle.
-    **/
+     * Makes reload time quicker and increases level, the amount of resources filled per reload cycle.
+     **/
     public void increaseLevel() {
         this.level++;
         this.reloadSpeed--;
@@ -119,18 +124,9 @@ public class Tower {
     }
 
     /**
-    * Makes reload time slower and decrease level, the amount of resources filled per reload cycle.
-    **/
-    public void decreaseLevel() {
-        this.level--;
-        this.reloadSpeed++;
-        this.resourceAmount--;
-    }
-
-    /**
-    * Returns a tower's level.
+     * Returns a tower's level.
      * @return level of the tower
-    **/
+     **/
     public int getLevel() {
         return level;
     }
@@ -138,7 +134,7 @@ public class Tower {
     /**
      * Returns a tower's base reload speed.
      * @return reload speed
-    **/
+     **/
     public int getReloadSpeed() {
         return reloadSpeed;
     }
@@ -146,64 +142,52 @@ public class Tower {
     /**
      * Returns a tower's current reload speed.
      * @return reload speed
-    **/
+     **/
     public int getCurrentReloadSpeed() {
         return currentReloadSpeed;
     }
 
     /**
-    * Decrements current reload speed by one.
-    **/
+     * Decrements current reload speed by one.
+     **/
     public void lowerCurrentReloadSpeed() {
         currentReloadSpeed -= 1;
     }
 
     /**
-    * Resets current speed back to the base reload speed.
-    **/
-    public void resetCurrentReloadSpeed(){
+     * Resets current speed back to the base reload speed.
+     **/
+    public void resetCurrentReloadSpeed() {
         currentReloadSpeed = reloadSpeed;
     }
 
     /**
-    * Returns towers cost.
-    * Used to get sell value
+     * Returns towers cost.
+     * Used to get sell value
+     *
      * @return sell price
-    **/
+     **/
     public int getCost() {
         return cost;
     }
 
     /**
-    * Returns how much the tower will fill the cart per increment.
-    * Used so the cart knows how much to fill up by.
+     * Returns how much the tower will fill the cart per increment.
+     * Used so the cart knows how much to fill up by.
+     *
      * @return number of resources
-    **/
+     **/
     public int getResourceAmount() {
         return resourceAmount;
     }
 
     /**
-    * Returns what resource a tower provides
+     * Returns what resource a tower provides
+     *
      * @return integer representation of resource type
-    **/
+     **/
     public int getResourceType() {
         return resourceType;
     }
 
-    /**
-     * Returns the current image tile the tower is on
-     * @return tile image reference
-     */
-    public ImageView getCurrentTile() {
-        return currentTile;
-    }
-
-    /**
-     * Returns the display of the tower
-     * @return display image reference
-     */
-    public ImageView getCurrentDisplay() {
-        return currentDisplay;
-    }
 }

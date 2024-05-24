@@ -4,6 +4,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import seng201.team25.services.NameVerifier;
 import seng201.team25.services.PlayerManager;
 import seng201.team25.services.WindowManager;
 import javafx.scene.control.Label;
@@ -65,15 +66,12 @@ public class SetupScreenController {
      */
     public void continuePressed() {
             // Check name is longer than 2 characters
-            if (txtName.getText().length() > 2 && txtName.getText().length() < 16) {
-                // Check name has no special characters
-                if (txtName.getText().matches("[A-Za-z0-9]+")) {
-                    PlayerManager.storeValues(txtName.getText(), difficultyLabels.indexOf(selectedDifficulty), (int) sldRounds.getValue());
-                    windowManager.toTowerScreen();
-                } else {
-                    lblValidName.setText("Name cannot include special characters");
-                    lblValidName.setVisible(true);
-                }
+            if (NameVerifier.verifyName(txtName.getText()) == 1) {
+                PlayerManager.storeValues(txtName.getText(), difficultyLabels.indexOf(selectedDifficulty), (int) sldRounds.getValue());
+                windowManager.toTowerScreen();
+            } else if (NameVerifier.verifyName(txtName.getText()) == -1) {
+                lblValidName.setText("Name cannot include special characters");
+                lblValidName.setVisible(true);
             } else {
                 lblValidName.setText("Name must be between 3 and 15 characters");
                 lblValidName.setVisible(true);

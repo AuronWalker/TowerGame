@@ -10,6 +10,10 @@ import seng201.team25.services.RoundManager;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * JUnit tests for the RoundManager Class.
+ * This class interacts with a JFX plane. This is not tested with JUnit, hence 71% method coverage.
+ */
 public class RoundManagerTest {
     private static RoundManager roundManager;
 
