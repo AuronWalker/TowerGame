@@ -19,8 +19,6 @@ public class Tower {
     private int currentReloadSpeed = reloadSpeed;
     private int cost = 0;
 
-    private ImageView currentTile;
-    private ImageView currentDisplay;
     private boolean directionLeft;
     private Point2D position;
 
@@ -52,13 +50,10 @@ public class Tower {
      *
      * @param newResourceType the type of resource this tower is set to
      * @param emptyTile       the imageview containing the sprite of the tower
-     * @param displayTile     the imageview displaying the resource of the tower
      * @param direction       the boolean that determines the way the image is facing
      **/
-    public Tower(int newResourceType, ImageView emptyTile, ImageView displayTile, boolean direction) {
+    public Tower(int newResourceType, ImageView emptyTile, boolean direction) {
         this.resourceType = newResourceType;
-        this.currentDisplay = displayTile;
-        this.currentTile = emptyTile;
         this.directionLeft = direction;
         position = new Point2D(0, emptyTile.getLayoutY());
         cost = resourceType + 1;

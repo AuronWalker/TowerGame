@@ -412,7 +412,7 @@ public class MainGameController {
             if(tileResources.get(placement-1) != currentSelectedButton && tileResources.get(placement+1) != currentSelectedButton && currentSelectedButton <= 2) return;
 
 
-            Tower newTower = new Tower(currentSelectedButton, emptyTile, displayTile, directionLeft);
+            Tower newTower = new Tower(currentSelectedButton, emptyTile, directionLeft);
             AvailableTowerManager.removeTowerOfType(currentSelectedButton);
             tileObj.setTower(newTower);
             activeTowers.add(newTower);
