@@ -15,9 +15,8 @@ public class AvailableTowerManager {
 
     /**
      * List of available towers to buy.
-     * Temporarily public to allow for JUnit Array Equality tests
      */
-    public static final Tower[] towersToBuy = {
+    private static final Tower[] towersToBuy = {
             new Tower(0, 1, 2,1,1),
             new Tower(1, 1, 1, 1, 2),
             new Tower(2, 1, 1, 1, 3),
