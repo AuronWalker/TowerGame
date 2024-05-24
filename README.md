@@ -34,8 +34,12 @@ Click the button to begin a round. You'll be offered to play an easy round, or a
 ### Buying more towers
 More towers can be purchased at the end of the round through the shop. Keep buying towers to ensure you have enough resources for the carts! You can have a maximum of 5 towers on the board at any time, and 5 towers in your inventory.
 
-## Compiling from source
+## Building from source
 1. Open a command line interface inside the project directory and run `./gradlew jar` to create a packaged Jar. The Jar file is located at build/libs/seng201_team0-1.0-SNAPSHOT.jar
 2. Navigate to the build/libs/ directory (you can do this with `cd build/libs`)
 3. Run the command `java -jar seng201_team25-1.0-SNAPSHOT.jar` to open the application.
 
+## Importing into IntelliJ
+1. Clone the project: either download as a zip from the GitLab page and extract, or clone using ```git clone https://eng-git.canterbury.ac.nz/seng201-2024/team-25```
+2. In IntelliJ, select File > Open, then select the "team-25" directory.
+3. If requested, select "Trust" to open the project without enabling safe mode.
