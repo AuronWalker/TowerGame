@@ -59,7 +59,7 @@ public class Tower {
         this.currentTile = emptyTile;
         this.directionLeft = direction;
         position = new Point2D(0, emptyTile.getLayoutY());
-        setCost();
+        cost = resourceType + 1;
     }
 
     /**
@@ -76,18 +76,6 @@ public class Tower {
         this.reloadSpeed = newReloadSpeed;
         this.level = newLevel;
         this.cost = newCost;
-    }
-
-    /**
-    * Sets cost of tower depending on the resource.
-    * Each resource is more expensive as they appear in harder difficulties
-    **/
-    private void setCost(){
-        if(resourceType == 0) cost = 1;
-        else if(resourceType == 1) cost = 2;
-        else if(resourceType == 2) cost = 3;
-        else if(resourceType == 3) cost = 4;
-        else if(resourceType == 4) cost = 5;
     }
 
     /**
