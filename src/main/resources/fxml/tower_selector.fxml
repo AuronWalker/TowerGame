@@ -9,335 +9,361 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team25.gui.TowerScreenController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="197.0957794189453" minHeight="10.0" prefHeight="197.0957794189453" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="460.2767868041992" minHeight="0.0" prefHeight="421.4042205810547" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="313.0" minHeight="10.0" prefHeight="37.380096435546875" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <ImageView fitHeight="723.0" fitWidth="1282.0" pickOnBounds="true" GridPane.valignment="TOP">
-         <image>
-            <Image url="@../assets/grass.png" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" prefHeight="91.0" prefWidth="419.0" text="Tower Game" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-         <font>
-            <Font name="Comic Sans MS Bold" size="43.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblStartGame" onMouseReleased="#continuePressed" opacity="0.4" text="Start Game &gt;" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-         <font>
-            <Font name="Comic Sans MS Bold" size="19.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="20.0" right="20.0" />
-         </GridPane.margin>
-      </Label>
-      <Label onMouseReleased="#backPressed" text=" &lt; Back" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-         <font>
-            <Font name="Comic Sans MS Bold" size="19.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="20.0" right="120.0" />
-         </GridPane.margin>
-      </Label>
-      <GridPane GridPane.rowIndex="1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+          prefWidth="1280.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="seng201.team25.gui.TowerScreenController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="197.0957794189453" minHeight="10.0" prefHeight="197.0957794189453"
+                        vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="460.2767868041992" minHeight="0.0" prefHeight="421.4042205810547" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="313.0" minHeight="10.0" prefHeight="37.380096435546875" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <ImageView fitHeight="723.0" fitWidth="1282.0" pickOnBounds="true" GridPane.valignment="TOP">
+        <Image url="@../assets/grass.png"/>
+    </ImageView>
+    <Label alignment="CENTER" prefHeight="91.0" prefWidth="419.0" text="Tower Game" textAlignment="CENTER"
+           textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+        <font>
+          <Font name="Comic Sans MS Bold" size="43.0"/>
+        </font>
+    </Label>
+    <Label fx:id="lblStartGame" onMouseReleased="#continuePressed" opacity="0.4" text="Start Game &gt;"
+           textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+        <font>
+          <Font name="Comic Sans MS Bold" size="19.0"/>
+        </font>
+        <GridPane.margin>
+          <Insets left="20.0" right="20.0"/>
+        </GridPane.margin>
+    </Label>
+    <Label onMouseReleased="#backPressed" text=" &lt; Back" textAlignment="CENTER" textFill="WHITE"
+           GridPane.halignment="LEFT" GridPane.rowIndex="2">
+        <font>
+          <Font name="Comic Sans MS Bold" size="19.0"/>
+        </font>
+        <GridPane.margin>
+          <Insets left="20.0" right="120.0"/>
+        </GridPane.margin>
+    </Label>
+    <GridPane GridPane.rowIndex="1">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="531.5921936035156" minWidth="10.0" prefWidth="184.5950927734375" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="422.95513916015625" minWidth="10.0" prefWidth="221.9049072265625" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.3881225585938" minWidth="10.0" prefWidth="174.12750244140625" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="531.5921936035156" minWidth="10.0"
+                               prefWidth="184.5950927734375"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="422.95513916015625" minWidth="10.0"
+                               prefWidth="221.9049072265625"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="553.3881225585938" minWidth="10.0"
+                               prefWidth="174.12750244140625"/>
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="142.8380584716797" minHeight="0.0" prefHeight="42.29754638671875" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="404.97906494140625" minHeight="10.0" prefHeight="403.70245361328125" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="142.8380584716797" minHeight="0.0" prefHeight="42.29754638671875"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="404.97906494140625" minHeight="10.0" prefHeight="403.70245361328125"
+                            vgrow="SOMETIMES"/>
         </rowConstraints>
-         <children>
-            <Label prefHeight="28.0" prefWidth="179.0" text="Select a Tower" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="Comic Sans MS Bold" size="20.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
+        <GridPane.margin>
+            <Insets left="350.0" right="350.0"/>
+        </GridPane.margin>
+        <Label prefHeight="28.0" prefWidth="179.0" text="Select a Tower" textAlignment="CENTER" textFill="WHITE"
+               GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <font>
+                <Font size="20.0"/>
+            </font>
+            <GridPane.margin>
+                <Insets/>
+            </GridPane.margin>
+        </Label>
+        <Label text="Tower Preview" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1"
+               GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <font>
+                <Font name="Comic Sans MS Bold" size="20.0"/>
+            </font>
+        </Label>
+        <Label prefHeight="28.0" prefWidth="136.0" text="Your Towers" textAlignment="CENTER" textFill="WHITE"
+               GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <font>
+                <Font name="Comic Sans MS Bold" size="20.0"/>
+            </font>
+            <GridPane.margin>
+                <Insets/>
+            </GridPane.margin>
+        </Label>
+        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="371.0" prefWidth="200.0"
+                  GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <GridPane.margin>
+                <Insets/>
+            </GridPane.margin>
+            <ImageView fx:id="imgTower0" fitHeight="95.0" fitWidth="95.0" onMouseReleased="#towerSelected"
+                       pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER"
+                       GridPane.valignment="TOP">
+                <Image url="@../assets/menuTiles/tower-wood.png"/>
+            </ImageView>
+            <ImageView fx:id="imgTower1" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#towerSelected"
+                       opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1"
+                       GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                <Image url="@../assets/menuTiles/tower-stone.png"/>
+            </ImageView>
+            <ImageView fx:id="imgTower2" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#towerSelected"
+                       opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER"
+                       GridPane.rowIndex="1" GridPane.valignment="TOP">
+                <Image url="@../assets/menuTiles/tower-fruit.png"/>
+            </ImageView>
+            <ImageView fx:id="imgTower3" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#towerSelected"
+                       opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1"
+                       GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                <Image url="@../assets/menuTiles/tower-upgrade-1.png"/>
+            </ImageView>
+            <ImageView fx:id="imgTower4" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#towerSelected"
+                       opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER"
+                       GridPane.rowIndex="2" GridPane.valignment="TOP">
+                <Image url="@../assets/menuTiles/tower-upgrade-2.png"/>
+            </ImageView>
+            <Label text="Wood" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS" size="13.0"/>
+                </font>
+                <GridPane.margin>
+                    <Insets bottom="10.0"/>
+                </GridPane.margin>
             </Label>
-            <Label text="Tower Preview" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="Comic Sans MS Bold" size="20.0" />
-               </font>
+            <Label text="Stone" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                   GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS" size="13.0"/>
+                </font>
+                <GridPane.margin>
+                    <Insets bottom="10.0"/>
+                </GridPane.margin>
             </Label>
-            <Label prefHeight="28.0" prefWidth="136.0" text="Your Towers" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="Comic Sans MS Bold" size="20.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
+            <Label text="Fruit" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                   GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS" size="13.0"/>
+                </font>
+                <GridPane.margin>
+                    <Insets bottom="10.0"/>
+                </GridPane.margin>
             </Label>
-            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="371.0" prefWidth="200.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <ImageView fx:id="imgTower0" fitHeight="95.0" fitWidth="95.0" onMouseReleased="#towerSelected" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-                     <image>
-                        <Image url="@../assets/menuTiles/tower-wood.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgTower1" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#towerSelected" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-                     <image>
-                        <Image url="@../assets/menuTiles/tower-stone.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgTower2" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#towerSelected" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
-                     <image>
-                        <Image url="@../assets/menuTiles/tower-fruit.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgTower3" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#towerSelected" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
-                     <image>
-                        <Image url="@../assets/menuTiles/tower-upgrade-1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgTower4" fitHeight="95.0" fitWidth="100.0" onMouseReleased="#towerSelected" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                     <image>
-                        <Image url="@../assets/menuTiles/tower-upgrade-2.png" />
-                     </image>
-                  </ImageView>
-                  <Label text="Wood" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS" size="13.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="10.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="Stone" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS" size="13.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="10.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="Fruit" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS" size="13.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="10.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS" size="13.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="15.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="Upgrade 2" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS" size="13.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="10.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="Upgrade 1" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS" size="13.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="10.0" />
-                     </GridPane.margin>
-                  </Label>
-               </children>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
+            <Label textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                   GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS" size="13.0"/>
+                </font>
+                <GridPane.margin>
+                    <Insets bottom="15.0"/>
+                </GridPane.margin>
+            </Label>
+            <Label text="Upgrade 2" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2"
+                   GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS" size="13.0"/>
+                </font>
+                <GridPane.margin>
+                    <Insets bottom="10.0"/>
+                </GridPane.margin>
+            </Label>
+            <Label text="Upgrade 1" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                   GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS" size="13.0"/>
+                </font>
+                <GridPane.margin>
+                    <Insets bottom="10.0"/>
+                </GridPane.margin>
+            </Label>
+        </GridPane>
+        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="208.35626220703125" minHeight="10.0" prefHeight="205.97369384765625"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="194.3680419921875" minHeight="10.0" prefHeight="141.47625732421875"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="98.79916381835938" minHeight="10.0" prefHeight="55.52374267578125"
+                                vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <GridPane GridPane.rowIndex="1">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.64739990234375" minWidth="10.0"
+                                       prefWidth="200.90350341796875"/>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.9114990234375" minWidth="10.0"
+                                       prefWidth="90.09649658203125"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                </rowConstraints>
+                <GridPane.margin>
+                    <Insets left="30.0"/>
+                </GridPane.margin>
+                <Label prefHeight="23.0" prefWidth="154.0" text="Resources / Load:" textFill="WHITE"
+                       GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets right="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <Label text="Reload Speed:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="1"
+                       GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets right="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <Label text="Level:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="2"
+                       GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets right="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <Label text="Cost:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="3"
+                       GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets right="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <Label text="Free" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <font>
+                        <Font name="Comic Sans MS" size="16.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="lblLevel" text="1" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font name="Comic Sans MS" size="16.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="lblReloadSpeed" text="1" textFill="WHITE" GridPane.columnIndex="1"
+                       GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Comic Sans MS" size="16.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="lblResources" text="1" textFill="WHITE" GridPane.columnIndex="1">
+                    <font>
+                        <Font name="Comic Sans MS" size="16.0"/>
+                    </font>
+                </Label>
             </GridPane>
-            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="208.35626220703125" minHeight="10.0" prefHeight="205.97369384765625" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="194.3680419921875" minHeight="10.0" prefHeight="141.47625732421875" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="98.79916381835938" minHeight="10.0" prefHeight="55.52374267578125" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <GridPane GridPane.rowIndex="1">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.64739990234375" minWidth="10.0" prefWidth="200.90350341796875" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.9114990234375" minWidth="10.0" prefWidth="90.09649658203125" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label prefHeight="23.0" prefWidth="154.0" text="Resources / Load:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Comic Sans MS" size="16.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets right="10.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label text="Reload Speed:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Comic Sans MS" size="16.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets right="10.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label text="Level:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Comic Sans MS" size="16.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets right="10.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label text="Cost:" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Comic Sans MS" size="16.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets right="10.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label text="Free" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <font>
-                              <Font name="Comic Sans MS" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblLevel" text="1" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font name="Comic Sans MS" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblReloadSpeed" text="1" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Comic Sans MS" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblResources" text="2" textFill="WHITE" GridPane.columnIndex="1">
-                           <font>
-                              <Font name="Comic Sans MS" size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <GridPane.margin>
-                        <Insets left="30.0" />
-                     </GridPane.margin>
-                  </GridPane>
-                  <ImageView fx:id="imgTowerSelected" fitHeight="150.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-                     <image>
-                        <Image url="@../assets/menuTiles/tower-wood.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="lblTowerName" text="Wood Tower" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS" size="19.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="25.0" />
-                     </padding>
-                  </Label>
-                  <Label onMouseReleased="#addSelectedToLoadout" text="Add to Loadout" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                     <font>
-                        <Font name="Comic Sans MS Bold" size="19.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="5.0" />
-                     </GridPane.margin>
-                  </Label>
-               </children>
-            </GridPane>
-            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="371.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="124.30172729492188" minHeight="10.0" prefHeight="113.25143432617188" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="154.87713623046875" minHeight="10.0" prefHeight="106.15975952148438" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="185.0" minHeight="10.0" prefHeight="109.29437255859375" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="87.57989501953125" minHeight="0.0" prefHeight="29.20562744140625" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <ImageView fx:id="imgLoadedTower0" fitHeight="95.0" fitWidth="95.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-                     <image>
-                        <Image url="@../assets/menuTiles/tower.png" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </ImageView>
-                  <ImageView fx:id="imgLoadedTower1" fitHeight="95.0" fitWidth="100.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
-                     <image>
-                        <Image url="@../assets/menuTiles/tower.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgLoadedTower2" fitHeight="95.0" fitWidth="100.0" opacity="0.4" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                     <image>
-                        <Image url="@../assets/menuTiles/tower.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="lblLoadedTower0" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS" size="13.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="15.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="lblLoadedTower1" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS" size="13.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="15.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="lblLoadedTower2" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS" size="13.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="15.0" />
-                     </padding>
-                  </Label>
-                  <Label onMouseReleased="#resetLoadout" text="Reset Loadout" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Comic Sans MS Bold" size="19.0" />
-                     </font>
-                     <padding>
-                        <Insets left="15.0" />
-                     </padding>
-                  </Label>
-               </children>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </GridPane>
-         </children>
-         <GridPane.margin>
-            <Insets left="350.0" right="350.0" />
-         </GridPane.margin>
-      </GridPane>
-   </children>
+            <ImageView fx:id="imgTowerSelected" fitHeight="150.0" fitWidth="165.0" pickOnBounds="true"
+                       preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                <Image url="@../assets/menuTiles/tower-wood.png"/>
+            </ImageView>
+            <Label fx:id="lblTowerName" text="Wood Tower" textFill="WHITE" GridPane.halignment="CENTER"
+                   GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS" size="19.0"/>
+                </font>
+                <padding>
+                    <Insets bottom="25.0"/>
+                </padding>
+            </Label>
+            <Label onMouseReleased="#addSelectedToLoadout" text="Add to Loadout" textAlignment="CENTER"
+                   textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2"
+                   GridPane.valignment="CENTER">
+                <font>
+                    <Font name="Comic Sans MS Bold" size="19.0"/>
+                </font>
+                <GridPane.margin>
+                    <Insets bottom="5.0"/>
+                </GridPane.margin>
+            </Label>
+        </GridPane>
+        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="371.0" prefWidth="200.0"
+                  GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="124.30172729492188" minHeight="10.0" prefHeight="113.25143432617188"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="154.87713623046875" minHeight="10.0" prefHeight="106.15975952148438"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="185.0" minHeight="10.0" prefHeight="109.29437255859375"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="87.57989501953125" minHeight="0.0" prefHeight="29.20562744140625"
+                                vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <GridPane.margin>
+                <Insets/>
+            </GridPane.margin>
+            <ImageView fx:id="imgLoadedTower0" fitHeight="95.0" fitWidth="95.0" opacity="0.4" pickOnBounds="true"
+                       preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                <GridPane.margin>
+                    <Insets/>
+                </GridPane.margin>
+                <Image url="@../assets/menuTiles/tower.png"/>
+            </ImageView>
+            <ImageView fx:id="imgLoadedTower1" fitHeight="95.0" fitWidth="100.0" opacity="0.4"
+                       pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER"
+                       GridPane.rowIndex="1" GridPane.valignment="TOP">
+                <Image url="@../assets/menuTiles/tower.png"/>
+            </ImageView>
+            <ImageView fx:id="imgLoadedTower2" fitHeight="95.0" fitWidth="100.0" opacity="0.4"
+                       pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER"
+                       GridPane.rowIndex="2" GridPane.valignment="TOP">
+                <Image url="@../assets/menuTiles/tower.png"/>
+            </ImageView>
+            <Label fx:id="lblLoadedTower0" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER"
+                   GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS" size="13.0"/>
+                </font>
+                <padding>
+                    <Insets bottom="15.0"/>
+                </padding>
+            </Label>
+            <Label fx:id="lblLoadedTower1" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER"
+                   GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS" size="13.0"/>
+                </font>
+                <padding>
+                    <Insets bottom="15.0"/>
+                </padding>
+            </Label>
+            <Label fx:id="lblLoadedTower2" text="Not Selected" textFill="WHITE" GridPane.halignment="CENTER"
+                   GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS" size="13.0"/>
+                </font>
+                <padding>
+                    <Insets bottom="15.0"/>
+                </padding>
+            </Label>
+            <Label onMouseReleased="#resetLoadout" text="Reset Loadout" textAlignment="CENTER" textFill="WHITE"
+                   GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                <font>
+                    <Font name="Comic Sans MS Bold" size="19.0"/>
+                </font>
+                <padding>
+                    <Insets left="15.0"/>
+                </padding>
+            </Label>
+        </GridPane>
+    </GridPane>
 </GridPane>

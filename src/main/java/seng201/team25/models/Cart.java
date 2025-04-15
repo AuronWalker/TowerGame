@@ -11,25 +11,28 @@ import seng201.team25.gui.MainGameController;
 import seng201.team25.services.GameOverManager;
 import javafx.geometry.Point2D;
 
+import java.util.Objects;
+
+/**
+ * Manages statistics and resources for in-game Carts.
+ */
 public class Cart {
-    private Image cartSprite = new Image(getClass().getResourceAsStream("/assets/cart/cart.png"));
-    private Image treeDisplay = new Image(getClass().getResourceAsStream("/assets/cart/cartTree.png"));
-    private Image rockDisplay = new Image(getClass().getResourceAsStream("/assets/cart/cartRock.png"));
-    private Image fruitDisplay = new Image(getClass().getResourceAsStream("/assets/cart/cartFruit.png"));
-    private int xLayout = 531;
-    private int totalResource;
+    private final Image treeDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/cart/cartTree.png")));
+    private final Image rockDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/cart/cartRock.png")));
+    private final Image fruitDisplay = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/cart/cartFruit.png")));
+    private final int totalResource;
     private int currentResource=0;
-    private Label amount;
+    private final Label amount;
     private Point2D position;
-    private int resourceType;
+    private final int resourceType;
 
     /**
     * Spawns a cart that moves upwards by a certain speed
-    * @param _anchorPane Anchor pane to attach the cart image to.
     * @param speed Speed at which the cart moves
     * @param _resourceType Type of resource the cart can be filled by.
     * @param _totalResource Amount of resources it needs to be filled with
     * @param mg Game controller to send to game over manager.
+     * @param anchorPane AnchorPane object reference
     **/
     public Cart(AnchorPane anchorPane, float speed, int _resourceType, int _totalResource, MainGameController mg){
         ImageView cart = new ImageView();
@@ -38,9 +41,11 @@ public class Cart {
         totalResource = _totalResource;
         resourceType = _resourceType;
 
+        Image cartSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/assets/cart/cart.png")));
         cart.setImage(cartSprite);
         setDisplay(cartDisplay);
 
+        int xLayout = 531;
         cartDisplay.setLayoutX(xLayout);
         cartDisplay.setLayoutY(505);
         amount.setLayoutX(575);
@@ -72,7 +77,7 @@ public class Cart {
                     anchorPane.getChildren().remove(amount);
                     
                     if(currentResource != totalResource){
-                        GameOverManager.gameOver = true;
+                        GameOverManager.setGameOver(true);
                         GameOverManager.gameOverScreen(anchorPane, mg);
                     }
                     this.stop();
@@ -112,6 +117,7 @@ public class Cart {
 
     /**
     * Returns carts x and y position.
+     * @return integer resource position
     **/
     public Point2D getPosition(){
         return position;
@@ -119,6 +125,7 @@ public class Cart {
 
     /**
     * Returns carts resource type.
+     * @return integer resource type
     **/
     public int getResourceType(){
         return resourceType;

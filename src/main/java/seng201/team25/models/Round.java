@@ -16,28 +16,29 @@ import seng201.team25.services.GoldManager;
 import seng201.team25.services.PlayerManager;
 import seng201.team25.services.RoundManager;
 
-//No unit test due to it being more of a servcie than a class making it very hard to test
-//I may come back and add a bunch of functions to add a unit test latter if there is time.
+/**
+ * Manages each round of the game, including speed and difficulty.
+ */
 public class Round {
     private int spawnerTimer;
     private List<Cart> activeCarts;
-    private List<Tower> activeTowers;
+    private final List<Tower> activeTowers;
     private int amountOfCarts = 0;
-    private int totalCarts;
-    private Timeline spawner;
-    private Timeline rangeCheck;
-    private Button startButton;
-    private Button shopButton;
-    private Random rng;
-    private boolean roundDifficulty;
-    private AnchorPane anchorPane;
+    private final int totalCarts;
+    private final Timeline spawner;
+    private final Timeline rangeCheck;
+    private final Button startButton;
+    private final Button shopButton;
+    private final Random rng;
+    private final boolean roundDifficulty;
+    private final AnchorPane anchorPane;
 
     private int amountOfTree;
     private int amountOfRock;
     private int amountOfFruit;
 
-    private RoundManager rm;
-    private MainGameController mg;
+    private final RoundManager roundManager;
+    private final MainGameController mainGameController;
     
     /**
     * Sets the Round based on difficulty and what round it currently is.
@@ -45,9 +46,12 @@ public class Round {
     * @param _anchorPane Anchor pane to attach the cart image to.
     * @param _startButton Button that starts the round.
     * @param _shopButton Button that opens the shop.
-    * @param mg Game controller to send to cart when spawned.
-    * @param rm Round manager with all the relevant info for the round.
-    * @param goldLabel Label that displays current gold
+    * @param _mg Game controller to send to cart when spawned.
+    * @param _rm Round manager with all the relevant info for the round.
+     * @param _roundDifficulty The requested difficulty of the game.
+     * @param treeCarts the number of tree carts in the round
+     * @param fruitCarts the number of fruit carts in the round
+     * @param rockCarts the number of stone carts in the round
     **/
     public Round(boolean _roundDifficulty, int treeCarts, int rockCarts, int fruitCarts, List<Tower> _activeTowers, AnchorPane _anchorPane, Button _startButton, Button _shopButton, MainGameController _mg, RoundManager _rm){
         anchorPane = _anchorPane;
@@ -57,8 +61,8 @@ public class Round {
         rangeCheck.setCycleCount(Animation.INDEFINITE);
 
         roundDifficulty = _roundDifficulty;
-        rm = _rm;
-        mg = _mg;
+        roundManager = _rm;
+        mainGameController = _mg;
         rng = new Random();
 
         startButton = _startButton;
@@ -68,7 +72,7 @@ public class Round {
         amountOfRock = rockCarts;
         amountOfFruit = fruitCarts;
 
-        activeCarts = new ArrayList<Cart>();
+        activeCarts = new ArrayList<>();
         activeTowers = _activeTowers;
         spawnerTimer = 4;
         totalCarts = treeCarts + fruitCarts + rockCarts;
@@ -78,8 +82,8 @@ public class Round {
     }
 
     /**
-    * Spawns the cart at an interval set by spwnerTimer
-    * @param _anchorPane Anchor pane to attach the cart image to.
+    * Spawns the cart at an interval set by spawnerTimer.
+    * @param anchorPane Anchor pane to attach the cart image to.
     **/
     private void spawnCart(AnchorPane anchorPane){
         //Gets how many of each resource is spawning.
@@ -95,14 +99,14 @@ public class Round {
             resourceType = getResource(resourceType);
 
             //Scale how likely cart is to get a speed boost by current round and game difficulty
-            int randomSpeedBoost = rng.nextInt(10 - rm.getCurrentRound() - PlayerManager.getDifficulty());
-            float speed = 0.7f + (PlayerManager.getDifficulty()/10) + (rm.getCurrentRound()/10);
-            if(randomSpeedBoost == 0) speed += 0.5f;
+            int randomSpeedBoost = rng.nextInt(10 - roundManager.getCurrentRound() - PlayerManager.getDifficulty());
+            float speed = 0.7f + ((float) PlayerManager.getDifficulty() /10) + ((float) roundManager.getCurrentRound() / 25);
+            if(randomSpeedBoost == 0) speed += 0.2f;
 
-            int totalResource = 10 + rm.getCurrentRound();
-            if(roundDifficulty) totalResource += 2;
+            int totalResource = 10 + roundManager.getCurrentRound();
+            if(!roundDifficulty) totalResource += 1;
 
-            activeCarts.add(new Cart(anchorPane, speed, resourceType, totalResource, mg));
+            activeCarts.add(new Cart(anchorPane, speed, resourceType, totalResource, mainGameController));
             amountOfCarts += 1;
             spawnerTimer = 0;
         }
@@ -112,7 +116,11 @@ public class Round {
             spawnerTimer = 5; 
         }
     }
-    
+
+    /**
+     * Handles taking resources from a tower
+     * @param resourceType the type of resource to take
+     */
     private int getResource(int resourceType){
         if(resourceType == 0){
             if(amountOfTree <= 0){
@@ -173,9 +181,9 @@ public class Round {
                 }
                 if(cartIndex == activeCarts.size()){
                     if(cart.getPosition().getY() <= killDistance && spawner.getStatus().equals(Animation.Status.STOPPED)){
-                        if(rm.checkWon()){
-                            GameOverManager.winScreen(anchorPane, mg);
-                        }else if(GameOverManager.gameOver == false) endRound();
+                        if(roundManager.checkWon()){
+                            GameOverManager.winScreen(anchorPane, mainGameController);
+                        }else if(!GameOverManager.isGameOver()) endRound();
                         
                         rangeCheck.stop();
                     }
@@ -185,17 +193,17 @@ public class Round {
     }
 
     /**
-    * Displays the round and shop button again while restting active carts and adding gold.
+    * Displays the round and shop button again while resetting active carts and adding gold.
     **/
     private void endRound(){
         startButton.setVisible(true);
         shopButton.setVisible(true);
-        activeCarts = new ArrayList<Cart>();
+        activeCarts = new ArrayList<>();
 
         if(roundDifficulty)GoldManager.increaseGoldBalance(2);
-        else GoldManager.increaseGoldBalance(3);
+        else GoldManager.increaseGoldBalance(4);
 
-        mg.updateGoldLabels();
-        rm.incrementCurrentRound();
+        mainGameController.updateGoldLabels();
+        roundManager.incrementCurrentRound();
     }
 }

@@ -19,25 +19,27 @@ public class PlayerManager {
         playerName = name;
         difficulty = requestedDifficulty;
         rounds = requestedRounds;
-        System.out.printf("%s, %d, %d", getPlayerName(), getDifficulty(), getRounds());
     }
 
     /**
-     * @return The name of the player
+     * Returns the name of the player, as entered in the setup screen.
+     * @return player name
      */
     public static String getPlayerName() {
         return playerName;
     }
 
     /**
-     * @return The requested difficulty.
+     * Returns the requested difficulty, as entered in the setup screen.
+     * @return integer representation of difficulty
      */
     public static int getDifficulty() {
         return difficulty;
     }
 
     /**
-     * @return The requested number of rounds
+     * Returns the requested number of rounds, as entered in the setup screen.
+     * @return number of rounds.
      */
     public static int getRounds() {
         return rounds;

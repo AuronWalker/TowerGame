@@ -9,12 +9,13 @@ import java.util.List;
  * Static class to hold all available towers for placement, either from the
  * start screen or from the shop.
  */
-
 public class AvailableTowerManager {
-    private static List<Tower> towers = new ArrayList<>();
+    private static final List<Tower> towers = new ArrayList<>();
     private static final String[] resourceTypeMap = {"Wood", "Stone", "Fruit", "Upgrade 1", "Upgrade 2"};
 
-    // Stores towers available in the shop
+    /**
+     * List of available towers to buy.
+     */
     private static final Tower[] towersToBuy = {
             new Tower(0, 1, 2,1,1),
             new Tower(1, 1, 1, 1, 2),
@@ -23,14 +24,16 @@ public class AvailableTowerManager {
             new Tower(4, 0, -2, 1, 5)};
 
     /**
-     * @return A list of Towers available to buy in the shop
+     * Returns a list of towers available to purchase.
+     * @return array of Towers
      */
     public static Tower[] getTowersToBuy() {
             return towersToBuy;
     }
 
     /**
-     * @return The number of towers in the inventory
+     * Returns the number of towers in the inventory.
+     * @return number of towers
      */
     public static int numberOfTowers() {
         return towers.size();
@@ -43,7 +46,6 @@ public class AvailableTowerManager {
      */
     public static void addAvailableTower(Tower tower) {
         towers.add(tower);
-        System.out.println("Adding");
     }
 
     /**
@@ -52,7 +54,7 @@ public class AvailableTowerManager {
     public static void clearAvailableTowers() {towers.clear();}
 
     /**
-     * Gets the next available empty slot in the setup screen loadout
+     * Gets the next available empty slot in the setup screen loadout.
      * @return index of next available slot
      */
     public static int getNextAvailableIndex() {
@@ -61,11 +63,12 @@ public class AvailableTowerManager {
     }
 
     /**
-    * Removes a tower with a specified resource type from the list of available towers.
-    * Returns true if tower removed, false if no tower of specified type available.
-    * @param towerType Type of resource type to search for
-    * @return Whether the removal was successful
-    */
+     * Removes a tower with a specified resource type from the list of available towers.
+     * Returns true if tower removed, false if no tower of specified type available.
+     *
+     * @param towerType Type of resource type to search for
+     * @return Whether a tower was removed
+     */
     public static boolean removeTowerOfType(int towerType) {
         for (Tower tower : towers) {
             if (tower.getResourceType() == towerType) {

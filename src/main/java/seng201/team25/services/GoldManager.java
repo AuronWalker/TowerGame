@@ -1,28 +1,35 @@
 package seng201.team25.services;
 
 /**
- * Class to manage a static gold balance between controllers
+ * Class to manage a static gold balance between controllers.
  */
 
 public class GoldManager {
     private static int gold;
 
+    /**
+     * Sets the gold balance of the player.
+     * @param goldValue Gold balance
+     */
     public static void setGold(int goldValue) {
         gold = goldValue;
     }
 
+    /**
+     * Retrieves the gold balance of the player.
+     * @return The gold balance of the player
+     */
     public static int getGoldBalance() {
         return gold;
     }
 
     /**
      * Increases the player's gold balance.
+     *
      * @param goldToAdd Amount of gold to add to balance
-     * @return Current balance
      */
-    public static int increaseGoldBalance(int goldToAdd) {
+    public static void increaseGoldBalance(int goldToAdd) {
         gold += goldToAdd;
-        return gold;
     }
 
     /**

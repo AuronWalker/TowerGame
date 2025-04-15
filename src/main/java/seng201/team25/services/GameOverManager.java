@@ -6,16 +6,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import seng201.team25.gui.MainGameController;
 
+/**
+ * Handles win and lose screens at the end of the game, and resetting the game if the player requests another round.
+ */
 public class GameOverManager {
-    public static boolean gameOver = false;
-
+    private static boolean gameOver = false;
     /**
     * Displays the text and buttons for game over screen.
-    * @param anchorPane anchor pane to attach text to.
-    * @param mg main game controller to call a function that displays game over buttons.
+    * @param anchorPane Anchor pane to attach text to.
+    * @param mainGameController Main game controller to call a function that displays game over buttons.
     **/
-    public static void gameOverScreen(AnchorPane anchorPane, MainGameController mg){
-        mg.displayButtons();
+    public static void gameOverScreen(AnchorPane anchorPane, MainGameController mainGameController){
+
+        mainGameController.displayButtons();
         Label gameOverText = new Label();
         Label gameOverSpice = new Label();
         
@@ -24,7 +27,7 @@ public class GameOverManager {
 
         gameOverText.setLayoutX(850);
         gameOverText.setLayoutY(320);
-        gameOverSpice.setLayoutX(850);
+        gameOverSpice.setLayoutX(800);
         gameOverSpice.setLayoutY(390);
 
         gameOverText.setFont(Font.font(50));
@@ -36,7 +39,13 @@ public class GameOverManager {
         anchorPane.getChildren().add(gameOverSpice);
     }
 
-    public static void winScreen(AnchorPane anchorPane, MainGameController mg){
+    /**
+     * Displays the text and buttons when the user wins the game.
+     * @param anchorPane Anchor pane to attach text to
+     * @param mainGameController global mainGameController object
+     */
+    public static void winScreen(AnchorPane anchorPane, MainGameController mainGameController){
+        mainGameController.displayButtons();
         Label winText = new Label();
         Label winSpice = new Label();
         
@@ -45,7 +54,7 @@ public class GameOverManager {
 
         winText.setLayoutX(850);
         winText.setLayoutY(320);
-        winSpice.setLayoutX(850);
+        winSpice.setLayoutX(800);
         winSpice.setLayoutY(390);
 
         winText.setFont(Font.font(50));
@@ -55,5 +64,21 @@ public class GameOverManager {
         winText.setStyle("-fx-font-weight: bold");
         anchorPane.getChildren().add(winText);
         anchorPane.getChildren().add(winSpice);
+    }
+
+    /**
+     * Check whether the game has ended
+     * @return whether the game is over
+     */
+    public static boolean isGameOver() {
+        return gameOver;
+    }
+
+    /**
+     * Set the state of gameOVer
+     * @param _gameOver whether the game is over
+     */
+    public static void setGameOver(boolean _gameOver) {
+        gameOver = _gameOver;
     }
 }

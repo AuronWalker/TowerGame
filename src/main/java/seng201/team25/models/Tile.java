@@ -1,6 +1,9 @@
 package seng201.team25.models;
 import seng201.team25.services.GoldManager;
 
+/**
+ * Stores information about tiles placed on the board.
+ */
 public class Tile {
     private Tower tileTower = null;
 
@@ -23,14 +26,15 @@ public class Tile {
     /**
     * Used to know if there is a tower on the tile or not.
     * Returns false if there is no tower and true if there is.
+     * @return boolean representation of whether the tile is empty
     **/
     public boolean hasTower(){
-        if(tileTower == null) return false;
-        else return true;
+        return tileTower != null;
     }
 
     /**
-    * Returns tower on tile.
+     * Returns the tower element on this tile
+     * @return Tower element
     **/
     public Tower getTower(){
         return tileTower;
